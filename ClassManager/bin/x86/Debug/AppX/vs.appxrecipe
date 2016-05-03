@@ -22,7 +22,7 @@
     <AppXManifest Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-03T09:24:24.064</Modified>
+      <Modified>2016-05-03T16:51:41.460</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -66,11 +66,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\ClassManager.exe">
       <PackagePath>ClassManager.exe</PackagePath>
-      <Modified>2016-05-03T09:24:24.060</Modified>
+      <Modified>2016-05-03T16:51:41.458</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\ClassManager.xr.xml">
       <PackagePath>ClassManager.xr.xml</PackagePath>
-      <Modified>2016-05-03T09:24:16.448</Modified>
+      <Modified>2016-05-03T15:49:23.655</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\ClrCompression.dll">
       <PackagePath>ClrCompression.dll</PackagePath>
@@ -78,7 +78,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\entrypoint\ClassManager.exe">
       <PackagePath>entrypoint\ClassManager.exe</PackagePath>
-      <Modified>2016-05-03T09:24:17.443</Modified>
+      <Modified>2016-05-03T16:51:40.689</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -104,13 +104,17 @@
       <PackagePath>Microsoft.Win32.Primitives.dll</PackagePath>
       <Modified>2016-02-25T14:54:29.138</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+      <Modified>2016-04-07T12:51:50.976</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
       <Modified>2016-05-03T09:22:17.729</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-05-03T09:24:21.026</Modified>
+      <Modified>2016-05-03T15:49:25.350</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\chenzl25\Desktop\ClassManager\ClassManager\bin\x86\Debug\Core\System.AppContext.dll">
       <PackagePath>System.AppContext.dll</PackagePath>

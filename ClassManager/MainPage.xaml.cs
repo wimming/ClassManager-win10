@@ -12,6 +12,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ClassManager.Service;
+using ClassManager.Model;
+using System.Diagnostics;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -22,9 +27,50 @@ namespace ClassManager
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
         public MainPage()
         {
             this.InitializeComponent();
+            var viewTitleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
+            viewTitleBar.BackgroundColor = Windows.UI.Colors.CornflowerBlue;
+            viewTitleBar.ButtonBackgroundColor = Windows.UI.Colors.CornflowerBlue;
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame.CanGoBack)
+            {
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    Windows.UI.Core.AppViewBackButtonVisibility.Visible;
+            }
+            else
+            {
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
+            }
+            input_account.Text = "14331048";
+            input_password.Password = "14331048";
+        }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+
+        }
+
+        private async void onClickLogin(object sender, RoutedEventArgs e)
+        {
+            Result result = await SingleService.Instance.login(input_account.Text, input_password.Password);
+            Debug.WriteLine(JsonConvert.SerializeObject(result));
+            if (SingleService.Instance.hasLogin())
+            {
+                Frame.Navigate(typeof(HomePage));
+            }
+        }
+
+        private async void onClickRegister(object sender, RoutedEventArgs e)
+        {
+            Result result = await SingleService.Instance.register(input_account.Text, input_password.Password);
+            Debug.WriteLine(JsonConvert.SerializeObject(result));
+            var i = new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
         }
     }
 }

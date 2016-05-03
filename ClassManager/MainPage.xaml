@@ -8,6 +8,13 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="ClassManager" Margin="77,10,0,0" TextWrapping="Wrap" Text="ClassManager" VerticalAlignment="Top" FontFamily="Segoe WP" Width="189" HorizontalAlignment="Left" Height="56" FontSize="29.333"/>
+        <AppBarButton x:Name="registerButton" HorizontalAlignment="Left" Label="register" Margin="77,574,0,0" VerticalAlignment="Top" Icon="Permissions" Click="onClickRegister"/>
+        <AppBarButton x:Name="loginButton" HorizontalAlignment="Left" Icon="Accept" Label="login" Margin="198,574,0,0" VerticalAlignment="Top" Click="onClickLogin"/>
+        <TextBox x:Name="input_account" HorizontalAlignment="Left" Margin="77,239,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="189" Height="43"/>
+        <PasswordBox x:Name="input_password" HorizontalAlignment="Left" Margin="77,342,0,0" VerticalAlignment="Top" Width="189" Height="47"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="77,207,0,0" TextWrapping="Wrap" Text="Account:" VerticalAlignment="Top" Height="27" Width="189"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="77,317,0,0" TextWrapping="Wrap" Text="password:" VerticalAlignment="Top" Width="189"/>
 
     </Grid>
 </Page>

@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using Windows.UI.Xaml.Media.Imaging;
 using System.IO;
 using Windows.UI.Xaml.Media;
+using System.ServiceModel;
 
 namespace ClassManager.Service
 {
@@ -45,23 +46,38 @@ namespace ClassManager.Service
             httpClient = new HttpClient(handler);
         }
 
+
         private async Task<JObject> _post(string sub_url, Dictionary<string, string> dict)
         {
             var content = new FormUrlEncodedContent(dict);
-            var response = await httpClient.PostAsync(_serverAddress + sub_url, content);
-            var responseByte = await response.Content.ReadAsByteArrayAsync();
-            string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
-            JObject resultJson = JObject.Parse(responseString);
-            return resultJson;
+            try
+            {
+                var response = await httpClient.PostAsync(_serverAddress + sub_url, content);
+                var responseByte = await response.Content.ReadAsByteArrayAsync();
+                string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
+                JObject resultJson = JObject.Parse(responseString);
+                return resultJson;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private async Task<JObject> _get(string sub_url)
         {
-            var response = await httpClient.GetAsync(_serverAddress + sub_url);
-            var responseByte = await response.Content.ReadAsByteArrayAsync();
-            string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
-            JObject resultJson = JObject.Parse(responseString);
-            return resultJson;
+            try
+            {
+                var response = await httpClient.GetAsync(_serverAddress + sub_url);
+                var responseByte = await response.Content.ReadAsByteArrayAsync();
+                string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
+                JObject resultJson = JObject.Parse(responseString);
+                return resultJson;
+            }
+            catch
+            {
+                return null;
+            }
         }
         //method
         public User getUser()
@@ -86,6 +102,12 @@ namespace ClassManager.Service
             };
             JObject resultJson = await _post("login/user", values);
             Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
             result.error = (bool)resultJson["error"];
             result.message = (string)resultJson["message"];
             if (result.error == false)
@@ -116,7 +138,7 @@ namespace ClassManager.Service
             return result;
         }
 
-        public async Task<Result> register(string account, string password)
+        public async Task<Result> registerUser(string account, string password)
         {
             var values = new Dictionary<string, string>
             {
@@ -125,6 +147,12 @@ namespace ClassManager.Service
             };
             JObject resultJson = await _post("register/user", values);
             Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
             result.error = (bool)resultJson["error"];
             result.message = (string)resultJson["message"];
             return result;
@@ -132,12 +160,173 @@ namespace ClassManager.Service
 
         public async Task<BitmapImage> getImage(string sub_image_url)
         {
-            string full_image_url = _serverAddress + ((sub_image_url != null) ? sub_image_url : "null");
-            var response = await httpClient.GetAsync(full_image_url);
-            var responseStream = await response.Content.ReadAsStreamAsync();
-            Windows.UI.Xaml.Media.Imaging.BitmapImage bmp = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-            await bmp.SetSourceAsync(responseStream.AsRandomAccessStream());
-            return bmp;
+            try
+            {
+                string full_image_url = _serverAddress + ((sub_image_url != null) ? sub_image_url : "null");
+                var response = await httpClient.GetAsync(full_image_url);
+                var responseStream = await response.Content.ReadAsStreamAsync();
+                Windows.UI.Xaml.Media.Imaging.BitmapImage bmp = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+                await bmp.SetSourceAsync(responseStream.AsRandomAccessStream());
+                return bmp;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public void logout()
+        {
+            _user = null;
+        }
+        public async Task<Result> updateUser()
+        {
+            JObject resultJson = await _get("search/user");
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            if (result.error == false)
+            {
+                result.user_data.account = (string)resultJson["user_data"]["account"];
+                result.user_data.password = (string)resultJson["user_data"]["password"];
+                result.user_data.name = (string)resultJson["user_data"]["name"];
+                result.user_data.student_id = (string)resultJson["user_data"]["student_id"];
+                result.user_data.gender = (string)resultJson["user_data"]["gender"];
+                result.user_data.image = (string)resultJson["user_data"]["image"];
+                result.user_data.email = (string)resultJson["user_data"]["email"];
+                result.user_data.phone = (string)resultJson["user_data"]["phone"];
+                result.user_data.qq = (string)resultJson["user_data"]["qq"];
+                result.user_data.wechat = (string)resultJson["user_data"]["wechat"];
+                List<JToken> homeworkList = resultJson["user_data"]["homeworks"].Children().ToList();
+                foreach (JToken token in homeworkList)
+                {
+                    result.user_data.homeworks.Add(JsonConvert.DeserializeObject<UserHomework>(token.ToString()));
+                }
+                List<JToken> relationshipList = resultJson["user_data"]["relationships"].Children().ToList();
+                foreach (JToken token in relationshipList)
+                {
+                    result.user_data.relationships.Add(JsonConvert.DeserializeObject<Relationship>(token.ToString()));
+                }
+
+                _user = result.user_data;
+            }
+            return result;
+        }
+        public async Task<Result> registerOrganization(string account, string password)
+        {
+            var values = new Dictionary<string, string>
+            {
+                {"account", account },
+                {"password", password }
+            };
+            JObject resultJson = await _post("register/organization", values);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
+        }
+        public Result searchUser(string userAccount)
+        {
+            return new Result();
+        }
+        public Result searchOrganization(string organizationAccount)
+        {
+            return new Result();
+        }
+        public Result searchOrganizationDetail(string organizationAccount)
+        {
+            return new Result();
+        }
+        public Result userSetting(Dictionary<string, string> settingData)
+        {
+            return new Result();
+        }
+        public Result organizationSetting(Dictionary<string, string> settingData)
+        {
+            return new Result();
+        }
+        public Result joinWithoutPassword(string organizationAccount)
+        {
+            return new Result();
+        }
+        public Result joinWithPassword(string organizationAccount)
+        {
+            return new Result();
+        }
+        public Result lookHomework(string organizationAccount, string homeworkId)
+        {
+            return new Result();
+        }
+        public Result lookNotice(string organizationAccount, string noticeId)
+        {
+            return new Result();
+        }
+        public Result complishHomework(string homeworkId, bool complishFlag)
+        {
+            return new Result();
+        }
+        public Result updateMemberPosition(string organizationAccount, string memberId, string position)
+        {
+            return new Result();
+        }
+        public Result upMember(string organizationAccount, string memberId)
+        {
+            return new Result();
+        }
+        public Result downMember(string organizationAccount, string memberId)
+        {
+            return new Result();
+        }
+        public Result createHomework(string organizationAccount, Dictionary<string, string> homeworkData)
+        {
+            return new Result();
+        }
+        public Result createNotice(string organizationAccount, Dictionary<string, string> noticeData)
+        {
+            return new Result();
+        }
+        public Result createVote(string organizationAccount, Dictionary<string, string> voteData)
+        {
+            return new Result();
+        }
+        public Result vote(string organizationAccount, string voteId, string optionId)
+        {
+            return new Result();
+        }
+        public Result deleteHomework(string organizationAccount, string homeworkId)
+        {
+            return new Result();
+        }
+        public Result deleteNotice(string organizationAccount, string noticeId)
+        {
+            return new Result();
+        }
+        public Result deleteVote(string organizationAccount, string voteId)
+        {
+            return new Result();
+        }
+        public Result deleteMember(string organizationAccount, string memberAccount)
+        {
+            return new Result();
+        }
+        public Result deleteOrganization(string organizationAccount)
+        {
+            return new Result();
+        }
+        public Result quitOrganization(string organizationAccount)
+        {
+            return new Result();
         }
     }
 }

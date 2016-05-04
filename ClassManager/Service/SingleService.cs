@@ -126,15 +126,12 @@ namespace ClassManager.Service
 
         public async Task<BitmapImage> getImage(string sub_image_url)
         {
-            using (var client = new HttpClient())
-            {
-                string full_image_url = _serverAddress + ((sub_image_url != null) ? sub_image_url : "null");
-                var response = await client.GetAsync(full_image_url);
-                var responseStream = await response.Content.ReadAsStreamAsync();
-                Windows.UI.Xaml.Media.Imaging.BitmapImage bmp = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                await bmp.SetSourceAsync(responseStream.AsRandomAccessStream());
-                return bmp;
-            }
+            string full_image_url = _serverAddress + ((sub_image_url != null) ? sub_image_url : "null");
+            var response = await httpClient.GetAsync(full_image_url);
+            var responseStream = await response.Content.ReadAsStreamAsync();
+            Windows.UI.Xaml.Media.Imaging.BitmapImage bmp = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+            await bmp.SetSourceAsync(responseStream.AsRandomAccessStream());
+            return bmp;
         }
     }
 }

@@ -103,8 +103,14 @@ namespace ClassManager.Service
                 List<JToken> homeworkList = resultJson["user_data"]["homeworks"].Children().ToList();
                 foreach (JToken token in homeworkList)
                 {
-                    result.user_data.homeworks.Add(JsonConvert.DeserializeObject<Homework>(token.ToString()));
+                    result.user_data.homeworks.Add(JsonConvert.DeserializeObject<UserHomework>(token.ToString()));
                 }
+                List<JToken> relationshipList = resultJson["user_data"]["relationships"].Children().ToList();
+                foreach (JToken token in relationshipList)
+                {
+                    result.user_data.relationships.Add(JsonConvert.DeserializeObject<Relationship>(token.ToString()));
+                }
+
                 _user = result.user_data;
             }
             return result;

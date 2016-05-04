@@ -17,8 +17,6 @@ namespace ClassManager.Service
     public class SingleService
     {
         private static SingleService _instatnce;
-        private SingleService() { }
-
         public static SingleService Instance
         {
             get
@@ -26,8 +24,6 @@ namespace ClassManager.Service
                 if (_instatnce == null)
                 {
                     _instatnce = new SingleService();
-                    _instatnce._user = null;
-                    _instatnce._serverAddress = "http://119.29.65.204:3000/";
                 }
                 return _instatnce;
             }
@@ -35,30 +31,37 @@ namespace ClassManager.Service
 
         private string _serverAddress;
         private User _user;
+
+        private HttpClient httpClient;
+
+        private SingleService()
+        {
+            _serverAddress = "http://119.29.65.204:3000/";
+            _user = null;
+
+            // 自动处理cookie
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.CookieContainer = new System.Net.CookieContainer();
+            httpClient = new HttpClient(handler);
+        }
+
         private async Task<JObject> _post(string sub_url, Dictionary<string, string> dict)
         {
-            using (var client = new HttpClient())
-            {
-
-                var content = new FormUrlEncodedContent(dict);
-                var response = await client.PostAsync(_serverAddress + sub_url, content);
-                var responseByte = await response.Content.ReadAsByteArrayAsync();
-                string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
-                JObject resultJson = JObject.Parse(responseString);
-                return resultJson;
-            }
+            var content = new FormUrlEncodedContent(dict);
+            var response = await httpClient.PostAsync(_serverAddress + sub_url, content);
+            var responseByte = await response.Content.ReadAsByteArrayAsync();
+            string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
+            JObject resultJson = JObject.Parse(responseString);
+            return resultJson;
         }
 
         private async Task<JObject> _get(string sub_url)
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(_serverAddress + sub_url);
-                var responseByte = await response.Content.ReadAsByteArrayAsync();
-                string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
-                JObject resultJson = JObject.Parse(responseString);
-                return resultJson;
-            }
+            var response = await httpClient.GetAsync(_serverAddress + sub_url);
+            var responseByte = await response.Content.ReadAsByteArrayAsync();
+            string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
+            JObject resultJson = JObject.Parse(responseString);
+            return resultJson;
         }
         //method
         public User getUser()
@@ -123,15 +126,12 @@ namespace ClassManager.Service
 
         public async Task<BitmapImage> getImage(string sub_image_url)
         {
-            using (var client = new HttpClient())
-            {
-                string full_image_url = _serverAddress + ((sub_image_url != null) ? sub_image_url : "null");
-                var response = await client.GetAsync(full_image_url);
-                var responseStream = await response.Content.ReadAsStreamAsync();
-                Windows.UI.Xaml.Media.Imaging.BitmapImage bmp = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                await bmp.SetSourceAsync(responseStream.AsRandomAccessStream());
-                return bmp;
-            }
+            string full_image_url = _serverAddress + ((sub_image_url != null) ? sub_image_url : "null");
+            var response = await httpClient.GetAsync(full_image_url);
+            var responseStream = await response.Content.ReadAsStreamAsync();
+            Windows.UI.Xaml.Media.Imaging.BitmapImage bmp = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
+            await bmp.SetSourceAsync(responseStream.AsRandomAccessStream());
+            return bmp;
         }
     }
 }

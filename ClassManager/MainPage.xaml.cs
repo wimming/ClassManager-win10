@@ -59,6 +59,11 @@ namespace ClassManager
         private async void onClickLogin(object sender, RoutedEventArgs e)
         {
             Result result = await SingleService.Instance.login(input_account.Text, input_password.Password);
+            if (result.error)
+            {
+                var i = new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+                return;
+            }
             Debug.WriteLine(JsonConvert.SerializeObject(result));
             if (SingleService.Instance.hasLogin())
             {
@@ -68,7 +73,7 @@ namespace ClassManager
 
         private async void onClickRegister(object sender, RoutedEventArgs e)
         {
-            Result result = await SingleService.Instance.register(input_account.Text, input_password.Password);
+            Result result = await SingleService.Instance.registerUser(input_account.Text, input_password.Password);
             Debug.WriteLine(JsonConvert.SerializeObject(result));
             var i = new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
         }

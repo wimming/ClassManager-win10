@@ -1,5 +1,3 @@
-"# ClassManager-win10" 
+# ClassManager-win10
 
-hello.
-
-world
+a simple ClassManager front-end in win10.

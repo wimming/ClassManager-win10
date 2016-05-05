@@ -8,7 +8,7 @@ namespace ClassManager.Model
 {
     public class User
     {
-        public string _id { get; }
+        public string _id { get; set; }
         public string name { get; set; }
         public string account { get; set; }
         public string password { get; set; }
@@ -19,7 +19,7 @@ namespace ClassManager.Model
         public string email { get; set; }
         public string qq { get; set; }
         public string wechat { get; set; }
-        public List<Homework> homeworks { get; set; }
+        public List<UserHomework> homeworks { get; set; }
         public List<Relationship> relationships { get; set; }
 
         public User()
@@ -35,26 +35,50 @@ namespace ClassManager.Model
             phone = "";
             qq = "";
             wechat = "";
-            homeworks = new List<Homework>();
+            homeworks = new List<UserHomework>();
             relationships = new List<Relationship>();
         }
+    }
 
+    public class Relationship
+    {
+        public string _id { get; set; }
+        public string name { get; set; }
+        public string account { get; set; }
+        public string image { get; set; }
+        public string position { get; set; }
 
-        public class Relationship
+        public Relationship()
         {
-            public string _id { get; }
-            public string name { get; set; }
-            public string account { get; set; }
-            public string image { get; set; }
-            public string position { get; set; }
-            public Relationship()
-            {
-                _id = "";
-                name = "";
-                account = "";
-                image = "";
-                position = "";
-            }
+            _id = "";
+            name = "";
+            account = "";
+            image = "";
+            position = "";
+        }
+    }
+
+    public class UserHomework
+    {
+
+        public string _id { get; set; }
+        public string name { get; set; }
+        public string content { get; set; }
+        public string join_on { get; set; }
+        public string deadline { get; set; }
+        public string account { get; set; }
+        public bool unlook { get; set; }
+        public bool uncomplish { get; set; }
+        public UserHomework()
+        {
+            _id = "";
+            name = "";
+            content = "";
+            join_on = "";
+            deadline = "";
+            account = "";
+            unlook = true;
+            uncomplish = true;
         }
     }
 }

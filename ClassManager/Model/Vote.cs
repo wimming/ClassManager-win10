@@ -8,7 +8,7 @@ namespace ClassManager.Model
 {
     public class Vote
     {
-        public string _id { get; }
+        public string _id { get; set; }
         public string name { get; set; }
         public string content { get; set; }
         public string join_on { get; set; }
@@ -27,7 +27,7 @@ namespace ClassManager.Model
         }
         public class Option
         {
-            public string _id { get; }
+            public string _id { get; set; }
             public string name { get; set; }
             public int votes { get; set; }
             public List<User> supporters { get; set; }

@@ -79,6 +79,21 @@ namespace ClassManager.Service
                 return null;
             }
         }
+        private async Task<JObject> _delete(string sub_url)
+        {
+            try
+            {
+                var response = await httpClient.DeleteAsync(_serverAddress + sub_url);
+                var responseByte = await response.Content.ReadAsByteArrayAsync();
+                string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
+                JObject resultJson = JObject.Parse(responseString);
+                return resultJson;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         //method
         public User getUser()
         {
@@ -238,95 +253,358 @@ namespace ClassManager.Service
         }
         public Result searchUser(string userAccount)
         {
+            // 用户搜索不做
             return new Result();
         }
-        public Result searchOrganization(string organizationAccount)
+        public async Task<Result> searchOrganization(string organizationAccount)
         {
-            return new Result();
+            JObject resultJson = await _get("search/organization/account/" + organizationAccount);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            if (result.error == false)
+            {
+                result.organization_data.account = (string)resultJson["organization_data"]["account"];
+                result.organization_data.password = (string)resultJson["organization_data"]["password"];
+                result.organization_data.name = (string)resultJson["organization_data"]["name"];
+                result.organization_data.image = (string)resultJson["organization_data"]["image"];
+                result.organization_data.need_password = (bool)resultJson["organization_data"]["need_password"];
+            }
+            return result;
         }
-        public Result searchOrganizationDetail(string organizationAccount)
+        public async Task<Result> searchOrganizationDetail(string organizationAccount)
         {
-            return new Result();
+            JObject resultJson = await _get("search/organization/" + organizationAccount);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            if (result.error == false)
+            {
+                result.organization_data._id = (string)resultJson["organization_data"]["_id"];
+                result.organization_data.account = (string)resultJson["organization_data"]["account"];
+                result.organization_data.password = (string)resultJson["organization_data"]["password"];
+                result.organization_data.name = (string)resultJson["organization_data"]["name"];
+                result.organization_data.image = (string)resultJson["organization_data"]["image"];
+                result.organization_data.join_on = (string)resultJson["organization_data"]["join_on"];
+                List<JToken> homeworkList = resultJson["organization_data"]["homeworks"].Children().ToList();
+                foreach (JToken token in homeworkList)
+                {
+                    result.organization_data.homeworks.Add(JsonConvert.DeserializeObject<Homework>(token.ToString()));
+                }
+                List<JToken> noticeList = resultJson["organization_data"]["notices"].Children().ToList();
+                foreach (JToken token in noticeList)
+                {
+                    result.organization_data.notices.Add(JsonConvert.DeserializeObject<Notice>(token.ToString()));
+                }
+                List<JToken> memberList = resultJson["organization_data"]["members"].Children().ToList();
+                foreach (JToken token in memberList)
+                {
+                    result.organization_data.members.Add(JsonConvert.DeserializeObject<User>(token.ToString()));
+                }
+                List<JToken> voteList = resultJson["organization_data"]["votes"].Children().ToList();
+                foreach (JToken voteToken in voteList)
+                {
+                    result.organization_data.votes.Add(JsonConvert.DeserializeObject<Vote>(voteToken.ToString()));
+                }
+            }
+            return result;
         }
-        public Result userSetting(Dictionary<string, string> settingData)
+        public async Task<Result> userSetting(Dictionary<string, string> settingData)
         {
-            return new Result();
+            JObject resultJson = await _post("settings/user", settingData);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result organizationSetting(Dictionary<string, string> settingData)
+        public async Task<Result> organizationSetting(string organizationAccount, Dictionary<string, string> settingData)
         {
-            return new Result();
+            JObject resultJson = await _post("settings/organization/" + organizationAccount, settingData);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result joinWithoutPassword(string organizationAccount)
+        public async Task<Result> joinWithoutPassword(string organizationAccount)
         {
-            return new Result();
+            JObject resultJson = await _get("join/organization/" + organizationAccount);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result joinWithPassword(string organizationAccount)
+        public async Task<Result> joinWithPassword(string organizationAccount, string password)
         {
-            return new Result();
+            var values = new Dictionary<string, string>
+            {
+                {"password", password }
+            };
+            JObject resultJson = await _post("join/organization/" + organizationAccount, values);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result lookHomework(string organizationAccount, string homeworkId)
+        public async Task<Result> lookHomework(string organizationAccount, string homeworkId)
         {
-            return new Result();
+            JObject resultJson = await _get("search/organization/" + organizationAccount +
+                                            "/homework/" + homeworkId);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result lookNotice(string organizationAccount, string noticeId)
+        public async Task<Result> lookNotice(string organizationAccount, string noticeId)
         {
-            return new Result();
+            JObject resultJson = await _get("search/organization/" + organizationAccount +
+                                            "/homework/" + noticeId);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result complishHomework(string homeworkId, bool complishFlag)
+
+        public async Task<Result> complishHomework(string homeworkId, bool complishFlag)
         {
-            return new Result();
+            // this dictionary may sholud be changed as <string, bool>
+            var values = new Dictionary<string, string>
+            {
+                {"uncoplish", complishFlag.ToString() }
+            };
+            JObject resultJson = await _post("update/user/homework/" + homeworkId, values);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result updateMemberPosition(string organizationAccount, string memberId, string position)
+        public async Task<Result> updateMemberPosition(string organizationAccount, string memberId, string position)
         {
-            return new Result();
+            var values = new Dictionary<string, string>
+            {
+                {"position", position }
+            };
+            JObject resultJson = await _post("update/organization/" + organizationAccount +
+                                             "/member/" + memberId, values);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result upMember(string organizationAccount, string memberId)
+        public async Task<Result> upMember(string organizationAccount, string memberId)
         {
-            return new Result();
+            return await updateMemberPosition(organizationAccount, memberId, "manager");
         }
-        public Result downMember(string organizationAccount, string memberId)
+        public async Task<Result> downMember(string organizationAccount, string memberId)
         {
-            return new Result();
+            return await updateMemberPosition(organizationAccount, memberId, "member");
         }
-        public Result createHomework(string organizationAccount, Dictionary<string, string> homeworkData)
+        public async Task<Result> createHomework(string organizationAccount, Dictionary<string, string> homeworkData)
         {
-            return new Result();
+            JObject resultJson = await _post("create/organization/" + organizationAccount +
+                                             "/homework", homeworkData);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result createNotice(string organizationAccount, Dictionary<string, string> noticeData)
+        public async Task<Result> createNotice(string organizationAccount, Dictionary<string, string> noticeData)
         {
-            return new Result();
+            JObject resultJson = await _post("create/organization/" + organizationAccount +
+                                             "/notice", noticeData);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result createVote(string organizationAccount, Dictionary<string, string> voteData)
+        public async Task<Result> createVote(string organizationAccount, Dictionary<string, string> voteData)
         {
-            return new Result();
+            JObject resultJson = await _post("create/organization/" + organizationAccount +
+                                             "/vote", voteData);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result vote(string organizationAccount, string voteId, string optionId)
+        public async Task<Result> vote(string organizationAccount, string voteId, string optionId)
         {
-            return new Result();
+            var values = new Dictionary<string, string>
+            {
+                {"vote_id", voteId },
+                {"option_id", optionId }
+            };
+            JObject resultJson = await _post("vote/organization/" + organizationAccount, values);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result deleteHomework(string organizationAccount, string homeworkId)
+        public async Task<Result> deleteHomework(string organizationAccount, string homeworkId)
         {
-            return new Result();
+            JObject resultJson = await _delete("organization/" + organizationAccount + "/homework/" + homeworkId);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result deleteNotice(string organizationAccount, string noticeId)
+        public async Task<Result> deleteNotice(string organizationAccount, string noticeId)
         {
-            return new Result();
+            JObject resultJson = await _delete("organization/" + organizationAccount + "/notice/" + noticeId);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result deleteVote(string organizationAccount, string voteId)
+        public async Task<Result> deleteVote(string organizationAccount, string voteId)
         {
-            return new Result();
+            JObject resultJson = await _delete("organization/" + organizationAccount + "/vote/" + voteId);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result deleteMember(string organizationAccount, string memberAccount)
+        public async Task<Result> deleteMember(string organizationAccount, string memberAccount)
         {
-            return new Result();
+            JObject resultJson = await _delete("organization/" + organizationAccount + "/member/" + memberAccount);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result deleteOrganization(string organizationAccount)
+        public async Task<Result> deleteOrganization(string organizationAccount)
         {
-            return new Result();
+            JObject resultJson = await _delete("organization/" + organizationAccount);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
-        public Result quitOrganization(string organizationAccount)
+        public async Task<Result> quitOrganization(string organizationAccount)
         {
-            return new Result();
+            JObject resultJson = await _delete("user/organization/" + organizationAccount);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
         }
     }
 }

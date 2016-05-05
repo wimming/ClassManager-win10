@@ -8,7 +8,7 @@ namespace ClassManager.Model
 {
     public class Notice
     {
-        public string _id { get; }
+        public string _id { get; set; }
         public string name { get; set; }
         public string content { get; set; }
         public string join_on { get; set; }

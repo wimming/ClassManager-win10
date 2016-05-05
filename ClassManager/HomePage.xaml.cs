@@ -30,6 +30,8 @@ namespace ClassManager
     {
         private string _serverAddress;
 
+        private User _user { get; set; }
+
         public HomePage()
         {
             this.InitializeComponent();
@@ -41,9 +43,16 @@ namespace ClassManager
                 Frame.Navigate(typeof(MainPage));
                 return;
             }
-            User _user = SingleService.Instance.getUser();
-            user_name.Text = _user.name != null ? _user.name : "null";
-            user_image.Source = await SingleService.Instance.getImage(_user.image);
+            _user = SingleService.Instance.getUser();
+            _user.image = SingleService.Instance.getServerAddress() + (_user.image == null ? "null" : _user.image);
+            //user_image.Source = await SingleService.Instance.getImage(_user.image);
+
+        }
+
+        private void relationships_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            // 跳转至班级页面，merge后把注释去掉
+            // Frame.Navigate(typeof(MemberOfClass), ((Relationship)e.ClickedItem).account);
         }
     }
 }

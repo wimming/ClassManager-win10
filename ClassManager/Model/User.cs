@@ -8,7 +8,7 @@ namespace ClassManager.Model
 {
     public class User
     {
-        public string _id { get; }
+        public string _id { get; set; }
         public string name { get; set; }
         public string account { get; set; }
         public string password { get; set; }
@@ -42,7 +42,7 @@ namespace ClassManager.Model
 
     public class Relationship
     {
-        public string _id { get; }
+        public string _id { get; set; }
         public string name { get; set; }
         public string account { get; set; }
         public string image { get; set; }
@@ -61,7 +61,7 @@ namespace ClassManager.Model
     public class UserHomework
     {
 
-        public string _id { get; }
+        public string _id { get; set; }
         public string name { get; set; }
         public string content { get; set; }
         public string join_on { get; set; }

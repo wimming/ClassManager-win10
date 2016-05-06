@@ -22,13 +22,13 @@
     <AppXManifest Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-06T03:44:17.964</Modified>
+      <Modified>2016-05-06T16:15:39.119</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\ClassManager.exe">
       <PackagePath>entrypoint\ClassManager.exe</PackagePath>
-      <Modified>2016-05-06T03:44:17.168</Modified>
+      <Modified>2016-05-06T16:15:37.548</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\.nuget\packages\Microsoft.ApplicationInsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -502,7 +502,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\ClassManager.xr.xml">
       <PackagePath>ClassManager.xr.xml</PackagePath>
-      <Modified>2016-05-06T03:13:54.347</Modified>
+      <Modified>2016-05-06T15:47:41.683</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -510,11 +510,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-05-06T03:44:17.762</Modified>
+      <Modified>2016-05-06T16:15:38.686</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\Core\ClassManager.exe">
       <PackagePath>ClassManager.exe</PackagePath>
-      <Modified>2016-05-06T03:44:17.957</Modified>
+      <Modified>2016-05-06T16:15:39.111</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

@@ -105,6 +105,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MemberOfClass.xaml.cs">
+      <DependentUpon>MemberOfClass.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Homework.cs" />
     <Compile Include="Model\Notice.cs" />
     <Compile Include="Model\Organization.cs" />
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MemberOfClass.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

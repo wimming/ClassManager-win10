@@ -14,14 +14,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <RelativePanel>
-            <Image x:Name="user_image" Source="{x:Bind _user.image}" Height="100" Width="100"/>
-            <TextBlock x:Name="user_name" TextWrapping="Wrap" Text="{x:Bind _user.name}" RelativePanel.RightOf="user_image" FontSize="26.667"/>
+            <Image x:Name="user_image" Source="{x:Bind UVM.User.image}" Height="100" Width="100"/>
+            <TextBlock x:Name="user_name" TextWrapping="Wrap" Text="{x:Bind UVM.User.name}" RelativePanel.RightOf="user_image" FontSize="26.667"/>
             <AppBarButton Icon="ShowBcc" IsCompact="True" RelativePanel.RightOf="user_name">
                 <AppBarButton.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="Edit"/>
-                        <MenuFlyoutItem Text="Delete" />
-                        <MenuFlyoutItem Text="share" />
+                        <MenuFlyoutItem x:Name="setting" Text="Setting" Click="setting_Click"/>
+                        <MenuFlyoutItem x:Name="create" Text="Create Class" Click="create_Click"/>
+                        <MenuFlyoutItem x:Name="logout" Text="Logout" Click="logout_Click"/>
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
@@ -32,10 +32,10 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <ListView Grid.Column="0" ItemsSource="{x:Bind _user.homeworks}">
+            <ListView Grid.Column="0" ItemsSource="{x:Bind UVM.User.homeworks}" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="md:UserHomework">
-                        <Grid Height="100">
+                        <Grid Height="100" Margin="10, 10, 10, 10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -70,10 +70,10 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <ListView x:Name="relationships" Grid.Column="1" ItemsSource="{x:Bind _user.relationships}" IsItemClickEnabled="True" ItemClick="relationships_ItemClick">
+            <ListView x:Name="relationships" Grid.Column="1" ItemsSource="{x:Bind UVM.User.relationships}" IsItemClickEnabled="True" ItemClick="relationships_ItemClick" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="md:Relationship">
-                        <Grid Height="100">
+                        <Grid Height="100" Margin="10, 10, 10, 10">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="auto"/>

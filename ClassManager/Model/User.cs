@@ -19,8 +19,7 @@ namespace ClassManager.Model
         public string email { get; set; }
         public string qq { get; set; }
         public string wechat { get; set; }
-		public string position { get; set; }
-		public List<UserHomework> homeworks { get; set; }
+        public List<UserHomework> homeworks { get; set; }
         public List<Relationship> relationships { get; set; }
 
         public User()
@@ -36,8 +35,7 @@ namespace ClassManager.Model
             phone = "";
             qq = "";
             wechat = "";
-			position = "";
-			homeworks = new List<UserHomework>();
+            homeworks = new List<UserHomework>();
             relationships = new List<Relationship>();
         }
     }

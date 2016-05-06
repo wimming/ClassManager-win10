@@ -10,7 +10,7 @@ namespace ClassManager.Model
 {
     public class Organization : INotifyPropertyChanged
     {
-        private string _id;
+        public string _id;
         public string ID
         {
             get { return _id; }
@@ -21,7 +21,7 @@ namespace ClassManager.Model
             }
         }
 
-        private string name;
+        public string name;
         public string Name
         {
             get { return name; }
@@ -32,7 +32,7 @@ namespace ClassManager.Model
             }
         }
 
-        private string account;
+        public string account;
         public string Account
         {
             get { return account; }
@@ -43,7 +43,7 @@ namespace ClassManager.Model
             }
         }
 
-        private string password;
+        public string password;
         public string Password
         {
             get { return password; }
@@ -54,7 +54,7 @@ namespace ClassManager.Model
             }
         }
 
-        private bool need_password;
+        public bool need_password;
         public bool NeedPassword
         {
             get { return need_password; }
@@ -65,7 +65,7 @@ namespace ClassManager.Model
             }
         }
 
-        private string image;
+        public string image;
         public string Image
         {
             get { return image; }
@@ -76,7 +76,7 @@ namespace ClassManager.Model
             }
         }
 
-        private string join_on;
+        public string join_on;
         public string JoinOn
         {
             get { return join_on; }
@@ -87,16 +87,16 @@ namespace ClassManager.Model
             }
         }
 
-        private ObservableCollection<User> members;
+        public ObservableCollection<User> members;
         public ObservableCollection<User> Members { get { return members; } }
 
-        private ObservableCollection<Homework> homeworks;
+        public ObservableCollection<Homework> homeworks;
         public ObservableCollection<Homework> Homeworks { get { return homeworks; } }
 
-        private ObservableCollection<Notice> notices;
+        public ObservableCollection<Notice> notices;
         public ObservableCollection<Notice> Notices { get { return notices; } }
 
-        private ObservableCollection<Vote> votes;
+        public ObservableCollection<Vote> votes;
         public ObservableCollection<Vote> Votes { get { return votes; } }
 
         public Organization()

@@ -1,25 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ClassManager.Model
 {
-    public class Organization
+    public class Organization : INotifyPropertyChanged
     {
-        public string _id { get; set; }
-        public string name { get; set; }
-        public string account { get; set; }
-        public string password { get; set; }
-        public bool need_password { get; set; }
-        public string image { get; set; }
-        public string join_on { get; set; }
-        public List<User> members { get; set; }
-        public List<Homework> homeworks { get; set; }
-        public List<Notice> notices { get; set; }
-        public List<Vote> votes { get; set; }
+        private string _id;
+        public string ID
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                NotifyPropertyChanged("ID");
+            }
+        }
 
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                NotifyPropertyChanged("Name");
+            }
+        }
+
+        private string account;
+        public string Account
+        {
+            get { return account; }
+            set
+            {
+                account = value;
+                NotifyPropertyChanged("Account");
+            }
+        }
+
+        private string password;
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                password = value;
+                NotifyPropertyChanged("Password");
+            }
+        }
+
+        private bool need_password;
+        public bool NeedPassword
+        {
+            get { return need_password; }
+            set
+            {
+                need_password = value;
+                NotifyPropertyChanged("NeedPassword");
+            }
+        }
+
+        private string image;
+        public string Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
+                NotifyPropertyChanged("Image");
+            }
+        }
+
+        private string join_on;
+        public string JoinOn
+        {
+            get { return join_on; }
+            set
+            {
+                join_on = value;
+                NotifyPropertyChanged("JoinOn");
+            }
+        }
+
+        private ObservableCollection<User> members;
+        public ObservableCollection<User> Members { get { return members; } }
+
+        private ObservableCollection<Homework> homeworks;
+        public ObservableCollection<Homework> Homeworks { get { return homeworks; } }
+
+        private ObservableCollection<Notice> notices;
+        public ObservableCollection<Notice> Notices { get { return notices; } }
+
+        private ObservableCollection<Vote> votes;
+        public ObservableCollection<Vote> Votes { get { return votes; } }
 
         public Organization()
         {
@@ -30,10 +108,56 @@ namespace ClassManager.Model
             image = "";
             need_password = false;
             join_on = "";
-            members = new List<User>();
-            homeworks = new List<Homework>();
-            notices = new List<Notice>();
-            votes = new List<Vote>();
+            members = new ObservableCollection<User>();
+            homeworks = new ObservableCollection<Homework>();
+            notices = new ObservableCollection<Notice>();
+            votes = new ObservableCollection<Vote>();
+        }
+
+        public void DeepCopy(Organization or)
+        {
+            ID = or.ID;
+            Name = or.Name;
+            Account = or.Account;
+            Password = or.Password;
+            Image = or.Image;
+            NeedPassword = or.NeedPassword;
+            JoinOn = or.JoinOn;
+
+            Members.Clear();
+            foreach (User item in or.Members)
+            {
+                Members.Add(item);
+            }
+            Homeworks.Clear();
+            foreach (Homework item in or.Homeworks)
+            {
+                Homeworks.Add(item);
+            }
+
+            Notices.Clear();
+            foreach (Notice item in or.Notices)
+            {
+                Notices.Add(item);
+            }
+
+            Votes.Clear();
+            foreach (Vote item in or.Votes)
+            {
+                Votes.Add(item);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // NotifyPropertyChanged will raise the PropertyChanged event passing the
+        // source property that is being updated.
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

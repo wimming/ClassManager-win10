@@ -270,11 +270,11 @@ namespace ClassManager.Service
             result.message = (string)resultJson["message"];
             if (result.error == false)
             {
-                result.organization_data.account = (string)resultJson["organization_data"]["account"];
-                result.organization_data.password = (string)resultJson["organization_data"]["password"];
-                result.organization_data.name = (string)resultJson["organization_data"]["name"];
-                result.organization_data.image = (string)resultJson["organization_data"]["image"];
-                result.organization_data.need_password = (bool)resultJson["organization_data"]["need_password"];
+                result.organization_data.Account = (string)resultJson["organization_data"]["account"];
+                result.organization_data.Password = (string)resultJson["organization_data"]["password"];
+                result.organization_data.Name = (string)resultJson["organization_data"]["name"];
+                result.organization_data.Image = (string)resultJson["organization_data"]["image"];
+                result.organization_data.NeedPassword = (bool)resultJson["organization_data"]["need_password"];
             }
             return result;
         }
@@ -292,31 +292,31 @@ namespace ClassManager.Service
             result.message = (string)resultJson["message"];
             if (result.error == false)
             {
-                result.organization_data._id = (string)resultJson["organization_data"]["_id"];
-                result.organization_data.account = (string)resultJson["organization_data"]["account"];
-                result.organization_data.password = (string)resultJson["organization_data"]["password"];
-                result.organization_data.name = (string)resultJson["organization_data"]["name"];
-                result.organization_data.image = (string)resultJson["organization_data"]["image"];
-                result.organization_data.join_on = (string)resultJson["organization_data"]["join_on"];
+                result.organization_data.ID = (string)resultJson["organization_data"]["_id"];
+                result.organization_data.Account = (string)resultJson["organization_data"]["account"];
+                result.organization_data.Password = (string)resultJson["organization_data"]["password"];
+                result.organization_data.Name = (string)resultJson["organization_data"]["name"];
+                result.organization_data.Image = (string)resultJson["organization_data"]["image"];
+                result.organization_data.JoinOn = (string)resultJson["organization_data"]["join_on"];
                 List<JToken> homeworkList = resultJson["organization_data"]["homeworks"].Children().ToList();
                 foreach (JToken token in homeworkList)
                 {
-                    result.organization_data.homeworks.Add(JsonConvert.DeserializeObject<Homework>(token.ToString()));
+                    result.organization_data.Homeworks.Add(JsonConvert.DeserializeObject<Homework>(token.ToString()));
                 }
                 List<JToken> noticeList = resultJson["organization_data"]["notices"].Children().ToList();
                 foreach (JToken token in noticeList)
                 {
-                    result.organization_data.notices.Add(JsonConvert.DeserializeObject<Notice>(token.ToString()));
+                    result.organization_data.Notices.Add(JsonConvert.DeserializeObject<Notice>(token.ToString()));
                 }
                 List<JToken> memberList = resultJson["organization_data"]["members"].Children().ToList();
                 foreach (JToken token in memberList)
                 {
-                    result.organization_data.members.Add(JsonConvert.DeserializeObject<User>(token.ToString()));
+                    result.organization_data.Members.Add(JsonConvert.DeserializeObject<User>(token.ToString()));
                 }
                 List<JToken> voteList = resultJson["organization_data"]["votes"].Children().ToList();
                 foreach (JToken voteToken in voteList)
                 {
-                    result.organization_data.votes.Add(JsonConvert.DeserializeObject<Vote>(voteToken.ToString()));
+                    result.organization_data.Votes.Add(JsonConvert.DeserializeObject<Vote>(voteToken.ToString()));
                 }
             }
             return result;

@@ -51,8 +51,8 @@ namespace ClassManager
 
         private void relationships_ItemClick(object sender, ItemClickEventArgs e)
         {
-            // 跳转至班级页面，merge后把注释去掉
-            // Frame.Navigate(typeof(MemberOfClass), ((Relationship)e.ClickedItem).account);
+            // 跳转至班级页面
+            Frame.Navigate(typeof(MemberOfClass), ((Relationship)e.ClickedItem).account);
         }
     }
 }

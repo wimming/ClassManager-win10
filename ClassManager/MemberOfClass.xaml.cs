@@ -26,10 +26,17 @@ namespace ClassManager
 	/// </summary>
 	public sealed partial class MemberOfClass : Page
 	{
+
+		private Organization _organization { get; set; }
+
+		private User _user { get; set; }
+
 		public MemberOfClass ()
 		{
 			this.InitializeComponent();
+			_organization = new Organization();
 		}
+
 		protected override async void OnNavigatedTo (NavigationEventArgs e)
 		{
 			if (!SingleService.Instance.hasLogin()) {
@@ -38,17 +45,17 @@ namespace ClassManager
 			}
 			string temp = ((string)e.Parameter);
 			Debug.WriteLine("member");
-			//Debug.WriteLine(temp);
+			//Debug.WriteLine(temp); 
+			_user = SingleService.Instance.getUser();
 			Result res = await SingleService.Instance.searchOrganizationDetail(temp);
 			_organization = res.organization_data;
 			_organization.image = SingleService.Instance.getServerAddress() + (_organization.image == null ? "null" : _organization.image);
 			org_account.Text = "Account: " + (_organization.account == null ? "" : _organization.account);
 			org_name.Text = "Name: " + (_organization.name == null ? "" : _organization.name);
-			//Debug.WriteLine(JsonConvert.SerializeObject(_organization));
+			Debug.WriteLine(JsonConvert.SerializeObject(_organization.members));
 			foreach (var item in _organization.members) {
 				item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
 			}
 		}
-		private Organization _organization { get; set; }
 	}
 }

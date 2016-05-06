@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -80,14 +81,27 @@ namespace ClassManager
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-        }
 
-        /// <summary>
-        /// 导航到特定页失败时调用
-        /// </summary>
-        ///<param name="sender">导航失败的框架</param>
-        ///<param name="e">有关导航失败的详细信息</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+
+			// Every time the Frame navigates, set the visibility of the Shell-drawn back button 
+			// appropriate to whether there is anywhere to go back to
+			rootFrame.Navigated += (s, a) => {
+				if (rootFrame.CanGoBack) {
+					// Setting this visible is ignored on Mobile and when in tablet mode!     
+					SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+				} else {
+					SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+				}
+			};
+
+		}
+
+		/// <summary>
+		/// 导航到特定页失败时调用
+		/// </summary>
+		///<param name="sender">导航失败的框架</param>
+		///<param name="e">有关导航失败的详细信息</param>
+		void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }

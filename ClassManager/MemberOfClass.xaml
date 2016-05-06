@@ -13,6 +13,7 @@
 			<RowDefinition Height="auto"></RowDefinition>
 			<RowDefinition Height="auto"></RowDefinition>
 			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
@@ -26,11 +27,11 @@
 				<RowDefinition Height="auto"></RowDefinition>
 			</Grid.RowDefinitions>
 
-            <!--Image Grid.Column="0" Grid.RowSpan="2" Source="{x:Bind _organization.Image}" Height="100" Width="100"/>-->
+			<Image Grid.Column="0" Grid.RowSpan="2"  Height="100" Width="100"/>
 
-            <TextBlock Grid.Column="1" Grid.Row="0" x:Name="org_account" Text="{x:Bind _organization.Account, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="0" x:Name="org_account" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
 
-            <TextBlock Grid.Column="1" Grid.Row="1" x:Name="org_name" Text="{x:Bind _organization.Name, Mode=OneWay}" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+			<TextBlock Grid.Column="1" Grid.Row="1" x:Name="org_name" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
 
 			<AppBarButton Grid.Column="2" Grid.RowSpan="2" Icon="Setting" IsCompact="True" VerticalAlignment="Center">
 				<AppBarButton.Flyout>
@@ -57,34 +58,35 @@
 		</Grid>
 
 		<!--<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">-->
-		<ListView Grid.Row="2" ItemsSource="{x:Bind _organization.Members}">
-				<ListView.ItemTemplate>
-					<DataTemplate x:DataType="md:User">
-						<Grid Height="100">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="auto"></ColumnDefinition>
+		<ListView Grid.Row="2" ItemsSource="{x:Bind _organization.members, Mode=OneWay}">
+			<ListView.ItemTemplate>
+				<DataTemplate x:DataType="md:User">
+					<Grid Height="100">
+						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="auto"></RowDefinition>
-								<RowDefinition Height="auto"></RowDefinition>
-								<RowDefinition Height="auto"></RowDefinition>
-								<RowDefinition Height="auto"></RowDefinition>
-							</Grid.RowDefinitions>
-							<!--<Image Grid.Column="0" Grid.RowSpan="4" Source="{x:Bind image}"></Image>-->
-							<TextBlock Grid.Column="1" Grid.Row="0" Text="Name:"></TextBlock>
-                            <TextBlock Grid.Column="2" Grid.Row="0" Text="{x:Bind name, Mode=OneWay}"></TextBlock>
-							<TextBlock Grid.Column="1" Grid.Row="1" Text="Account:"></TextBlock>
-                            <TextBlock Grid.Column="2" Grid.Row="1" Text="{x:Bind account, Mode=OneWay}"></TextBlock>
-							<TextBlock Grid.Column="1" Grid.Row="2" Text="Position:"></TextBlock>
-                            <TextBlock Grid.Column="2" Grid.Row="2" Text="{x:Bind position, Mode=OneWay}"></TextBlock>
-							<TextBlock Grid.Column="1" Grid.Row="3" Text="Student Id:"></TextBlock>
-                            <TextBlock Grid.Column="2" Grid.Row="3" Text="{x:Bind student_id, Mode=OneWay}"></TextBlock>
-						</Grid>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
+							<ColumnDefinition Width="auto"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+						</Grid.RowDefinitions>
+						<!--<Image Grid.Column="0" Grid.RowSpan="4" Source="{x:Bind image}"></Image>-->
+						<TextBlock Grid.Column="1" Grid.Row="0" Text="Name:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="0" Text="{x:Bind name}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="Account:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="1" Text="{x:Bind account}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="2" Text="Position:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="2" Text="{x:Bind position}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="3" Text="Student Id:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="3" Text="{x:Bind student_id}"></TextBlock>
+					</Grid>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
 		<!--</ScrollViewer>-->
+		<TextBlock Grid.Row="3" Text="{x:Bind  _organization.name, Mode=OneWay}"></TextBlock>
 	</Grid>
 </Page>

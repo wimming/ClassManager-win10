@@ -18,6 +18,8 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
+using ClassManager.ViewModels;
+using Windows.UI.Core;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -30,29 +32,48 @@ namespace ClassManager
     {
         private string _serverAddress;
 
-        private User _user { get; set; }
+        private UserViewModel UVM;
 
         public HomePage()
         {
             this.InitializeComponent();
+
+            UVM = UserViewModel.Instance;
         }
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                AppViewBackButtonVisibility.Collapsed;
+
             if (!SingleService.Instance.hasLogin())
             {
                 Frame.Navigate(typeof(MainPage));
                 return;
             }
-            _user = SingleService.Instance.getUser();
-            _user.image = SingleService.Instance.getServerAddress() + (_user.image == null ? "null" : _user.image);
-            //user_image.Source = await SingleService.Instance.getImage(_user.image);
 
+            UVM.initialUVM();
         }
 
         private void relationships_ItemClick(object sender, ItemClickEventArgs e)
         {
             // 跳转至班级页面
             Frame.Navigate(typeof(MemberOfClass), ((Relationship)e.ClickedItem).account);
+        }
+
+        private void setting_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SettingPage));
+        }
+
+        private void create_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CreateOrganizationPage));
+        }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            UVM.logout();
+            Frame.GoBack();
         }
     }
 }

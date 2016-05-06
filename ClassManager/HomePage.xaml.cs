@@ -57,7 +57,7 @@ namespace ClassManager
         private void relationships_ItemClick(object sender, ItemClickEventArgs e)
         {
             // 跳转至班级页面
-            Frame.Navigate(typeof(MemberOfClass), ((Relationship)e.ClickedItem).account);
+            Frame.Navigate(typeof(OrganizationDetail), ((Relationship)e.ClickedItem).account);
         }
 
         private void setting_Click(object sender, RoutedEventArgs e)

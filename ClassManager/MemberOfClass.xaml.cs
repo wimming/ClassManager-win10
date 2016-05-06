@@ -40,15 +40,16 @@ namespace ClassManager
 			Debug.WriteLine("member");
 			//Debug.WriteLine(temp);
 			Result res = await SingleService.Instance.searchOrganizationDetail(temp);
-			_organization = res.organization_data;
-			_organization.image = SingleService.Instance.getServerAddress() + (_organization.image == null ? "null" : _organization.image);
-			org_account.Text = "Account: " + (_organization.account == null ? "" : _organization.account);
-			org_name.Text = "Name: " + (_organization.name == null ? "" : _organization.name);
+            //res.organization_data.Image = SingleService.Instance.getServerAddress() + (_organization.Image == "" ? "null" : _organization.Image);
+            _organization.DeepCopy(res.organization_data);
+			//_organization.Image = SingleService.Instance.getServerAddress() + (_organization.Image == null ? "null" : _organization.Image);
+			//org_account.Text = "Account: " + (_organization.Account == null ? "" : _organization.Account);
+			//org_name.Text = "Name: " + (_organization.Name == null ? "" : _organization.Name);
 			//Debug.WriteLine(JsonConvert.SerializeObject(_organization));
-			foreach (var item in _organization.members) {
-				item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
-			}
+			//foreach (var item in _organization.Members) {
+			//	item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
+			//}
 		}
-		private Organization _organization { get; set; }
+        private Organization _organization = new Organization();
 	}
 }

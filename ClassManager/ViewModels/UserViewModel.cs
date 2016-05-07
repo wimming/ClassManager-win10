@@ -37,8 +37,8 @@ namespace ClassManager.ViewModels
 
         public void initialUVM()
         {
-            _instance.User.DeepCopy(SingleService.Instance.getUser());
-            _instance.User.image = SingleService.Instance.getServerAddress() + (_instance.User.image == null ? "null" : _instance.User.image);
+            User.DeepCopy(SingleService.Instance.getUser());
+            User.image = SingleService.Instance.getServerAddress() + (User.image == null ? "null" : User.image);
         }
 
         public async void setPasswprd(string password)
@@ -69,16 +69,7 @@ namespace ClassManager.ViewModels
             {
                 await new Windows.UI.Popups.MessageDialog("修改成功").ShowAsync();
 
-                Result result2 = await SingleService.Instance.updateUser();
-
-                if (!result2.error)
-                {
-                    User.DeepCopy(SingleService.Instance.getUser());
-                }
-                else
-                {
-                    await new Windows.UI.Popups.MessageDialog(result2.message).ShowAsync();
-                }
+                regetUser();
             }
             else
             {
@@ -94,16 +85,7 @@ namespace ClassManager.ViewModels
             {
                 await new Windows.UI.Popups.MessageDialog("创建班级成功").ShowAsync();
 
-                Result result2 = await SingleService.Instance.updateUser();
-
-                if (!result2.error)
-                {
-                    User.DeepCopy(SingleService.Instance.getUser());
-                }
-                else
-                {
-                    await new Windows.UI.Popups.MessageDialog(result2.message).ShowAsync();
-                }
+                regetUser();
             }
             else
             {
@@ -113,7 +95,23 @@ namespace ClassManager.ViewModels
 
         public void logout()
         {
-            _instance.User.DeepCopy(new User());
+            User.DeepCopy(new User());
+        }
+
+        // 私有方法 重新获取user数据
+        private async void regetUser()
+        {
+            Result result = await SingleService.Instance.updateUser();
+
+            if (!result.error)
+            {
+                User.DeepCopy(SingleService.Instance.getUser());
+                User.image = SingleService.Instance.getServerAddress() + (User.image == null ? "null" : User.image);
+            }
+            else
+            {
+                await new Windows.UI.Popups.MessageDialog("当前网络状况不佳").ShowAsync();
+            }
         }
     }
 }

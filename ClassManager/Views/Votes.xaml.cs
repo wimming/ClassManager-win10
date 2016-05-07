@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ClassManager.Controls;
+using ClassManager.Model;
+using ClassManager.Service;
+using ClassManager.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,10 +25,145 @@ namespace ClassManager.Views
 	/// 可用于自身或导航至 Frame 内部的空白页。
 	/// </summary>
 	public sealed partial class Votes : Page
-	{
-		public Votes ()
+    {
+        private OrganizationViewModel OVM;
+        public Votes ()
 		{
 			this.InitializeComponent();
-		}
-	}
+            OVM = OrganizationViewModel.Instance;
+        }
+
+        private async void option_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var dialog = new ContentDialog()
+            {
+                Content = "确定为其投票？",
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消",
+                FullSizeDesired = false,
+            };
+
+            dialog.PrimaryButtonClick += (_s, _e) => {
+                string voteId = ((Vote)((Grid)((ListView)sender).Parent).DataContext)._id;
+                string optionId = ((Option)e.ClickedItem)._id;
+                OVM.vote(OVM.Organization.Account, voteId, optionId);
+            };
+            await dialog.ShowAsync();
+        }
+
+        private async void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = "新建投票",
+                Content = new CreateVoteContent(),
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消",
+                FullSizeDesired = false,
+            };
+
+            dialog.PrimaryButtonClick += (_s, _e) =>
+            {
+                ContentDialog x = dialog;
+                Dictionary<string, string> voteData = new Dictionary<string, string>();
+                voteData.Add("name", ((CreateVoteContent)dialog.Content).getName());
+                voteData.Add("content", ((CreateVoteContent)dialog.Content).getContent());
+                voteData.Add("deadline", ((CreateVoteContent)dialog.Content).getDeadline()+"");
+                voteData.Add("options", ((CreateVoteContent)dialog.Content).getOptions());
+
+                OVM.createVote(voteData);
+            };
+            await dialog.ShowAsync();
+        }
+    }
+
+    public class SupporterNumCVT : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return ((List<User>)value).Count + "";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class IsVotedCVT : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            bool isVoted = true;
+
+            List<User> unvotes = ((List<User>)value);
+            foreach (User item in unvotes)
+            {
+                if (item.Account == UserViewModel.Instance.User.Account)
+                {
+                    isVoted = false;
+                }
+            }
+
+            return !isVoted;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IsVotedTextCVT : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            bool isVoted = true;
+
+            List<User> unvotes = ((List<User>)value);
+            foreach (User item in unvotes)
+            {
+                if (item.Account == UserViewModel.Instance.User.Account)
+                {
+                    isVoted = false;
+                }
+            }
+
+            return isVoted ? "已投票" : "未投票";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SelectedCVT : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            int index = -1;
+
+            List<Option> options = ((List<Option>)value);
+            for (int i = 0; i < options.Count; ++i)
+            {
+                List<User> supporters = options[i].supporters;
+                foreach (User supporter in supporters)
+                {
+                    if (supporter.Account == UserViewModel.Instance.User.Account)
+                    {
+                        index = i;
+                        break;
+                    }
+                    if (index != -1) break;
+                }
+            }
+
+            return index;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

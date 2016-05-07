@@ -5,9 +5,49 @@
     xmlns:local="using:ClassManager.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:md="using:ClassManager.Model"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    </Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Text="Members"></TextBlock>
+			<Button x:Name="AddButton" Content="Add"/>
+		</StackPanel>
+
+		<ListView Grid.Row="1" ItemsSource="{x:Bind OVM.Organization.members, Mode=OneWay}">
+			<ListView.ItemTemplate>
+				<DataTemplate x:DataType="md:User">
+					<Grid Height="100">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto"></ColumnDefinition>
+							<ColumnDefinition Width="auto"></ColumnDefinition>
+							<ColumnDefinition Width="auto"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
+						</Grid.RowDefinitions>
+						<Image Grid.Column="0" Grid.RowSpan="4" Height="100" Width="100" Source="{x:Bind image}"></Image>
+						<TextBlock Grid.Column="1" Grid.Row="0" Text="Name:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="0" Text="{x:Bind name}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="Account:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="1" Text="{x:Bind account}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="2" Text="Position:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="2" Text="{x:Bind position}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="3" Text="Student Id:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="3" Text="{x:Bind student_id}"></TextBlock>
+					</Grid>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+	</Grid>
 </Page>

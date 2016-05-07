@@ -45,8 +45,9 @@
                     <VisualState.Setters>
                         <Setter Target="RootSplitView.DisplayMode" Value="CompactInline"/>
                         <Setter Target="RootSplitView.IsPaneOpen" Value="True"/>
-                        <Setter Target="NavPaneDivider.Visibility" Value="Visible"/>
-                    </VisualState.Setters>
+						<Setter Target="NavPaneDivider.Visibility" Value="Visible"/>
+						<Setter Target="NavPaneDivider1.Visibility" Value="Visible"/>
+					</VisualState.Setters>
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
@@ -55,8 +56,9 @@
                     <VisualState.Setters>
                         <Setter Target="RootSplitView.DisplayMode" Value="CompactOverlay"/>
                         <Setter Target="RootSplitView.IsPaneOpen" Value="False"/>
-                        <Setter Target="NavPaneDivider.Visibility" Value="Collapsed"/>
-                    </VisualState.Setters>
+						<Setter Target="NavPaneDivider.Visibility" Value="Collapsed"/>
+						<Setter Target="NavPaneDivider1.Visibility" Value="Collapsed"/>
+					</VisualState.Setters>
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
@@ -83,11 +85,13 @@
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="*"/>
+						<RowDefinition Height="auto"/>
+						<RowDefinition Height="48"/>
 						<RowDefinition Height="6"/>
 					</Grid.RowDefinitions>
 
 					<!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
-					<Grid Grid.Row="0" Margin="0,0,0,0">
+					<Grid Grid.Row="0" Margin="48,0,0,0">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
 							<ColumnDefinition Width="*"></ColumnDefinition>
@@ -98,19 +102,20 @@
 							<RowDefinition Height="auto"></RowDefinition>
 						</Grid.RowDefinitions>
 
-						<Image Grid.Column="0" Grid.RowSpan="2" Source="{x:Bind _organization.Image}"  Height="50" Width="50"/>
+						<Image Grid.Column="0" Grid.RowSpan="2" Source="{x:Bind OVM.Organization.image}"  Height="50" Width="50"/>
 
-						<TextBlock Grid.Column="1" Grid.Row="0" x:Name="org_account" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="0" x:Name="org_account" VerticalAlignment="Bottom" Text="{x:Bind OVM.Organization.Account}" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
 
-						<TextBlock Grid.Column="1" Grid.Row="1" x:Name="org_name" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind OVM.Organization.Name}" x:Name="org_name" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
 
-						<Button x:Name="SettingsNavPaneButton"
+						<!--<Button x:Name="SettingsNavPaneButton"
                             Grid.RowSpan="2"
                             Grid.Column="2"
                             Style="{StaticResource SplitViewPaneButtonStyle}"
                             Content="&#xE713;"
+							Click="OrganizationSettingClick"
                             AutomationProperties.Name="Settings"
-                            ToolTipService.ToolTip="Settings"/>
+                            ToolTipService.ToolTip="Settings"/>-->
 					</Grid>
 					
 					<Rectangle x:Name="NavPaneDivider"
@@ -125,15 +130,20 @@
                                           ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                                           ItemTemplate="{StaticResource NavMenuItemTemplate}"
                                           ItemInvoked="NavMenuList_ItemInvoked"/>
-                    
-                    <!--<Button x:Name="FeedbackNavPaneButton"
-                            Grid.Row="2"
-                            Grid.Column="1"
+					<Rectangle x:Name="NavPaneDivider1"
+                               Grid.Row="3"
+                               Height="1"
+                               Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                               Margin="16,6,16,6"/>
+					<Button x:Name="ToHomePage"
+                            Grid.Row="4"
+                            Grid.Column="2"
                             Style="{StaticResource SplitViewPaneButtonStyle}"
                             Content="&#xE76E;"
+							Click="ToHomePageClick"
                             AutomationProperties.Name="Feedback"
                             ToolTipService.ToolTip="Feedback"/>
-                    <Button x:Name="SettingsNavPaneButton"
+                    <!--<Button x:Name="SettingsNavPaneButton"
                             Grid.Row="2"
                             Grid.Column="2"
                             Style="{StaticResource SplitViewPaneButtonStyle}"

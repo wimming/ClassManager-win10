@@ -18,6 +18,7 @@ using ClassManager.Controls;
 using ClassManager.Views;
 using ClassManager.Service;
 using ClassManager.Model;
+using ClassManager.ViewModels;
 
 namespace ClassManager
 {
@@ -29,7 +30,7 @@ namespace ClassManager
 	{
 		private bool isPaddingAdded = false;
 
-		private Organization _organization { get; set; }
+		private OrganizationViewModel OVM;
 
 		// Declare the top level nav items
 		private List<NavMenuItem> navlist = new List<NavMenuItem>(
@@ -60,6 +61,13 @@ namespace ClassManager
 					//Highlight Comment 两个可选一个合适的当icon
 					Label = "Homeworks",
 					DestPage = typeof(Homeworks)
+				},
+				new NavMenuItem()
+				{
+					Symbol = Symbol.Setting,
+					//Highlight Comment 两个可选一个合适的当icon
+					Label = "Setting",
+					DestPage = typeof(Setting)
 				},
 			});
 
@@ -94,27 +102,29 @@ namespace ClassManager
 			SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
 			SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 
-
 			NavMenuList.ItemsSource = navlist;
+
+			OVM = OrganizationViewModel.Instance;
 		}
 
-		protected override async void OnNavigatedTo (NavigationEventArgs e)
+		protected override void OnNavigatedTo (NavigationEventArgs e)
 		{
 			if (!SingleService.Instance.hasLogin()) {
 				Frame.Navigate(typeof(MainPage));
 				return;
 			}
-			string temp = ((string)e.Parameter);
 			Debug.WriteLine("member");
-			//Debug.WriteLine(temp); 
-			Result res = await SingleService.Instance.searchOrganizationDetail(temp);
-			if (_organization == null) {
-				_organization = new Organization();
-			}
-			_organization.DeepCopy(res.organization_data);
-			_organization.Image = SingleService.Instance.getServerAddress() + (_organization.Image == null ? "null" : _organization.Image);
-			org_account.Text = "Account: " + (_organization.account == null ? "" : _organization.account);
-			org_name.Text = "Name: " + (_organization.name == null ? "" : _organization.name);
+
+			OVM.initialOVM((string)e.Parameter);
+
+			string tem = OVM.Organization.account;
+			//org_account.Text = "Account: " + (OVM.Organization.account == null ? "" : OVM.Organization.account);
+			//org_name.Text = "Name: " + (OVM.Organization.name == null ? "" : OVM.Organization.name);
+		}
+
+		private void ToHomePageClick (object sender, RoutedEventArgs e)
+		{
+			Frame.Navigate(typeof(HomePage));
 		}
 
 		public Frame AppFrame { get { return this.frame; } }
@@ -228,7 +238,7 @@ namespace ClassManager
 				if (item.DestPage != null &&
 					item.DestPage != this.AppFrame.CurrentSourcePageType) {
 					Debug.WriteLine(item.Arguments);
-					this.AppFrame.Navigate(item.DestPage, _organization.account);
+					this.AppFrame.Navigate(item.DestPage, OVM.Organization.account);
 				}
 			}
 		}

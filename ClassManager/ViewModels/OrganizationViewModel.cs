@@ -99,56 +99,56 @@ namespace ClassManager.ViewModels
 		//	_instance.User.DeepCopy(new User());
 		//}
 		
-        public async void vote(string organizationAccount, string voteId, string optionId)
-        {
-            Result result = await SingleService.Instance.vote(organizationAccount, voteId, optionId);
-
-            if (!result.error)
-            {
-                await new Windows.UI.Popups.MessageDialog("投票成功").ShowAsync();
-
-                regetOrganization();
-            }
-            else
-            {
-                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
-            }
-        }
-
-        public async void createVote(Dictionary<string, string> voteData)
-        {
-            Result result = await SingleService.Instance.createVote(Organization.Account, voteData);
-
-            if (!result.error)
-            {
-                await new Windows.UI.Popups.MessageDialog("创建成功").ShowAsync();
-
-                regetOrganization();
-            }
-            else
-            {
-                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
-            }
-        }
-
-        // 私有方法 重新获取organization数据
-        private async void regetOrganization()
-        {
-            Result result = await SingleService.Instance.searchOrganizationDetail(Organization.Account);
-
-            if (!result.error)
-            {
-                Organization.DeepCopy(result.organization_data);
-                Organization.image = SingleService.Instance.getServerAddress() + (Organization.image == null ? "null" : Organization.image);
-                foreach (var item in Organization.members)
-                {
-                    item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
-                }
-            }
-            else
-            {
-                await new Windows.UI.Popups.MessageDialog("当前网络状况不佳").ShowAsync();
-            }
-        }
+	        public async void vote(string organizationAccount, string voteId, string optionId)
+	        {
+	            Result result = await SingleService.Instance.vote(organizationAccount, voteId, optionId);
+	
+	            if (!result.error)
+	            {
+	                await new Windows.UI.Popups.MessageDialog("投票成功").ShowAsync();
+	
+	                regetOrganization();
+	            }
+	            else
+	            {
+	                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+	            }
+	        }
+	
+	        public async void createVote(Dictionary<string, string> voteData)
+	        {
+	            Result result = await SingleService.Instance.createVote(Organization.Account, voteData);
+	
+	            if (!result.error)
+	            {
+	                await new Windows.UI.Popups.MessageDialog("创建成功").ShowAsync();
+	
+	                regetOrganization();
+	            }
+	            else
+	            {
+	                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+	            }
+	        }
+	
+	        // 私有方法 重新获取organization数据
+	        private async void regetOrganization()
+	        {
+	            Result result = await SingleService.Instance.searchOrganizationDetail(Organization.Account);
+	
+	            if (!result.error)
+	            {
+	                Organization.DeepCopy(result.organization_data);
+	                Organization.image = SingleService.Instance.getServerAddress() + (Organization.image == null ? "null" : Organization.image);
+	                foreach (var item in Organization.members)
+	                {
+	                    item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
+	                }
+	            }
+	            else
+	            {
+	                await new Windows.UI.Popups.MessageDialog("当前网络状况不佳").ShowAsync();
+	            }
+	        }
 	}
 }

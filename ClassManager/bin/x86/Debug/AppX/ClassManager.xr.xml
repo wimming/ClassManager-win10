@@ -44,6 +44,7 @@
       <RootProperty Name="Children" />
       <RootProperty Name="Padding" />
       <RootProperty Name="Width" />
+      <RootProperty Name="Orientation" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Header" />
@@ -307,6 +308,7 @@
     <RootType FullName="ClassManager.Views.Homeworks" />
     <RootType FullName="ClassManager.Views.Members" />
     <RootType FullName="ClassManager.Views.Notices" />
+    <RootType FullName="ClassManager.Views.Setting" />
     <RootType FullName="ClassManager.Views.Votes" />
   </Roots.RootTypes>
 </Roots>

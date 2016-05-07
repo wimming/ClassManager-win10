@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClassManager.Service;
+using ClassManager.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +24,19 @@ namespace ClassManager.Views
 	/// </summary>
 	public sealed partial class Members : Page
 	{
+		private OrganizationViewModel OVM;
 		public Members ()
 		{
 			this.InitializeComponent();
+
+			OVM = OrganizationViewModel.Instance;
+		}
+
+		protected override void OnNavigatedTo (NavigationEventArgs e)
+		{
+			OVM.initialOVM((string)e.Parameter);
+			int i = 10;
+			string tem = OVM.Organization.account;
 		}
 	}
 }

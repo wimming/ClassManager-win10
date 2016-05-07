@@ -1,4 +1,13 @@
 App.xbf
+CreateOrganizationPage.xbf
 HomePage.xbf
 MainPage.xbf
 MemberOfClass.xbf
+OrganizationDetail.xbf
+SettingPage.xbf
+Styles\Styles.xbf
+Views\Homeworks.xbf
+Views\Members.xbf
+Views\Notices.xbf
+Views\Setting.xbf
+Views\Votes.xbf

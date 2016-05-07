@@ -42,9 +42,10 @@
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Padding" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Orientation" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Header" />
@@ -67,7 +68,6 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Content" />
-      <RootProperty Name="Style" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="ClassManager.CreateOrganizationPage" />
@@ -305,7 +305,6 @@
       <RootProperty Name="HorizontalContentAlignment" />
       <RootProperty Name="VerticalContentAlignment" />
     </RootType>
-    <RootType FullName="ClassManager.Views.Homeworks" />
     <RootType FullName="ClassManager.Views.Members" />
     <RootType FullName="ClassManager.Views.Notices" />
     <RootType FullName="ClassManager.Views.Setting" />

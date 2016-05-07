@@ -99,6 +99,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BooleanToVisibilityConverter.cs" />
     <Compile Include="Controls\NavMenuListView.cs" />
     <Compile Include="CreateOrganizationPage.xaml.cs">
       <DependentUpon>CreateOrganizationPage.xaml</DependentUpon>

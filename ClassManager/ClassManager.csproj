@@ -99,6 +99,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Controls\CreateHomeworkContent.xaml.cs">
+      <DependentUpon>CreateHomeworkContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CreateNoticeContent.xaml.cs">
+      <DependentUpon>CreateNoticeContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CreateVoteContent.xaml.cs">
+      <DependentUpon>CreateVoteContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NavMenuListView.cs" />
     <Compile Include="CreateOrganizationPage.xaml.cs">
       <DependentUpon>CreateOrganizationPage.xaml</DependentUpon>
@@ -166,6 +176,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\CreateHomeworkContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CreateNoticeContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CreateVoteContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CreateOrganizationPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

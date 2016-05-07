@@ -12,15 +12,15 @@
 		<ScrollViewer>
 			<StackPanel Padding="10, 10, 10, 10" Width="350">
 				<TextBlock Text="设置头像"/>
-				<Image x:Name="image" Source="{x:Bind OVM.Organization.image}" Height="180" Stretch="UniformToFill"/>
+				<Image x:Name="image" Source="{x:Bind OVM.Organization.image, Mode=OneWay}" Height="180" Stretch="UniformToFill"/>
 				<RelativePanel>
 					<AppBarButton x:Name="SelectPictureButton" Click="SelectPictureButton_Click" Icon="Pictures" Label="select"/>
 					<Button x:Name="uploadBtn" Click="uploadBtn_Click" Content="upload" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
 				</RelativePanel>
 				<TextBlock Text="设置基本信息"/>
-				<TextBox x:Name="name" Header="Name:" Text="{x:Bind OVM.Organization.name}" Margin="0,12,0,0"/>
+				<TextBox x:Name="name" Header="Name:" Text="{x:Bind OVM.Organization.name, Mode=OneWay}" Margin="0,12,0,0"/>
 				<!--<TextBox x:Name="school" Header="School:" Text="{x:Bind OVM.Organization.school}" Margin="0,12,0,0"/>-->
-				<TextBox x:Name="Password" Header="Password:" Text="{x:Bind OVM.Organization.password}" Margin="0,12,0,0"/>
+				<TextBox x:Name="Password" Header="Password:" Text="{x:Bind OVM.Organization.password, Mode=OneWay}" Margin="0,12,0,0"/>
 				<RelativePanel Margin="0,24,0,0">
 					<Button x:Name="settingBtn" Content="Confirm" Click="settingBtn_Click"></Button>
 				</RelativePanel>

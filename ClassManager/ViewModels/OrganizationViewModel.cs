@@ -41,6 +41,9 @@ namespace ClassManager.ViewModels
 				foreach (var item in _instance.Organization.members) {
 					item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
 				}
+				foreach (var item in Organization.notices) {
+					item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
+				}
 			} else {
 				await new Windows.UI.Popups.MessageDialog(res.message).ShowAsync();
 			}
@@ -144,11 +147,38 @@ namespace ClassManager.ViewModels
 	                {
 	                    item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
 	                }
-	            }
+				foreach (var item in Organization.notices) {
+					item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
+				}
+			}
 	            else
 	            {
 	                await new Windows.UI.Popups.MessageDialog("当前网络状况不佳").ShowAsync();
 	            }
 	        }
+
+		public async void createHomeWork (Dictionary<string, string> HomeWorkData)
+		{
+			Result result = await SingleService.Instance.createHomework(Organization.Account, HomeWorkData);
+
+			if (!result.error) {
+				await new Windows.UI.Popups.MessageDialog("创建成功").ShowAsync();
+				regetOrganization();
+			} else {
+				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+			}
+		}
+
+		public async void createNotice (Dictionary<string, string> NoticeData)
+		{
+			Result result = await SingleService.Instance.createNotice(Organization.Account, NoticeData);
+
+			if (!result.error) {
+				await new Windows.UI.Popups.MessageDialog("创建成功").ShowAsync();
+				regetOrganization();
+			} else {
+				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+			}
+		}
 	}
 }

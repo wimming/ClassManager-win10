@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="ClassManager.Controls.CreateVoteContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ClassManager.Controls"
+    xmlns:md="using:ClassManager.Model"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel x:Name="rootPanel">
+        <TextBox x:Name="name" Header="标题"/>
+        <TextBox x:Name="content" Header="内容"/>
+        <DatePicker x:Name="datePicker"/>
+        <TimePicker x:Name="timePicker"/>
+        <Button x:Name="addOptionBtn" Content="添加选项" Click="addOptionBtn_Click"/>
+        <ListView x:Name="listView" ItemsSource="{x:Bind options}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:OptionString">
+                    <TextBox Text="{x:Bind Str, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackPanel>
+</UserControl>

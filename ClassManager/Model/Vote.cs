@@ -25,19 +25,19 @@ namespace ClassManager.Model
             options = new List<Option>();
             unvotes = new List<User>();
         }
-        public class Option
+    }
+    public class Option
+    {
+        public string _id { get; set; }
+        public string name { get; set; }
+        public int votes { get; set; }
+        public List<User> supporters { get; set; }
+        public Option()
         {
-            public string _id { get; set; }
-            public string name { get; set; }
-            public int votes { get; set; }
-            public List<User> supporters { get; set; }
-            public Option()
-            {
-                _id = "";
-                name = "";
-                votes = 0;
-                supporters = new List<User>();
-            }
+            _id = "";
+            name = "";
+            votes = 0;
+            supporters = new List<User>();
         }
     }
 }

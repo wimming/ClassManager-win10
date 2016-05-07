@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClassManager.Controls;
+using ClassManager.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +24,38 @@ namespace ClassManager.Views
 	/// </summary>
 	public sealed partial class Notices : Page
 	{
+		private OrganizationViewModel OVM;
 		public Notices ()
 		{
 			this.InitializeComponent();
+			OVM = OrganizationViewModel.Instance;
+		}
+
+		protected override void OnNavigatedTo (NavigationEventArgs e)
+		{
+			OVM.initialOVM((string)e.Parameter);
+		}
+
+		private async void AddButton_Click (object sender, RoutedEventArgs e)
+		{
+			var dialog = new ContentDialog() {
+				Title = "新建作业",
+				Content = new CreateNoticeContent(),
+				PrimaryButtonText = "确定",
+				SecondaryButtonText = "取消",
+				FullSizeDesired = false,
+			};
+
+			dialog.PrimaryButtonClick += (_s, _e) => {
+				ContentDialog x = dialog;
+				Dictionary<string, string> NoticeData = new Dictionary<string, string>();
+				NoticeData.Add("name", ((CreateNoticeContent)dialog.Content).getName());
+				NoticeData.Add("content", ((CreateNoticeContent)dialog.Content).getContent());
+				NoticeData.Add("deadline", ((CreateNoticeContent)dialog.Content).getDeadline() + "");
+
+				OVM.createNotice(NoticeData);
+			};
+			await dialog.ShowAsync();
 		}
 	}
 }

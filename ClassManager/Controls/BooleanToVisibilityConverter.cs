@@ -30,7 +30,7 @@ namespace ClassManager.Controls
 	{
 		public object Convert (object value, Type targetType, object parameter, string language)
 		{
-			if (!(bool)value) {
+			if ((bool)value == false) {
 				return Visibility.Visible;
 			} else {
 				return Visibility.Collapsed;

@@ -25,15 +25,26 @@ namespace ClassManager.Views
 	public sealed partial class Notices : Page
 	{
 		private OrganizationViewModel OVM;
+		private UserViewModel UVM;
 		public Notices ()
 		{
 			this.InitializeComponent();
 			OVM = OrganizationViewModel.Instance;
+			UVM = UserViewModel.Instance;
 		}
 
 		protected override void OnNavigatedTo (NavigationEventArgs e)
 		{
 			OVM.initialOVM((string)e.Parameter);
+			bool hasPowful = false;
+			foreach (var item in UVM.User.Relationships) {
+				if (item.account == OVM.Organization.Account && (item.position == "founder" || item.position == "manager")) {
+					hasPowful = true;
+				}
+			}
+			if (!hasPowful) {
+				add_btn.Visibility = Visibility.Collapsed;
+			}
 		}
 
 		private async void AddButton_Click (object sender, RoutedEventArgs e)

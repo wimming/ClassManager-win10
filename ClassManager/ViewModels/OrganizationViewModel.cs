@@ -180,5 +180,38 @@ namespace ClassManager.ViewModels
 				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
 			}
 		}
+
+		public async void deleteMember (string organizationAccount, string memberAccount)
+		{
+			Result result = await SingleService.Instance.deleteMember(organizationAccount, memberAccount);
+			if (!result.error) {
+				await new Windows.UI.Popups.MessageDialog("删除Member成功").ShowAsync();
+				regetOrganization();
+			} else {
+				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+			}
+		}
+
+		public async void UpMember (string organizationAccount, string memberId)
+		{
+			Result result = await SingleService.Instance.upMember(organizationAccount, memberId);
+			if (!result.error) {
+				await new Windows.UI.Popups.MessageDialog("提升权限成功").ShowAsync();
+				regetOrganization();
+			} else {
+				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+			}
+		}
+
+		public async void downMember (string organizationAccount, string memberId)
+		{
+			Result result = await SingleService.Instance.downMember(organizationAccount, memberId);
+			if (!result.error) {
+				await new Windows.UI.Popups.MessageDialog("免除权限成功").ShowAsync();
+				regetOrganization();
+			} else {
+				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+			}
+		}
 	}
 }

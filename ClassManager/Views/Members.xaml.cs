@@ -1,4 +1,6 @@
-﻿using ClassManager.Service;
+﻿using ClassManager.Controls;
+using ClassManager.Model;
+using ClassManager.Service;
 using ClassManager.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,18 +27,55 @@ namespace ClassManager.Views
 	public sealed partial class Members : Page
 	{
 		private OrganizationViewModel OVM;
+		private UserViewModel UVM;
 		public Members ()
 		{
 			this.InitializeComponent();
 
 			OVM = OrganizationViewModel.Instance;
+			UVM = UserViewModel.Instance;
 		}
 
 		protected override void OnNavigatedTo (NavigationEventArgs e)
 		{
 			OVM.initialOVM((string)e.Parameter);
-			int i = 10;
-			string tem = OVM.Organization.account;
+		}
+
+		private async void OnItemClick (object sender, ItemClickEventArgs e)
+		{
+			var clickUser = (User)(e.ClickedItem);
+			bool hasPowful = false;
+			string pos = clickUser.Position;
+			foreach (var item in UVM.User.Relationships) {
+				if (item.account == OVM.Organization.Account && item.position == "founder") {
+					hasPowful = true;
+				}
+			}
+			if (clickUser.Account == UVM.User.Account) {
+				hasPowful = false;
+			}
+			if (hasPowful) {
+				var dialog = new ContentDialog() {
+					Title = "What do you want to do?",
+					Content = new UserControlContent(pos),
+					PrimaryButtonText = "确定",
+					SecondaryButtonText = "取消",
+					FullSizeDesired = false,
+				};
+				dialog.PrimaryButtonClick += (_s, _e) => {
+					ContentDialog x = dialog;
+					Dictionary<string, string> voteData = new Dictionary<string, string>();
+					int what = ((UserControlContent)dialog.Content).getwhatControls();
+					if (what == 0) {
+						OVM.deleteMember(OVM.Organization.account, clickUser.Account);
+					} else if (what == 1) {
+						OVM.UpMember(OVM.Organization.account, clickUser.ID);
+					} else {
+						OVM.downMember(OVM.Organization.account, clickUser.ID);
+					}
+				};
+				await dialog.ShowAsync();
+			}
 		}
 	}
 }

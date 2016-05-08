@@ -102,6 +102,14 @@
       <RootProperty Name="Template" />
     </RootType>
     <RootType FullName="ClassManager.Controls.CreateVoteContent" />
+    <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
+      <RootProperty Name="Name" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="IsChecked" />
+      <RootEvent Name="Checked" />
+    </RootType>
+    <RootType FullName="ClassManager.Controls.UserControlContent" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
       <RootProperty Name="Header" />
       <RootProperty Name="HorizontalAlignment" />
@@ -142,7 +150,6 @@
       <RootProperty Name="Label" />
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Visibility" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyout">
@@ -154,11 +161,6 @@
     </RootType>
     <RootType FullName="ClassManager.HomePage" />
     <RootType FullName="ClassManager.MainPage" />
-    <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="Content" />
-      <RootProperty Name="IsChecked" />
-    </RootType>
     <RootType FullName="ClassManager.MemberOfClass" />
     <RootType FullName="Windows.UI.Xaml.Controls.FontIcon">
       <RootProperty Name="FontSize" />

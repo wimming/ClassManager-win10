@@ -110,6 +110,9 @@
       <DependentUpon>CreateVoteContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\NavMenuListView.cs" />
+    <Compile Include="Controls\UserControlContent.xaml.cs">
+      <DependentUpon>UserControlContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateOrganizationPage.xaml.cs">
       <DependentUpon>CreateOrganizationPage.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
     <Page Include="Controls\CreateVoteContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserControlContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateOrganizationPage.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -16,6 +16,8 @@ namespace ClassManager.Model
         public bool unlook { get; set; }
         public bool uncomplish { get; set; }
         public string image { get; set; }
+		public int unlooksNum { get; set; }
+		public List<User> unlooks { get; set; }
         public Notice()
         {
             _id = "";
@@ -26,6 +28,8 @@ namespace ClassManager.Model
             unlook = true;
             uncomplish = true;
             image = "";
+			unlooksNum = 0;
+			unlooks = new List<User>();
         }
     }
 }

@@ -46,9 +46,9 @@
 
 			<Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Grid.Row="0">
 				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Homeworks" Margin="24,8,8,8"
+					<TextBlock Text="Homeworks" Margin="48,8,8,8"
                            Style="{ThemeResource TitleTextBlockStyle}" />
-					<AppBarButton Icon="Add" Click="AddButton_Click"></AppBarButton>
+					<AppBarButton x:Name="add_btn" Icon="Add" Click="AddButton_Click"></AppBarButton>
 				</StackPanel>
 			</Border>
 

@@ -57,29 +57,58 @@ namespace ClassManager.Views
 				voteData.Add("name", ((CreateHomeworkContent)dialog.Content).getName());
 				voteData.Add("content", ((CreateHomeworkContent)dialog.Content).getContent());
 				voteData.Add("deadline", ((CreateHomeworkContent)dialog.Content).getDeadline() + "");
-
 				OVM.createHomeWork(voteData);
 			};
 			await dialog.ShowAsync();
 		}
-	}
 
-	//public class SelectItemOfHomeworks
-	//{
-	//	public SelectItemOfHomeworks ()
-	//	{
-	//		Users = new ObservableCollection<User>();
-	//	}
-	//	private ObservableCollection<User> users;
-	//	public ObservableCollection<User> Users {
-	//		get {
-	//			return users;
-	//		}
-	//		set {
-	//			foreach (User item in value) {
-	//				users.Add(item);
-	//			}
-	//		}
-	//	}
-	//}
+		private async void OnItemClick (object sender, ItemClickEventArgs e)
+		{
+			var clickHome = (Homework)(e.ClickedItem);
+			bool hasPowful = false;
+			bool unlook = false;
+			bool uncomplete = false;
+			Dictionary<string, string> type = new Dictionary<string, string>();
+			foreach (var item in UVM.User.Relationships) {
+				if (item.account == OVM.Organization.Account && (item.position == "founder" || item.position == "manager")) {
+					hasPowful = true;
+				}
+			}
+			foreach (var item in UVM.User.homeworks) {
+				if (item._id == clickHome._id) {
+					if (item.unlook) {
+						unlook = item.unlook;
+					}
+					if (item.uncomplish) {
+						uncomplete = item.uncomplish;
+					}
+				}
+			}
+			type.Add("hasPowful", hasPowful.ToString());
+			type.Add("unlook", unlook.ToString());
+			type.Add("uncomplete", uncomplete.ToString());
+			type.Add("type", "homework");
+			var dialog = new ContentDialog() {
+				Title = "What do you want to do?",
+				Content = new homeWorkAndNoticesCtl(type),
+				PrimaryButtonText = "确定",
+				SecondaryButtonText = "取消",
+				FullSizeDesired = false,
+			};
+			dialog.PrimaryButtonClick += (_s, _e) => {
+				ContentDialog x = dialog;
+				int what = ((homeWorkAndNoticesCtl)dialog.Content).getwhatControls();
+				if (what == 0) {
+					OVM.deleteHomework(OVM.Organization.account, clickHome._id);
+				} else if (what == 1) {
+					OVM.lookHomework(OVM.Organization.account, clickHome._id);
+				} else if (what == 3) {
+					UVM.complishHomework(clickHome._id, !uncomplete);
+				} else if (what == 4) {
+					UVM.complishHomework(clickHome._id, !uncomplete);
+				}
+			};
+			await dialog.ShowAsync();
+		}
+	}
 }

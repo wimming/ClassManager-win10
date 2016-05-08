@@ -23,7 +23,7 @@ namespace ClassManager.Controls
 	/// </summary>
 	public sealed partial class UserControlContent : Page
 	{
-		int whatControls;
+		private int whatControls = -1;
 		public UserControlContent (string pos)
 		{
 			this.InitializeComponent();
@@ -47,7 +47,6 @@ namespace ClassManager.Controls
 			} else {
 				whatControls = 2;
 			}
-			
 		}
 	}
 }

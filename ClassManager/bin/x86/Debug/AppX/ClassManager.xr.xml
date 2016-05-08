@@ -51,6 +51,7 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="Text" />
+      <RootProperty Name="Name" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Margin" />
@@ -109,6 +110,7 @@
       <RootProperty Name="IsChecked" />
       <RootEvent Name="Checked" />
     </RootType>
+    <RootType FullName="ClassManager.Controls.homeWorkAndNoticesCtl" />
     <RootType FullName="ClassManager.Controls.UserControlContent" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
       <RootProperty Name="Header" />

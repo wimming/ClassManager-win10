@@ -113,5 +113,21 @@ namespace ClassManager.ViewModels
                 await new Windows.UI.Popups.MessageDialog("当前网络状况不佳").ShowAsync();
             }
         }
-    }
+
+		public async void complishHomework (string homeworkId, bool uncomplete)
+		{
+			Result result = await SingleService.Instance.complishHomework(homeworkId, uncomplete);
+			if (!result.error) {
+				await new Windows.UI.Popups.MessageDialog("homework标记为" + (uncomplete ? "未完成" : "完成")).ShowAsync();
+				regetUser();
+			} else {
+				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+			}
+		}
+
+		public void updateUser()
+		{
+			regetUser();
+		}
+	}
 }

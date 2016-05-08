@@ -2,6 +2,7 @@ App.xbf
 Controls\CreateHomeworkContent.xbf
 Controls\CreateNoticeContent.xbf
 Controls\CreateVoteContent.xbf
+Controls\homeWorkAndNoticesCtl.xbf
 Controls\UserControlContent.xbf
 CreateOrganizationPage.xbf
 HomePage.xbf

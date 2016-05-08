@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="ClassManager.Controls.homeWorkAndNoticesCtl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ClassManager.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<StackPanel x:Name="rootPanel">
+			<TextBlock Name="notice_text" Text="当前notice已经查看过"></TextBlock>
+			<TextBlock Name="homework_text" Text="当前homework已经查看过"></TextBlock>
+			<RadioButton Name="rb1" Checked="Controls">删除</RadioButton>
+			<RadioButton Name="rb2" Checked="Controls">标记当前homework为已查看</RadioButton>
+			<RadioButton Name="rb3" Checked="Controls">标记当前notice为已查看</RadioButton>
+			<RadioButton Name="rb4" Checked="Controls">标记当前homework为已完成</RadioButton>
+			<RadioButton Name="rb5" Checked="Controls">标记当前homework为未完成</RadioButton>
+		</StackPanel>
+	</Grid>
+</Page>

@@ -70,7 +70,7 @@ namespace ClassManager.Views
 						OVM.deleteMember(OVM.Organization.account, clickUser.Account);
 					} else if (what == 1) {
 						OVM.UpMember(OVM.Organization.account, clickUser.ID);
-					} else {
+					} else if (what == 2) {
 						OVM.downMember(OVM.Organization.account, clickUser.ID);
 					}
 				};

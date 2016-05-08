@@ -399,7 +399,7 @@ namespace ClassManager.Service
         public async Task<Result> lookNotice(string organizationAccount, string noticeId)
         {
             JObject resultJson = await _get("search/organization/" + organizationAccount +
-                                            "/homework/" + noticeId);
+											"/Notice/" + noticeId);
             Result result = new Result();
             if (resultJson == null)
             {
@@ -417,9 +417,9 @@ namespace ClassManager.Service
             // this dictionary may sholud be changed as <string, bool>
             var values = new Dictionary<string, string>
             {
-                {"uncoplish", complishFlag.ToString() }
+                {"uncomplish", complishFlag.ToString() }
             };
-            JObject resultJson = await _post("update/user/homework/" + homeworkId, values);
+            JObject resultJson = await _post("api/update/user/homework/" + homeworkId, values);
             Result result = new Result();
             if (resultJson == null)
             {

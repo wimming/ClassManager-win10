@@ -16,7 +16,9 @@ namespace ClassManager.Model
         public string deadline { get; set; }
         public bool unlook { get; set; }
         public bool uncomplish { get; set; }
-        public Homework()
+		public int unlooksNum { get; set; }
+		public List<User> unlooks { get; set; }
+		public Homework()
         {
             _id = "";
             name = "";
@@ -25,6 +27,8 @@ namespace ClassManager.Model
             deadline = "";
             unlook = true;
             uncomplish = true;
-        }
+			unlooksNum = 0;
+			unlooks = new List<User>();
+		}
     }
 }

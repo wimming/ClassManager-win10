@@ -102,11 +102,17 @@
 							<RowDefinition Height="auto"></RowDefinition>
 						</Grid.RowDefinitions>
 
-						<Image Grid.Column="0" Grid.RowSpan="2" Source="{x:Bind OVM.Organization.image}"  Height="50" Width="50"/>
+						<Image Grid.Column="0" Grid.RowSpan="2" Source="{x:Bind OVM.Organization.image, Mode=OneWay}"  Height="50" Width="50"/>
 
-						<TextBlock Grid.Column="1" Grid.Row="0" x:Name="org_account" VerticalAlignment="Bottom" Text="{x:Bind OVM.Organization.Account}" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+						<StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+							<TextBlock Text="Account: "  VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+							<TextBlock x:Name="org_account" VerticalAlignment="Bottom" Text="{x:Bind OVM.Organization.Account, Mode=OneWay}" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+						</StackPanel>
 
-						<TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind OVM.Organization.Name}" x:Name="org_name" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+						<StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+							<TextBlock Text="Name: " VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+							<TextBlock  Text="{x:Bind OVM.Organization.Name, Mode=OneWay}" x:Name="org_name" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
+						</StackPanel>
 
 						<!--<Button x:Name="SettingsNavPaneButton"
                             Grid.RowSpan="2"
@@ -135,14 +141,13 @@
                                Height="1"
                                Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
                                Margin="16,6,16,6"/>
-					<Button x:Name="ToHomePage"
+					<AppBarButton x:Name="ToHomePage"
                             Grid.Row="4"
                             Grid.Column="2"
-                            Style="{StaticResource SplitViewPaneButtonStyle}"
-                            Content="&#xE76E;"
+                            Icon="Home"
 							Click="ToHomePageClick"
-                            AutomationProperties.Name="Feedback"
-                            ToolTipService.ToolTip="Feedback"/>
+                            AutomationProperties.Name="Home"
+                            ToolTipService.ToolTip="Home"/>
                     <!--<Button x:Name="SettingsNavPaneButton"
                             Grid.Row="2"
                             Grid.Column="2"

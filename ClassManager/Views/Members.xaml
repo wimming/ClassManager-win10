@@ -15,15 +15,17 @@
 			<RowDefinition Height="auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
-		<StackPanel Orientation="Horizontal">
-			<TextBlock Text="Members"></TextBlock>
-			<Button x:Name="AddButton" Content="Add"/>
-		</StackPanel>
+		<Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Grid.Row="0">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Members" Margin="48,8,8,8"
+                           Style="{ThemeResource TitleTextBlockStyle}" />
+			</StackPanel>
+		</Border>
 
-		<ListView Grid.Row="1" ItemsSource="{x:Bind OVM.Organization.members, Mode=OneWay}">
+		<ListView Grid.Row="1" ItemsSource="{x:Bind OVM.Organization.members, Mode=OneWay}" ItemClick="OnItemClick" IsItemClickEnabled="True" SelectionMode="None">
 			<ListView.ItemTemplate>
 				<DataTemplate x:DataType="md:User">
-					<Grid Height="100">
+					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
@@ -34,16 +36,17 @@
 							<RowDefinition Height="auto"></RowDefinition>
 							<RowDefinition Height="auto"></RowDefinition>
 							<RowDefinition Height="auto"></RowDefinition>
+							<RowDefinition Height="auto"></RowDefinition>
 						</Grid.RowDefinitions>
-						<Image Grid.Column="0" Grid.RowSpan="4" Height="100" Width="100" Source="{x:Bind image}"></Image>
-						<TextBlock Grid.Column="1" Grid.Row="0" Text="Name:"></TextBlock>
-						<TextBlock Grid.Column="2" Grid.Row="0" Text="{x:Bind name}"></TextBlock>
-						<TextBlock Grid.Column="1" Grid.Row="1" Text="Account:"></TextBlock>
-						<TextBlock Grid.Column="2" Grid.Row="1" Text="{x:Bind account}"></TextBlock>
-						<TextBlock Grid.Column="1" Grid.Row="2" Text="Position:"></TextBlock>
-						<TextBlock Grid.Column="2" Grid.Row="2" Text="{x:Bind position}"></TextBlock>
-						<TextBlock Grid.Column="1" Grid.Row="3" Text="Student Id:"></TextBlock>
-						<TextBlock Grid.Column="2" Grid.Row="3" Text="{x:Bind student_id}"></TextBlock>
+						<Image Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" Height="100" Width="100" Source="{x:Bind image, Mode=OneWay}"></Image>
+						<TextBlock Grid.Column="1" Grid.Row="1" Text="Name:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="1" Text="{x:Bind name, Mode=OneWay}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="2" Text="Account:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="2" Text="{x:Bind account, Mode=OneWay}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="3" Text="Position:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="3" Text="{x:Bind position, Mode=OneWay}"></TextBlock>
+						<TextBlock Grid.Column="1" Grid.Row="4" Text="Student Id:"></TextBlock>
+						<TextBlock Grid.Column="2" Grid.Row="4" Text="{x:Bind student_id, Mode=OneWay}"></TextBlock>
 					</Grid>
 				</DataTemplate>
 			</ListView.ItemTemplate>

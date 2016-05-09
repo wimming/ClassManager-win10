@@ -11,8 +11,9 @@
     <Page.Resources>
         <local:SupporterNumCVT x:Key="supporterNumCVT"/>
         <local:IsVotedCVT x:Key="isVotedCVT"/>
-        <local:IsVotedTextCVT x:Key="isVotedTextCVT"/>
+        <local:IsVotedTextCVT x:Key="isVotedTextCVT"/> 
         <local:SelectedCVT x:Key="selectedCVT"/>
+        <local:UnvotesNumCVT x:Key="unvotesNumCVT"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -42,23 +43,38 @@
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Name:"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Bind name}"></TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Start Date:"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind join_on}"></TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Deadline:"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{x:Bind deadline}"></TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Content:"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{x:Bind content}"></TextBlock>
-                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Options:"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="4" Text="{x:Bind unvotes, Converter={StaticResource isVotedTextCVT}}"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Name:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Bind name}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Start Date:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind join_on}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Deadline:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{x:Bind deadline}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Content:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{x:Bind content}"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Options:"/>
+                        <TextBlock Grid.Column="1" Grid.Row="4" Text="{x:Bind unvotes, Converter={StaticResource isVotedTextCVT}}"/>
                         <ListView Grid.ColumnSpan="2" Grid.Row="5" ItemsSource="{x:Bind options, Mode=OneWay}" IsEnabled="{x:Bind unvotes, Converter={StaticResource isVotedCVT}}" SelectedIndex="{x:Bind options, Converter={StaticResource selectedCVT}}" IsItemClickEnabled="True" ItemClick="option_ItemClick">
                             <ListView.ItemTemplate >
                                 <DataTemplate x:DataType="md:Option">
                                     <StackPanel>
                                         <TextBlock Text="{x:Bind name}"/>
                                         <TextBlock Text="{x:Bind supporters, Converter={StaticResource supporterNumCVT}}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <TextBlock Grid.Row="6" Text="未投票人数："/>
+                        <TextBlock Grid.Column="1" Grid.Row="6" Text="{x:Bind unvotes, Converter={StaticResource unvotesNumCVT}}"/>
+                        <ListView Grid.ColumnSpan="2" Grid.Row="7" ItemsSource="{x:Bind unvotes, Mode=OneWay}">
+                            <ListView.ItemTemplate >
+                                <DataTemplate x:DataType="md:User">
+                                    <StackPanel>
+                                        <TextBlock Text="{x:Bind account}"/>
+                                        <TextBlock Text="{x:Bind name}"/>
+                                        <TextBlock Text="{x:Bind student_id}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

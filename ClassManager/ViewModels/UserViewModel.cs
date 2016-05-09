@@ -37,8 +37,14 @@ namespace ClassManager.ViewModels
 
         public void initialUVM()
         {
-            User.DeepCopy(SingleService.Instance.getUser());
-            User.image = SingleService.Instance.getServerAddress() + (User.image == null ? "null" : User.image);
+            User u = SingleService.Instance.getUser();
+            u.Image = SingleService.Instance.getServerAddress() + (u.Image == null ? "null" : u.Image);
+            foreach (var item in u.Relationships)
+            {
+                item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
+            }
+
+            User.DeepCopy(u);
         }
 
         public async void setPasswprd(string password)
@@ -79,9 +85,9 @@ namespace ClassManager.ViewModels
 
         public async void createOrganization(string account, string password)
         {
-            Result resilt = await SingleService.Instance.registerOrganization(account, password);
+            Result result = await SingleService.Instance.registerOrganization(account, password);
 
-            if (!resilt.error)
+            if (!result.error)
             {
                 await new Windows.UI.Popups.MessageDialog("创建班级成功").ShowAsync();
 
@@ -89,13 +95,83 @@ namespace ClassManager.ViewModels
             }
             else
             {
-                await new Windows.UI.Popups.MessageDialog(resilt.message).ShowAsync();
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+
+        public async Task<Result> searchOrganization(string account)
+        {
+            return await SingleService.Instance.searchOrganization(account);
+        }
+
+        public async void joinOrganizationWithPassword(string account, string password)
+        {
+            Result result = await SingleService.Instance.joinWithPassword(account, password);
+
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("加入班级成功").ShowAsync();
+
+                regetUser();
+            }
+            else
+            {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+        public async void joinOrganizationWithoutPassword(string account)
+        {
+            Result result = await SingleService.Instance.joinWithoutPassword(account);
+
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("加入班级成功").ShowAsync();
+
+                regetUser();
+            }
+            else
+            {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+
+        public async void deleteOrganization(string account)
+        {
+            Result result = await SingleService.Instance.deleteOrganization(account);
+
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("解散班级成功").ShowAsync();
+
+                regetUser();
+            }
+            else
+            {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
             }
         }
 
         public void logout()
         {
             User.DeepCopy(new User());
+        }
+
+        public async void complishHomework(string homeworkId, bool uncomplete)
+        {
+            Result result = await SingleService.Instance.complishHomework(homeworkId, uncomplete);
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("homework标记为" + (uncomplete ? "未完成" : "完成")).ShowAsync();
+                regetUser();
+            }
+            else {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+
+        public void updateUser()
+        {
+            regetUser();
         }
 
         // 私有方法 重新获取user数据
@@ -105,29 +181,20 @@ namespace ClassManager.ViewModels
 
             if (!result.error)
             {
-                User.DeepCopy(SingleService.Instance.getUser());
-                User.image = SingleService.Instance.getServerAddress() + (User.image == null ? "null" : User.image);
+                User u = SingleService.Instance.getUser();
+                u.Image = SingleService.Instance.getServerAddress() + (u.Image == null ? "null" : u.Image);
+                foreach (var item in u.Relationships)
+                {
+                    item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
+                }
+
+                User.DeepCopy(u);
+
             }
             else
             {
                 await new Windows.UI.Popups.MessageDialog("当前网络状况不佳").ShowAsync();
             }
         }
-
-		public async void complishHomework (string homeworkId, bool uncomplete)
-		{
-			Result result = await SingleService.Instance.complishHomework(homeworkId, uncomplete);
-			if (!result.error) {
-				await new Windows.UI.Popups.MessageDialog("homework标记为" + (uncomplete ? "未完成" : "完成")).ShowAsync();
-				regetUser();
-			} else {
-				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
-			}
-		}
-
-		public void updateUser()
-		{
-			regetUser();
-		}
-	}
+    }
 }

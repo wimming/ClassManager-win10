@@ -2,9 +2,12 @@ using ClassManager.Model;
 using ClassManager.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 
 namespace ClassManager.ViewModels
@@ -38,9 +41,11 @@ namespace ClassManager.ViewModels
         public void initialUVM()
         {
             User u = SingleService.Instance.getUser();
+            u.Name = u.Name == null ? "（还没有设置）" : u.Name;
             u.Image = SingleService.Instance.getServerAddress() + (u.Image == null ? "null" : u.Image);
             foreach (var item in u.Relationships)
             {
+                item.name = item.name == null ? "（还没有设置）" : item.name;
                 item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
             }
 
@@ -174,6 +179,24 @@ namespace ClassManager.ViewModels
             regetUser();
         }
 
+        public async void uploadImage(Stream stream, string filename)
+        {
+            MultipartFormDataContent multipartContent = new MultipartFormDataContent();
+            multipartContent.Add(new StreamContent(stream), "image", filename);
+
+            Result result = await SingleService.Instance.userSetting(multipartContent);
+
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("修改成功").ShowAsync();
+                regetUser();
+            }
+            else
+            {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+
         // 私有方法 重新获取user数据
         private async void regetUser()
         {
@@ -182,9 +205,11 @@ namespace ClassManager.ViewModels
             if (!result.error)
             {
                 User u = SingleService.Instance.getUser();
+                u.Name = u.Name == null ? "（还没有设置）" : u.Name;
                 u.Image = SingleService.Instance.getServerAddress() + (u.Image == null ? "null" : u.Image);
                 foreach (var item in u.Relationships)
                 {
+                    item.name = item.name == null ? "（还没有设置）" : item.name;
                     item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
                 }
 

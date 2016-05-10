@@ -1,4 +1,5 @@
 ﻿using ClassManager.Model;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,29 +46,34 @@ namespace ClassManager.Controls
         {
             return content.Text;
         }
-        public int getDeadline()
+        public double getDeadline()
         {
-            return (datePicker.Date + timePicker.Time).Millisecond;
+            return (new DateTime(datePicker.Date.Year, datePicker.Date.Month, datePicker.Date.Day,
+                timePicker.Time.Hours, timePicker.Time.Minutes, timePicker.Time.Seconds) - DateTime.Parse("1970-1-1")).TotalMilliseconds;
         }
-        public string getOptions()
+        public JArray getOptions()
         {
-            string result = "[";
-            for (int i = 0, flag = 0; i < listView.Items.Count; ++i)
+            JArray ja = new JArray();
+            
+            for (int i = 0; i < listView.Items.Count; ++i)
             {
-                if (flag == 0)
-                {
-                    flag = 1;
-                } else
-                {
-                    result += ",";
-                }
-                result += "{\"name\":\"";
-                result += options[i].Str;
-                result += "\"}";
+                ja.Add(options[i].Str);
             }
-            result += "]";
 
-            return result;
+            return ja;
+        }
+        public bool check()
+        {
+            foreach (var item in options)
+            {
+                if (item.Str == "" || item.Str == null)
+                {
+                    alertMsg.Visibility = Visibility.Visible;
+                    return false;
+                }
+            }
+            alertMsg.Visibility = Visibility.Collapsed;
+            return true;
         }
     }
 

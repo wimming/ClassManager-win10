@@ -32,6 +32,8 @@ namespace ClassManager
     {
         private UserViewModel UVM;
 
+        StorageFile file = null;
+
         public SettingPage()
         {
             this.InitializeComponent();
@@ -70,7 +72,7 @@ namespace ClassManager
             openPicker.FileTypeFilter.Add(".jpg");
 
             // 打开 file picker.
-            StorageFile file = await openPicker.PickSingleFileAsync();
+            file = await openPicker.PickSingleFileAsync();
 
             // 'file' is null if user cancels the file picker.
             if (file != null)
@@ -103,9 +105,17 @@ namespace ClassManager
             UVM.setUserData(settingData);
         }
 
-        private void uploadBtn_Click(object sender, RoutedEventArgs e)
+        private async void uploadBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (file == null)
+            {
+                await new Windows.UI.Popups.MessageDialog("请选择一张图片").ShowAsync();
+            }
 
+            IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read);
+            Stream stream = fileStream.AsStream();
+
+            UserViewModel.Instance.uploadImage(stream, file.Name);
         }
 
         private async void setPasswordBtn_Click(object sender, RoutedEventArgs e)

@@ -70,10 +70,45 @@ namespace ClassManager
             Frame.Navigate(typeof(CreateOrganizationPage));
         }
 
+        private void join_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(JoinOrganizationPage));
+        }
+
         private void logout_Click(object sender, RoutedEventArgs e)
         {
             UVM.logout();
             Frame.GoBack();
+        }
+
+        private async void delete_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new ContentDialog()
+            {
+                Content = "确定解散这个班级？",
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消",
+                FullSizeDesired = false,
+            };
+
+            dialog.PrimaryButtonClick += (_s, _e) =>
+            {
+                UVM.deleteOrganization(((Relationship)((Button)sender).DataContext).account);
+            };
+            await dialog.ShowAsync();
+        }
+    }
+
+    class DeletableCVT : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return ((string)value) == "founder";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
         }
     }
 }

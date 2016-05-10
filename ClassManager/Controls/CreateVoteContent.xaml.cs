@@ -27,6 +27,9 @@ namespace ClassManager.Controls
         public CreateVoteContent()
         {
             this.InitializeComponent();
+
+            options.Add(new OptionString());
+            options.Add(new OptionString());
         }
 
         private void addOptionBtn_Click(object sender, RoutedEventArgs e)

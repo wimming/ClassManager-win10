@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="ClassManager.JoinOrganizationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ClassManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock Text="加入班级"/>
+            <TextBox x:Name="account" Header="Account"/>
+            <Button x:Name="searchBtn" Content="查找" Click="searchBtn_Click"/>
+            <Image x:Name="image" Visibility="Collapsed"/>
+            <TextBlock x:Name="name" Visibility="Collapsed"/>
+            <TextBlock x:Name="need_password" Text="" Visibility="Collapsed"/>
+            <PasswordBox x:Name="password" Header="Password" Visibility="Collapsed"/>
+            <Button x:Name="confirmBtn" Content="create" Click="confirmBtn_Click" Visibility="Collapsed"/>
+        </StackPanel>
+    </Grid>
+</Page>

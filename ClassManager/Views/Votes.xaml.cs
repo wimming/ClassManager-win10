@@ -2,6 +2,7 @@
 using ClassManager.Model;
 using ClassManager.Service;
 using ClassManager.ViewModels;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -50,7 +51,7 @@ namespace ClassManager.Views
             };
             await dialog.ShowAsync();
         }
-
+        
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new ContentDialog()
@@ -64,14 +65,13 @@ namespace ClassManager.Views
 
             dialog.PrimaryButtonClick += (_s, _e) =>
             {
-                ContentDialog x = dialog;
-                Dictionary<string, string> voteData = new Dictionary<string, string>();
-                voteData.Add("name", ((CreateVoteContent)dialog.Content).getName());
-                voteData.Add("content", ((CreateVoteContent)dialog.Content).getContent());
-                voteData.Add("deadline", ((CreateVoteContent)dialog.Content).getDeadline()+"");
-                voteData.Add("options", ((CreateVoteContent)dialog.Content).getOptions());
+                    JObject jo = new JObject();
+                    jo.Add("name", ((CreateVoteContent)_s.Content).getName());
+                    jo.Add("content", ((CreateVoteContent)_s.Content).getContent());
+                    jo.Add("deadline", ((CreateVoteContent)_s.Content).getDeadline());
+                    jo.Add("options", ((CreateVoteContent)_s.Content).getOptions());
 
-                OVM.createVote(voteData);
+                    OVM.createVote(jo.ToString());
             };
             await dialog.ShowAsync();
         }

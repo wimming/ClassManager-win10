@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Media.Imaging;
 using System.IO;
 using Windows.UI.Xaml.Media;
 using System.ServiceModel;
+using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace ClassManager.Service
 {
@@ -33,7 +35,7 @@ namespace ClassManager.Service
         private string _serverAddress;
         private User _user;
 
-        private HttpClient httpClient;
+        private System.Net.Http.HttpClient httpClient;
 
         private SingleService()
         {
@@ -43,7 +45,7 @@ namespace ClassManager.Service
             // 自动处理cookie
             HttpClientHandler handler = new HttpClientHandler();
             handler.CookieContainer = new System.Net.CookieContainer();
-            httpClient = new HttpClient(handler);
+            httpClient = new System.Net.Http.HttpClient(handler);
         }
 
 
@@ -53,6 +55,43 @@ namespace ClassManager.Service
             try
             {
                 var response = await httpClient.PostAsync(_serverAddress + sub_url, content);
+                var responseByte = await response.Content.ReadAsByteArrayAsync();
+                string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
+                JObject resultJson = JObject.Parse(responseString);
+                return resultJson;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        // 重载 _post
+        private async Task<JObject> _post(string sub_url, string string_content)
+        {
+            // E.g. a JSON string.
+            StringContent stringContent = new StringContent(
+                string_content,
+                Encoding.UTF8,
+                "application/json");
+            try
+            {
+                var response = await httpClient.PostAsync(_serverAddress + sub_url, stringContent);
+                var responseByte = await response.Content.ReadAsByteArrayAsync();
+                string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
+                JObject resultJson = JObject.Parse(responseString);
+                return resultJson;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        // 重载 _post
+        private async Task<JObject> _post(string sub_url, MultipartFormDataContent multipartContent)
+        {
+            try
+            {
+                var response = await httpClient.PostAsync(_serverAddress + sub_url, multipartContent);
                 var responseByte = await response.Content.ReadAsByteArrayAsync();
                 string responseString = System.Text.Encoding.UTF8.GetString(responseByte);
                 JObject resultJson = JObject.Parse(responseString);
@@ -488,6 +527,22 @@ namespace ClassManager.Service
             result.message = (string)resultJson["message"];
             return result;
         }
+
+        public async Task<Result> createVote(string organizationAccount, string string_content)
+        {
+            JObject resultJson = await _post("create/organization/" + organizationAccount +
+                                             "/vote", string_content);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
+        }
         public async Task<Result> createVote(string organizationAccount, Dictionary<string, string> voteData)
         {
             JObject resultJson = await _post("create/organization/" + organizationAccount +
@@ -595,6 +650,21 @@ namespace ClassManager.Service
         public async Task<Result> quitOrganization(string organizationAccount)
         {
             JObject resultJson = await _delete("user/organization/" + organizationAccount);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
+        }
+
+        public async Task<Result> userSetting(MultipartFormDataContent multipartContent)
+        {
+            JObject resultJson = await _post("settings/user/", multipartContent);
             Result result = new Result();
             if (resultJson == null)
             {

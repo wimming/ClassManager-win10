@@ -33,10 +33,11 @@ namespace ClassManager.Controls
 		public string getContent ()
 		{
 			return content.Text;
-		}
-		public int getDeadline ()
-		{
-			return (datePicker.Date + timePicker.Time).Millisecond;
-		}
-	}
+        }
+        public double getDeadline()
+        {
+            return (new DateTime(datePicker.Date.Year, datePicker.Date.Month, datePicker.Date.Day,
+                timePicker.Time.Hours, timePicker.Time.Minutes, timePicker.Time.Seconds) - DateTime.Parse("1970-1-1")).TotalMilliseconds;
+        }
+    }
 }

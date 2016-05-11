@@ -48,8 +48,8 @@ namespace ClassManager
                 Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                     Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
             }
-            input_account.Text = "111111";
-            input_password.Password = "111111";
+            input_account.Text = "hym14332008";
+            input_password.Password = "123456";
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {

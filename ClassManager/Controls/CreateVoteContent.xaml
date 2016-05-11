@@ -23,5 +23,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <TextBox x:Name="alertMsg" Text="请不要留有空的选项" Visibility="Collapsed"/>
     </StackPanel>
 </UserControl>

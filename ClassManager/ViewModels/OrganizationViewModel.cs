@@ -119,9 +119,9 @@ namespace ClassManager.ViewModels
 			}
 		}
 
-		public async void createVote (Dictionary<string, string> voteData)
+		public async void createVote (string string_content)
 		{
-			Result result = await SingleService.Instance.createVote(Organization.Account, voteData);
+			Result result = await SingleService.Instance.createVote(Organization.Account, string_content);
 
 			if (!result.error) {
 				await new Windows.UI.Popups.MessageDialog("创建成功").ShowAsync();

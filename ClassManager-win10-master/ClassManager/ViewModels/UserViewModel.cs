@@ -124,6 +124,23 @@ namespace ClassManager.ViewModels
                 await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
             }
         }
+
+        public async void deleteUserHomework(string account, string _id)
+        {
+            Result result = await SingleService.Instance.deleteHomework(account, _id);
+
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("删除成功").ShowAsync();
+
+                regetUser();
+            }
+            else
+            {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+
         public async void joinOrganizationWithoutPassword(string account)
         {
             Result result = await SingleService.Instance.joinWithoutPassword(account);

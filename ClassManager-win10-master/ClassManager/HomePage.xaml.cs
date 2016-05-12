@@ -81,7 +81,7 @@ namespace ClassManager
             Frame.GoBack();
         }
 
-        private async void delete_Click(object sender, RoutedEventArgs e)
+        private async void deleteOrganization_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new ContentDialog()
             {
@@ -97,6 +97,31 @@ namespace ClassManager
             };
             await dialog.ShowAsync();
         }
+
+        private void complishUserHomework(object sender, RoutedEventArgs e)
+        {
+            if (((ToggleSwitch)sender).FocusState != FocusState.Unfocused)
+            {
+                UVM.complishHomework(((UserHomework)((ToggleSwitch)sender).DataContext)._id, ((ToggleSwitch)sender).IsOn);
+            }
+        }
+
+        private async void deleteUserHomework_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new ContentDialog()
+            {
+                Content = "确定删除这个作业？",
+                PrimaryButtonText = "确定",
+                SecondaryButtonText = "取消",
+                FullSizeDesired = false,
+            };
+
+            dialog.PrimaryButtonClick += (_s, _e) =>
+            {
+                UVM.deleteUserHomework(((UserHomework)((Button)sender).DataContext).account, ((UserHomework)((Button)sender).DataContext)._id);
+            };
+            await dialog.ShowAsync();
+        }
     }
 
     class DeletableCVT : IValueConverter
@@ -104,6 +129,19 @@ namespace ClassManager
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             return ((string)value) == "founder";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class UncomplishToToggleCVT : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return (bool)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

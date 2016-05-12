@@ -9,9 +9,12 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<StackPanel x:Name="rootPanel">
-			<RadioButton Name="rb1" Checked="Controls">删除</RadioButton>
-			<RadioButton Name="rb2" Checked="Controls">提升为管理员</RadioButton>
-			<RadioButton Name="rb3" Checked="Controls">免除管理员权限</RadioButton>
+            <StackPanel.Background>
+                <ImageBrush Stretch="Fill" ImageSource="LightColorful.jpg" />
+            </StackPanel.Background>
+            <RadioButton FontStyle="Italic"  Margin="20,20,112,0" Name="rb1" Checked="Controls">删除</RadioButton>
+            <RadioButton FontStyle="Italic"  Margin="20,20,112,0" Name="rb2" Checked="Controls">提升为管理员</RadioButton>
+            <RadioButton FontStyle="Italic"  Margin="20,20,112,0" Name="rb3" Checked="Controls">免除管理员权限</RadioButton>
 		</StackPanel>
 	</Grid>
 </Page>

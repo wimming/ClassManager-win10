@@ -7,13 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<StackPanel x:Name="rootPanel">
-			<TextBlock Text="CreateHomework"></TextBlock>
-			<TextBox x:Name="name" Header="Name:"/>
-			<DatePicker x:Name="datePicker"/>
-			<TimePicker x:Name="timePicker"/>
-			<TextBox x:Name="content" Header="Name:"/>
+    <Grid>
+
+        <StackPanel x:Name="rootPanel">
+
+            <TextBlock FontSize="30" FontStyle="Italic"  Margin="20,20,112,0" Text="创建作业"></TextBlock>
+            <TextBox x:Name="name" FontStyle="Italic" Margin="20,20,112,0" Header="Name:"/>
+            <DatePicker FontStyle="Italic" Margin="20,20,112,0" x:Name="datePicker"/>
+            <TimePicker FontStyle="Italic" Margin="20,20,112,0" x:Name="timePicker"/>
+            <TextBox FontStyle="Italic" Margin="20,20,112,0" x:Name="content" Header="Name:"/>
 		</StackPanel>
 	</Grid>
 </Page>

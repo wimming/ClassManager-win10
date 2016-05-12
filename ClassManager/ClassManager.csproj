@@ -93,6 +93,27 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Controls\3Leaves.jpg" />
+    <Content Include="Controls\GreenDream.jpg" />
+    <Content Include="Controls\LeftLeaves.jpg" />
+    <Content Include="Controls\LightColorful.jpg" />
+    <Content Include="Controls\RightLeaves.jpg" />
+    <Content Include="Controls\ShadowLeaves.jpg" />
+    <Content Include="Controls\SunLeaves.jpg" />
+    <Content Include="Resource\3Leaves.jpg" />
+    <Content Include="Resource\GreenDream.jpg" />
+    <Content Include="Resource\LeftLeaves.jpg" />
+    <Content Include="Resource\LightColorful.jpg" />
+    <Content Include="Resource\RightLeaves.jpg" />
+    <Content Include="Resource\ShadowLeaves.jpg" />
+    <Content Include="Resource\SunLeaves.jpg" />
+    <Content Include="Views\3Leaves.jpg" />
+    <Content Include="Views\GreenDream.jpg" />
+    <Content Include="Views\LeftLeaves.jpg" />
+    <Content Include="Views\LightColorful.jpg" />
+    <Content Include="Views\RightLeaves.jpg" />
+    <Content Include="Views\ShadowLeaves.jpg" />
+    <Content Include="Views\SunLeaves.jpg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -251,7 +272,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\Resource\" />
+    <Folder Include="Views\Resource\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

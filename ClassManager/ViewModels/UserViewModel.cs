@@ -68,10 +68,7 @@ namespace ClassManager.ViewModels
                 await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
             }
         }
-        public void setImage()
-        {
 
-        }
         public async void setUserData(Dictionary<string, string> settingData)
         {
             Result result = await SingleService.Instance.userSetting(settingData);
@@ -199,7 +196,10 @@ namespace ClassManager.ViewModels
         public async void uploadImage(Stream stream, string filename)
         {
             MultipartFormDataContent multipartContent = new MultipartFormDataContent();
-            multipartContent.Add(new StreamContent(stream), "image", filename);
+            StreamContent sc = new StreamContent(stream);
+            sc.Headers.Add("Content-Type", "image/*");
+
+            multipartContent.Add(sc, "image", filename);
 
             Result result = await SingleService.Instance.userSetting(multipartContent);
 

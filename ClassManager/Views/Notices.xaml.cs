@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -59,15 +60,22 @@ namespace ClassManager.Views
 				FullSizeDesired = false,
 			};
 
-			dialog.PrimaryButtonClick += (_s, _e) => {
-				ContentDialog x = dialog;
-				Dictionary<string, string> NoticeData = new Dictionary<string, string>();
-				NoticeData.Add("name", ((CreateNoticeContent)dialog.Content).getName());
-				NoticeData.Add("content", ((CreateNoticeContent)dialog.Content).getContent());
-				NoticeData.Add("deadline", ((CreateNoticeContent)dialog.Content).getDeadline() + "");
+			dialog.PrimaryButtonClick += (_s, _e) =>
+            {
+                ContentDialog x = dialog;
 
-				OVM.createNotice(NoticeData);
-			};
+                //Stream image_stream = await ((CreateNoticeContent)dialog.Content).getImageStream();
+                //StreamContent sc = new StreamContent(image_stream);
+                //sc.Headers.Add("Content-Type", "image/* ");
+
+                MultipartFormDataContent multipartContent = new MultipartFormDataContent();
+                multipartContent.Add(new StringContent(((CreateNoticeContent)dialog.Content).getName()), "name");
+                multipartContent.Add(new StringContent(((CreateNoticeContent)dialog.Content).getContent()), "content");
+                multipartContent.Add(new StringContent(((CreateNoticeContent)dialog.Content).getDeadline()+""), "deadline");
+                //multipartContent.Add(sc, "image");
+
+                OVM.createNotice(multipartContent);
+            };
 			await dialog.ShowAsync();
 		}
 

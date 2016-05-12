@@ -29,7 +29,10 @@ namespace ClassManager.Views
 	public sealed partial class Setting : Page
 	{
 		private OrganizationViewModel OVM;
-		public Setting ()
+
+        private StorageFile file = null;
+
+        public Setting ()
 		{
 			this.InitializeComponent();
 			OVM = OrganizationViewModel.Instance;
@@ -64,7 +67,7 @@ namespace ClassManager.Views
 			openPicker.FileTypeFilter.Add(".jpg");
 
 			// 打开 file picker.
-			StorageFile file = await openPicker.PickSingleFileAsync();
+			file = await openPicker.PickSingleFileAsync();
 
 			// 'file' is null if user cancels the file picker.
 			if (file != null) {
@@ -85,28 +88,55 @@ namespace ClassManager.Views
 		{
 			Dictionary<string, string> settingData = new Dictionary<string, string>();
 			settingData.Add("name", name.Text);
-			settingData.Add("password", Password.Text);
 
 			OVM.setOrganizationData(OVM.Organization.Account, settingData);
 		}
 
-		private void uploadBtn_Click (object sender, RoutedEventArgs e)
+        private async void uploadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (file == null)
+            {
+                await new Windows.UI.Popups.MessageDialog("请选择一张图片").ShowAsync();
+                return;
+            }
+
+            IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read);
+            Stream stream = fileStream.AsStream();
+
+            OVM.uploadImage(stream, file.Name);
+        }
+
+        private async void setPasswordBtn_Click (object sender, RoutedEventArgs e)
 		{
+			if (password.Password != password_confirm.Password) {
+				await new Windows.UI.Popups.MessageDialog("两次输入法的密码不一致").ShowAsync();
+				return;
+            }
+            if (password.Password.Length < 6 && password.Password.Length != 0)
+            {
+                await new Windows.UI.Popups.MessageDialog("密码至少需要6位").ShowAsync();
+                return;
+            }
+            if (password.Password.Length == 0)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Content = "不提供密码将清除本班密码，是否继续？",
+                    PrimaryButtonText = "是",
+                    SecondaryButtonText = "否",
+                    FullSizeDesired = false,
+                };
 
-		}
-
-		private async void setPasswordBtn_Click (object sender, RoutedEventArgs e)
-		{
-			//if (password.Password.Length < 6) {
-			//	await new Windows.UI.Popups.MessageDialog("密码至少需要6位").ShowAsync();
-			//	return;
-			//}
-			//if (password.Password != password_confirm.Password) {
-			//	await new Windows.UI.Popups.MessageDialog("两次输入法的密码不一致").ShowAsync();
-			//	return;
-			//}
-
-			//UVM.setPasswprd(password.Password);
+                dialog.PrimaryButtonClick += (_s, _e) =>
+                {
+                    OVM.setPasswprd(password.Password);
+                };
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                OVM.setPasswprd(password.Password);
+            }
 		}
 	}
 

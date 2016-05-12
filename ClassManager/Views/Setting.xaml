@@ -19,17 +19,15 @@
 					<Button x:Name="uploadBtn" Click="uploadBtn_Click" Content="upload" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
 				</RelativePanel>
 				<TextBlock Text="设置基本信息"/>
-                <TextBox  x:Name="name" Header="Name:" Text="{x:Bind OVM.Organization.name, Mode=OneWay}" Margin="20,12,0,0"/>
-				<!--<TextBox x:Name="school" Header="School:" Text="{x:Bind OVM.Organization.school}" Margin="0,12,0,0"/>-->
-                <TextBox x:Name="Password" Header="Password:" Text="{x:Bind OVM.Organization.password, Mode=OneWay}" Margin="20,12,0,0"/>
-				<RelativePanel Margin="0,24,0,0">
-                    <Button x:Name="settingBtn"  Margin="20,12,0,0" FontStyle="Italic" Content="Confirm" Click="settingBtn_Click"></Button>
+                <TextBox  x:Name="name" Header="Name:" Text="{x:Bind OVM.Organization.name, Mode=OneWay}"/>
+                <RelativePanel>
+                    <Button x:Name="settingBtn" FontStyle="Italic" Content="Confirm" Click="settingBtn_Click"></Button>
 				</RelativePanel>
-				<!--<TextBlock Text="修改密码"/>
-				<PasswordBox x:Name="password"/>
-				<PasswordBox x:Name="password_confirm"/>
-				<Button x:Name="setPasswordBtn" Click="setPasswordBtn_Click" Content="OK"/>-->
-			</StackPanel>
+				<TextBlock Text="修改密码"/>
+				<PasswordBox x:Name="password" Margin="0, 10, 0, 10"/>
+                <PasswordBox x:Name="password_confirm" Margin="0, 10, 0, 10"/>
+                <Button x:Name="setPasswordBtn" Click="setPasswordBtn_Click" Content="OK"/>
+            </StackPanel>
 		</ScrollViewer>
 		
 	</Grid>

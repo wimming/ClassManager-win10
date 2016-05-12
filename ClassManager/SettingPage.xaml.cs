@@ -32,7 +32,7 @@ namespace ClassManager
     {
         private UserViewModel UVM;
 
-        StorageFile file = null;
+        private StorageFile file = null;
 
         public SettingPage()
         {
@@ -110,6 +110,7 @@ namespace ClassManager
             if (file == null)
             {
                 await new Windows.UI.Popups.MessageDialog("请选择一张图片").ShowAsync();
+                return;
             }
 
             IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read);

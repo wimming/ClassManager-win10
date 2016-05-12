@@ -528,6 +528,22 @@ namespace ClassManager.Service
             return result;
         }
 
+        public async Task<Result> createNotice(string organizationAccount, MultipartFormDataContent multipartContent)
+        {
+            JObject resultJson = await _post("create/organization/" + organizationAccount +
+                                             "/notice", multipartContent);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
+        }
+
         public async Task<Result> createVote(string organizationAccount, string string_content)
         {
             JObject resultJson = await _post("create/organization/" + organizationAccount +
@@ -665,6 +681,20 @@ namespace ClassManager.Service
         public async Task<Result> userSetting(MultipartFormDataContent multipartContent)
         {
             JObject resultJson = await _post("settings/user/", multipartContent);
+            Result result = new Result();
+            if (resultJson == null)
+            {
+                result.error = true;
+                result.message = "network error";
+                return result;
+            }
+            result.error = (bool)resultJson["error"];
+            result.message = (string)resultJson["message"];
+            return result;
+        }
+        public async Task<Result> organizationSetting(MultipartFormDataContent multipartContent, string organizationAccount)
+        {
+            JObject resultJson = await _post("settings/organization/"+ organizationAccount, multipartContent);
             Result result = new Result();
             if (resultJson == null)
             {

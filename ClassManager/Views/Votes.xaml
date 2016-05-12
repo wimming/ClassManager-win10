@@ -44,6 +44,7 @@
             </Border>
 
             <ListView Grid.Row="1" ItemsSource="{x:Bind OVM.Organization.Votes, Mode=OneWay}">
+
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="md:Vote">
                         <Grid>
@@ -61,28 +62,28 @@
                                 <RowDefinition Height="auto"></RowDefinition>
                                 <RowDefinition Height="auto"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Column="0" Grid.Row="0" Text="Name:"/>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Bind name}"/>
-                            <TextBlock Grid.Column="0" Grid.Row="1" Text="Start Date:"/>
-                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind join_on}"/>
-                            <TextBlock Grid.Column="0" Grid.Row="2" Text="Deadline:"/>
-                            <TextBlock Grid.Column="1" Grid.Row="2" Text="{x:Bind deadline}"/>
-                            <TextBlock Grid.Column="0" Grid.Row="3" Text="Content:"/>
-                            <TextBlock Grid.Column="1" Grid.Row="3" Text="{x:Bind content}"/>
-                            <TextBlock Grid.Column="0" Grid.Row="4" Text="Options:"/>
-                            <TextBlock Grid.Column="1" Grid.Row="4" Text="{x:Bind unvotes, Converter={StaticResource isVotedTextCVT}}"/>
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="名称:"  Margin="20, 20, 0, 0" />
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Bind name}" Margin="20, 20, 0, 0" />
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="起始日期:" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind join_on}" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="0" Grid.Row="2" Text="截止日期:" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Text="{x:Bind deadline}" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="0" Grid.Row="3" Text="内容:" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="3" Text="{x:Bind content}" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="0" Grid.Row="4" Text="选项:" Margin="20, 20, 0, 0" />
+                            <TextBlock Grid.Column="1" Grid.Row="4" Text="{x:Bind unvotes, Converter={StaticResource isVotedTextCVT}}" Margin="20, 20, 0, 0"/>
                             <ListView Grid.ColumnSpan="2" Grid.Row="5" ItemsSource="{x:Bind options, Mode=OneWay}" IsEnabled="{x:Bind unvotes, Converter={StaticResource isVotedCVT}}" SelectedIndex="{x:Bind options, Converter={StaticResource selectedCVT}}" IsItemClickEnabled="True" ItemClick="option_ItemClick">
                                 <ListView.ItemTemplate >
                                     <DataTemplate x:DataType="md:Option">
                                         <StackPanel>
-                                            <TextBlock Text="{x:Bind name}"/>
-                                            <TextBlock Text="{x:Bind supporters, Converter={StaticResource supporterNumCVT}}"/>
+                                            <TextBlock Text="{x:Bind name}" Margin="20, 20, 0, 0"/>
+                                            <TextBlock Text="{x:Bind supporters, Converter={StaticResource supporterNumCVT}}" Margin="20, 20, 0, 0"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
-                            <TextBlock Grid.Row="6" Text="未投票人数："/>
-                            <TextBlock Grid.Column="1" Grid.Row="6" Text="{x:Bind unvotes, Converter={StaticResource unvotesNumCVT}}"/>
+                            <TextBlock Grid.Row="6" Text="未投票人数：" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="6" Text="{x:Bind unvotes, Converter={StaticResource unvotesNumCVT}}" Margin="20, 20, 0, 0" />
                             <ListView Grid.ColumnSpan="2" Grid.Row="7" ItemsSource="{x:Bind unvotes, Mode=OneWay}">
                                 <ListView.ItemTemplate >
                                     <DataTemplate x:DataType="md:User">

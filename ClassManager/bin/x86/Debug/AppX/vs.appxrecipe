@@ -9,7 +9,7 @@
     <SolutionConfiguration>Debug|x86</SolutionConfiguration>
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>393a18f7-19c0-4e03-bb74-0baa4204835d</PackageIdentityName>
-    <IntermediateOutputPath>E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\obj\x86\Debug\</IntermediateOutputPath>
     <RegisteredManifestChecksum>D103D7EFF1A11DB538F5AEE70F48586B8AAFE7A7351D1E760A971A76BCF93143</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>393a18f7-19c0-4e03-bb74-0baa4204835d_1.0.0.0_x86__hagbjdg0t3ecw</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>393a18f7-19c0-4e03-bb74-0baa4204835d_hagbjdg0t3ecw!App</RegisteredUserModeAppID>
@@ -19,16 +19,16 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-10T16:00:25.716</Modified>
+      <Modified>2016-05-12T03:02:22.583</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\bin\x86\Debug\ClassManager.exe">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\bin\x86\Debug\ClassManager.exe">
       <PackagePath>entrypoint\ClassManager.exe</PackagePath>
-      <Modified>2016-05-10T16:00:24.531</Modified>
+      <Modified>2016-05-12T03:02:18.440</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\pc\.nuget\packages\Microsoft.ApplicationInsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -458,63 +458,147 @@
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
       <Modified>2016-02-26T08:35:17.786</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\ApplicationInsights.config">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\ApplicationInsights.config">
       <PackagePath>ApplicationInsights.config</PackagePath>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Controls\3Leaves.jpg">
+      <PackagePath>Controls\3Leaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:20:38.897</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Controls\GreenDream.jpg">
+      <PackagePath>Controls\GreenDream.jpg</PackagePath>
+      <Modified>2016-05-11T10:20:38.903</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Controls\LeftLeaves.jpg">
+      <PackagePath>Controls\LeftLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:20:38.908</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Controls\LightColorful.jpg">
+      <PackagePath>Controls\LightColorful.jpg</PackagePath>
+      <Modified>2016-05-11T10:20:38.917</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Controls\RightLeaves.jpg">
+      <PackagePath>Controls\RightLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:20:38.922</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Controls\ShadowLeaves.jpg">
+      <PackagePath>Controls\ShadowLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:20:38.928</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Controls\SunLeaves.jpg">
+      <PackagePath>Controls\SunLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:20:38.934</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Resource\3Leaves.jpg">
+      <PackagePath>Resource\3Leaves.jpg</PackagePath>
+      <Modified>2016-05-11T09:05:50.784</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Resource\GreenDream.jpg">
+      <PackagePath>Resource\GreenDream.jpg</PackagePath>
+      <Modified>2016-05-11T09:05:50.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Resource\LeftLeaves.jpg">
+      <PackagePath>Resource\LeftLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T09:05:50.796</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Resource\LightColorful.jpg">
+      <PackagePath>Resource\LightColorful.jpg</PackagePath>
+      <Modified>2016-05-11T09:05:48.864</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Resource\RightLeaves.jpg">
+      <PackagePath>Resource\RightLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T09:05:50.743</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Resource\ShadowLeaves.jpg">
+      <PackagePath>Resource\ShadowLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T09:05:50.772</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Resource\SunLeaves.jpg">
+      <PackagePath>Resource\SunLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T09:05:50.778</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Views\3Leaves.jpg">
+      <PackagePath>Views\3Leaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:47:20.719</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Views\GreenDream.jpg">
+      <PackagePath>Views\GreenDream.jpg</PackagePath>
+      <Modified>2016-05-11T10:47:20.724</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Views\LeftLeaves.jpg">
+      <PackagePath>Views\LeftLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:47:20.730</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Views\LightColorful.jpg">
+      <PackagePath>Views\LightColorful.jpg</PackagePath>
+      <Modified>2016-05-11T10:47:20.737</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Views\RightLeaves.jpg">
+      <PackagePath>Views\RightLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:47:20.742</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Views\ShadowLeaves.jpg">
+      <PackagePath>Views\ShadowLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:47:20.747</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Views\SunLeaves.jpg">
+      <PackagePath>Views\SunLeaves.jpg</PackagePath>
+      <Modified>2016-05-11T10:47:20.752</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-07T23:41:18.000</Modified>
+      <Modified>2016-05-11T04:13:15.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\bin\x86\Debug\ClassManager.xr.xml">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\bin\x86\Debug\ClassManager.xr.xml">
       <PackagePath>ClassManager.xr.xml</PackagePath>
-      <Modified>2016-05-10T15:09:25.329</Modified>
+      <Modified>2016-05-12T02:44:42.232</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
       <Modified>2016-02-26T08:22:01.071</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-05-10T16:00:25.504</Modified>
+      <Modified>2016-05-12T03:02:21.476</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\中山大学\本学期\大二下代码\ClassManager-win10-master #6\ClassManager-win10-master\ClassManager\bin\x86\Debug\Core\ClassManager.exe">
+    <AppxPackagedFile Include="C:\Users\pc\Documents\Tencent Files\623813445\FileRecv\ClassManager-win10-masterUp2\ClassManager-win10-master\ClassManager\bin\x86\Debug\Core\ClassManager.exe">
       <PackagePath>ClassManager.exe</PackagePath>
-      <Modified>2016-05-10T16:00:25.714</Modified>
+      <Modified>2016-05-12T03:02:22.577</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

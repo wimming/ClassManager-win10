@@ -9,13 +9,16 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<StackPanel x:Name="rootPanel">
-			<TextBlock Name="notice_text" Text="当前notice已经查看过"></TextBlock>
-			<TextBlock Name="homework_text" Text="当前homework已经查看过"></TextBlock>
-			<RadioButton Name="rb1" Checked="Controls">删除</RadioButton>
-			<RadioButton Name="rb2" Checked="Controls">标记当前homework为已查看</RadioButton>
-			<RadioButton Name="rb3" Checked="Controls">标记当前notice为已查看</RadioButton>
-			<RadioButton Name="rb4" Checked="Controls">标记当前homework为已完成</RadioButton>
-			<RadioButton Name="rb5" Checked="Controls">标记当前homework为未完成</RadioButton>
+            <StackPanel.Background>
+                <ImageBrush Stretch="Fill" ImageSource="LightColorful.jpg" />
+            </StackPanel.Background>
+            <TextBlock FontSize="20" FontStyle="Italic"  Margin="20,20,58,0" Name="notice_text" Text="当前notice已经查看过"></TextBlock>
+            <TextBlock FontSize="20" FontStyle="Italic"  Margin="20,20,58,0" Name="homework_text" Text="当前homework已经查看过"></TextBlock>
+            <RadioButton FontStyle="Italic"  Margin="20,20,112,0" Name="rb1" Checked="Controls">删除</RadioButton>
+            <RadioButton FontStyle="Italic"  Margin="20,20,112,0" Name="rb2" Checked="Controls">标记当前homework为已查看</RadioButton>
+            <RadioButton FontStyle="Italic"  Margin="20,20,112,0" Name="rb3" Checked="Controls">标记当前notice为已查看</RadioButton>
+            <RadioButton FontStyle="Italic"  Margin="20,20,112,0" Name="rb4" Checked="Controls">标记当前homework为已完成</RadioButton>
+            <RadioButton FontStyle="Italic"  Margin="20,20,112,0" Name="rb5" Checked="Controls">标记当前homework为未完成</RadioButton>
 		</StackPanel>
 	</Grid>
 </Page>

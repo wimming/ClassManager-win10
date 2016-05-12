@@ -18,8 +18,9 @@
 	<Page.Resources>
 		<controls:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 		<controls:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
-		<controls:BoolConver x:Key="BoolConver"/>
-	</Page.Resources>
+        <controls:BoolConver x:Key="BoolConver"/>
+        <local:DateCVT x:Key="dateCVT"/>
+    </Page.Resources>
 
 	<Grid>
         
@@ -89,8 +90,8 @@
 							<!--<AppBarButton Grid.Column="1" Grid.Row="3" Icon="Bullets"></AppBarButton>-->
                             <TextBlock Grid.Column="0" Grid.Row="5" FontStyle="Italic" Text="Content:"></TextBlock>
                             <TextBlock Grid.Column="1" Grid.Row="0" FontStyle="Italic" Text="{x:Bind name, Mode=OneWay}"></TextBlock>
-                            <TextBlock Grid.Column="1" Grid.Row="1" FontStyle="Italic" Text="{x:Bind join_on, Mode=OneWay}"></TextBlock>
-                            <TextBlock Grid.Column="1" Grid.Row="2" FontStyle="Italic" Text="{x:Bind deadline, Mode=OneWay}"></TextBlock>
+                            <TextBlock Grid.Column="1" Grid.Row="1" FontStyle="Italic" Text="{x:Bind join_on, Converter={StaticResource dateCVT}, Mode=OneWay}"></TextBlock>
+                            <TextBlock Grid.Column="1" Grid.Row="2" FontStyle="Italic" Text="{x:Bind deadline, Converter={StaticResource dateCVT}, Mode=OneWay}"></TextBlock>
 							<ListView Grid.ColumnSpan="2" Grid.Row="4" ItemsSource="{x:Bind unlooks, Mode=OneWay}" IsItemClickEnabled="False"  IsEnabled="False">
 								<ListView.ItemTemplate >
 									<DataTemplate x:DataType="md:User">

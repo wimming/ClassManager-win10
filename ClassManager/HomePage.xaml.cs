@@ -30,8 +30,6 @@ namespace ClassManager
     /// </summary>
     public sealed partial class HomePage : Page
     {
-        private string _serverAddress;
-
         private UserViewModel UVM;
 
         public HomePage()
@@ -78,7 +76,7 @@ namespace ClassManager
         private void logout_Click(object sender, RoutedEventArgs e)
         {
             UVM.logout();
-            Frame.GoBack();
+            Frame.Navigate(typeof(MainPage));
         }
 
         private async void deleteOrganization_Click(object sender, RoutedEventArgs e)

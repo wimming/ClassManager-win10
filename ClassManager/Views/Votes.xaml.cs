@@ -190,7 +190,7 @@ namespace ClassManager.Views
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return ((List<User>)value).Count+"";
+            return ((List<User>)value).Count + "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -199,4 +199,26 @@ namespace ClassManager.Views
         }
     }
 
+    public class DateCVT : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            try {
+                string date_str = (string)value;
+                date_str = date_str.Substring(0, 19);
+                DateTime dt = DateTime.ParseExact(date_str, "yyyy-MM-ddTHH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+                dt = dt.AddHours(8);
+                return string.Format("{0:U}", dt);
+            }
+            catch (Exception e)
+            {
+                return "时间显示异常";
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -2,7 +2,9 @@
 using ClassManager.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
@@ -52,24 +54,7 @@ namespace ClassManager.ViewModels
 				await new Windows.UI.Popups.MessageDialog(res.message).ShowAsync();
 			}
 		}
-
-		//public async void setPasswprd (string password)
-		//{
-		//	Dictionary<string, string> settingData = new Dictionary<string, string>();
-		//	settingData.Add("password", password);
-
-		//	Result result = await SingleService.Instance.userSetting(settingData);
-
-		//	if (!result.error) {
-		//		await new Windows.UI.Popups.MessageDialog("密码修改成功").ShowAsync();
-		//	} else {
-		//		await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
-		//	}
-		//}
-		//public void setImage ()
-		//{
-
-		//}
+        
 		public async void setOrganizationData (string account, Dictionary<string, string> settingData)
 		{
 			Result result = await SingleService.Instance.organizationSetting(account, settingData);
@@ -81,31 +66,7 @@ namespace ClassManager.ViewModels
 				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
 			}
 		}
-
-		//public async void createOrganization (string account, string password)
-		//{
-		//	Result resilt = await SingleService.Instance.registerOrganization(account, password);
-
-		//	if (!resilt.error) {
-		//		await new Windows.UI.Popups.MessageDialog("创建班级成功").ShowAsync();
-
-		//		Result result2 = await SingleService.Instance.updateUser();
-
-		//		if (!result2.error) {
-		//			User.DeepCopy(SingleService.Instance.getUser());
-		//		} else {
-		//			await new Windows.UI.Popups.MessageDialog(result2.message).ShowAsync();
-		//		}
-		//	} else {
-		//		await new Windows.UI.Popups.MessageDialog(resilt.message).ShowAsync();
-		//	}
-		//}
-
-		//public void logout ()
-		//{
-		//	_instance.User.DeepCopy(new User());
-		//}
-
+        
 		public async void vote (string organizationAccount, string voteId, string optionId)
 		{
 			Result result = await SingleService.Instance.vote(organizationAccount, voteId, optionId);
@@ -179,7 +140,21 @@ namespace ClassManager.ViewModels
 			}
 		}
 
-		public async void deleteMember (string organizationAccount, string memberAccount)
+        public async void createNotice(MultipartFormDataContent multipartContent)
+        {
+            Result result = await SingleService.Instance.createNotice(Organization.Account, multipartContent);
+
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("创建成功").ShowAsync();
+                regetOrganization();
+            }
+            else {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+
+        public async void deleteMember (string organizationAccount, string memberAccount)
 		{
 			Result result = await SingleService.Instance.deleteMember(organizationAccount, memberAccount);
 			if (!result.error) {
@@ -257,5 +232,43 @@ namespace ClassManager.ViewModels
 				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
 			}
 		}
-	}
+
+        public async void uploadImage(Stream stream, string filename)
+        {
+            MultipartFormDataContent multipartContent = new MultipartFormDataContent();
+            multipartContent.Add(new StreamContent(stream), "image", filename);
+
+            Result result = await SingleService.Instance.organizationSetting(multipartContent, Organization.Account);
+
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("修改成功").ShowAsync();
+
+                regetOrganization();
+            }
+            else
+            {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+
+
+        public async void setPasswprd(string password)
+        {
+            Dictionary<string, string> settingData = new Dictionary<string, string>();
+            settingData.Add("password", password);
+
+            Result result = await SingleService.Instance.organizationSetting(Organization.Account, settingData);
+
+            if (!result.error)
+            {
+                await new Windows.UI.Popups.MessageDialog("密码修改成功").ShowAsync();
+            }
+            else
+            {
+                await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
+            }
+        }
+
+    }
 }

@@ -11,9 +11,10 @@
     <Page.Resources>
         <local:SupporterNumCVT x:Key="supporterNumCVT"/>
         <local:IsVotedCVT x:Key="isVotedCVT"/>
-        <local:IsVotedTextCVT x:Key="isVotedTextCVT"/> 
+        <local:IsVotedTextCVT x:Key="isVotedTextCVT"/>
         <local:SelectedCVT x:Key="selectedCVT"/>
         <local:UnvotesNumCVT x:Key="unvotesNumCVT"/>
+        <local:DateCVT x:Key="dateCVT"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -65,9 +66,9 @@
                             <TextBlock Grid.Column="0" Grid.Row="0" Text="名称:"  Margin="20, 20, 0, 0" />
                             <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Bind name}" Margin="20, 20, 0, 0" />
                             <TextBlock Grid.Column="0" Grid.Row="1" Text="起始日期:" Margin="20, 20, 0, 0"/>
-                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind join_on}" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind join_on, Converter={StaticResource dateCVT}}" Margin="20, 20, 0, 0"/>
                             <TextBlock Grid.Column="0" Grid.Row="2" Text="截止日期:" Margin="20, 20, 0, 0"/>
-                            <TextBlock Grid.Column="1" Grid.Row="2" Text="{x:Bind deadline}" Margin="20, 20, 0, 0"/>
+                            <TextBlock Grid.Column="1" Grid.Row="2" Text="{x:Bind deadline, Converter={StaticResource dateCVT}}" Margin="20, 20, 0, 0"/>
                             <TextBlock Grid.Column="0" Grid.Row="3" Text="内容:" Margin="20, 20, 0, 0"/>
                             <TextBlock Grid.Column="1" Grid.Row="3" Text="{x:Bind content}" Margin="20, 20, 0, 0"/>
                             <TextBlock Grid.Column="0" Grid.Row="4" Text="选项:" Margin="20, 20, 0, 0" />

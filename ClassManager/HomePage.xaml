@@ -10,98 +10,137 @@
 
     <Page.Resources>
         <local:DeletableCVT x:Key="deletableCVT"/>
+        <local:UncomplishToToggleCVT x:Key="uncomplishToToggleCVT"/>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Resource/GreenDream.jpg" />
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <RelativePanel>
+
+        <RelativePanel Grid.Row="0">
             <Image x:Name="user_image" Source="{x:Bind UVM.User.Image}" Height="100" Width="100"/>
-            <TextBlock x:Name="user_name" TextWrapping="Wrap" Text="{x:Bind UVM.User.name}" RelativePanel.RightOf="user_image" FontSize="26.667"/>
-            <AppBarButton Icon="ShowBcc" IsCompact="True" RelativePanel.RightOf="user_name">
+            <TextBlock FontStyle="Italic" Margin="0,20,0,0" x:Name="user_name" TextWrapping="Wrap" Text="{x:Bind UVM.User.name}" RelativePanel.RightOf="user_image" FontSize="26.667"/>
+            <AppBarButton Icon="ShowBcc" Margin="30,20,0,0" IsCompact="True" RelativePanel.RightOf="user_name">
                 <AppBarButton.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem x:Name="setting" Text="Setting" Click="setting_Click"/>
-                        <MenuFlyoutItem x:Name="create" Text="创建班级" Click="create_Click"/>
-                        <MenuFlyoutItem x:Name="join" Text="加入班级" Click="join_Click"/>
-                        <MenuFlyoutItem x:Name="logout" Text="Logout" Click="logout_Click"/>
+                        <MenuFlyoutItem FontStyle="Italic" x:Name="Setting" Text="Setting" Click="setting_Click"/>
+                        <MenuFlyoutItem FontStyle="Italic" x:Name="create" Text="Setup Class" Click="create_Click"/>
+                        <MenuFlyoutItem FontStyle="Italic" x:Name="join" Text="Join Class" Click="join_Click"/>
+                        <MenuFlyoutItem FontStyle="Italic" x:Name="Logout" Text="Logout" Click="logout_Click"/>
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
         </RelativePanel>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
-            <ListView Grid.Column="0" ItemsSource="{x:Bind UVM.User.homeworks}" SelectionMode="None">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="md:UserHomework">
-                        <Grid Height="100" Margin="10, 10, 10, 10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+        <FlipView x:Name="flipView1" Grid.Row="1">
+            <FlipViewItem>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="8*"/>
+                    </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Text="Name"/>
-                            <TextBlock Grid.Row="1" Text="Content"/>
-                            <TextBlock Grid.Row="2" Text="Source"/>
-                            <TextBlock Grid.Row="3" Text="Start Date"/>
-                            <TextBlock Grid.Row="4" Text="Deadline"/>
-                            <TextBlock Grid.Row="5" Text="State"/>
-                            <TextBlock Grid.Row="6" Text="Look"/>
+                    <TextBlock Grid.Row="1" FontStyle="Italic" Margin="0,0,0,0"  Text="作业"  FontSize="25"/>
+                    <ScrollViewer Grid.Row="2">
+                        <ListView  ItemsSource="{x:Bind UVM.User.homeworks}" SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="md:UserHomework">
+                                    <Grid Margin="10, 10, 10, 10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind name}"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind content}"/>
-                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind account}"/>
-                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind join_on}"/>
-                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind deadline}"/>
-                            <TextBlock Grid.Row="5" Grid.Column="1" Text="{x:Bind uncomplish}"/>
-                            <TextBlock Grid.Row="6" Grid.Column="1" Text="{x:Bind unlook}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                        <TextBlock Grid.Row="0" FontStyle="Italic" Text="Name" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="1" FontStyle="Italic"  Text="Content" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="2" FontStyle="Italic" Text="Source" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="3" FontStyle="Italic" Text="Start Date" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="4" FontStyle="Italic" Text="Deadline" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="5" FontStyle="Italic" Text="State" Margin="10,10,0,0"/>
+                                        <!--<TextBlock Grid.Row="6" FontStyle="Italic" Text="Look" Margin="10,10,0,0"/>-->
 
-            <ListView x:Name="relationships" Grid.Column="1" ItemsSource="{x:Bind UVM.User.relationships, Mode=OneWay}" IsItemClickEnabled="True" ItemClick="relationships_ItemClick" SelectionMode="None">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="md:Relationship">
-                        <Grid Height="100" Margin="10, 10, 10, 10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind name}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind content}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind account}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind join_on}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind deadline}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="5" Grid.Column="1" Text="{x:Bind uncomplish}" Margin="10,10,0,0"/>
+                                        <!--<TextBlock Grid.Row="6" Grid.Column="1" Text="{x:Bind unlook}" Margin="10,10,0,0"/>-->
+                                        <ToggleSwitch Grid.Row="6" Toggled="complishUserHomework" OnContent="未完成" OffContent="已完成" IsOn="{x:Bind uncomplish, Mode=OneWay, Converter={StaticResource uncomplishToToggleCVT}}"/>
+                                        <Button Grid.Row="6" Grid.Column="1" Content="删除" Click="deleteUserHomework_Click"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+            </FlipViewItem>
+            
+            <FlipViewItem>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="8*"/>
+                    </Grid.RowDefinitions>
 
-                            <Image Source="{x:Bind image}" Height="90" Width="90"/>
-                            <Button Grid.Column="1" Content="delete" Click="delete_Click" IsEnabled="{x:Bind position, Converter={StaticResource deletableCVT}}"/>
-                            <TextBlock Grid.Row="1" Text="Name"/>
-                            <TextBlock Grid.Row="2" Text="Account"/>
-                            <TextBlock Grid.Row="3" Text="Position"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind name}"/>
-                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind account}"/>
-                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind position}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+                    <TextBlock Grid.Row="1" FontStyle="Italic" Margin="0,0,0,0"  Text="班级"  FontSize="25"/>
+                    <ScrollViewer Grid.Row="2">
+                        <ListView  x:Name="relationships"  ItemsSource="{x:Bind UVM.User.relationships, Mode=OneWay}" IsItemClickEnabled="True" ItemClick="relationships_ItemClick" SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="md:Relationship">
+                                    <Grid Height="145" Margin="10, 10, 10, 10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="5*"/>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="{x:Bind image}" Grid.Column="1" Height="90" Width="90"/>
+
+                                        <TextBlock Grid.Row="1" Grid.Column="1" FontStyle="Italic" Text="Name" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" FontStyle="Italic" Text="Account" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" FontStyle="Italic" Text="Position" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{x:Bind name}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="2" Text="{x:Bind account}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="2" Text="{x:Bind position}" Margin="10,10,0,0"/>
+                                        <Line Grid.Column="3" Stretch="Fill" Visibility="Collapsed" />
+                                        <Button Grid.Column="4" Content="delete" Margin="0,0,0,0" Click="deleteOrganization_Click" IsEnabled="{x:Bind position, Converter={StaticResource deletableCVT}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+                    
+            </FlipViewItem>
+        </FlipView>
     </Grid>
 </Page>

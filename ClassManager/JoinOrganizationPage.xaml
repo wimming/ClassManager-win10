@@ -7,16 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Resource/GreenDream.jpg" />
+        </Grid.Background>
         <StackPanel>
-            <TextBlock Text="加入班级"/>
-            <TextBox x:Name="account" Header="Account"/>
-            <Button x:Name="searchBtn" Content="查找" Click="searchBtn_Click"/>
+            <TextBlock Text="加入班级" FontStyle="Italic" Margin="20,20,112,0" FontSize="30"/>
+            <TextBox x:Name="account" Header="Account" Margin="20,20,112,0"/>
+            <Button x:Name="searchBtn" Content="Find" Click="searchBtn_Click" FontStyle="Italic" Margin="20,20,112,0"/>
             <Image x:Name="image" Visibility="Collapsed"/>
-            <TextBlock x:Name="name" Visibility="Collapsed"/>
-            <TextBlock x:Name="need_password" Text="" Visibility="Collapsed"/>
-            <PasswordBox x:Name="password" Header="Password" Visibility="Collapsed"/>
-            <Button x:Name="confirmBtn" Content="create" Click="confirmBtn_Click" Visibility="Collapsed"/>
+            <TextBlock x:Name="name" Visibility="Collapsed" Margin="20,20,112,0"/>
+            <TextBlock x:Name="need_password" Text="" Visibility="Collapsed" Margin="20,20,112,0"/>
+            <PasswordBox x:Name="password" Header="Password" Visibility="Collapsed" Margin="20,20,112,0"/>
+            <Button x:Name="confirmBtn" Content="create" Click="confirmBtn_Click" Visibility="Collapsed" FontStyle="Italic" Margin="20,20,112,0"/>
         </StackPanel>
     </Grid>
 </Page>

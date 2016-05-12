@@ -85,6 +85,8 @@ namespace ClassManager.Controls
 				whatControls = 3;
 			} else if (li.Name == "rb5") {
 				whatControls = 4;
+			} else if (li.Name == "rb6") {
+				whatControls = 5;
 			}
 		}
 	}

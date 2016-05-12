@@ -70,11 +70,10 @@
                             <TextBlock Grid.Column="0" Grid.Row="1" FontStyle="Italic" Text="起始日期:"></TextBlock>
                             <TextBlock Grid.Column="0" Grid.Row="2" FontStyle="Italic" Text="截止日期:"></TextBlock>
 							<StackPanel Grid.Column="0" Grid.Row="6" Orientation="Horizontal">
-								<TextBlock Text="Unlook Numbers:"></TextBlock>
+								<TextBlock Text="未查看人数:"></TextBlock>
 								<TextBlock Text="{x:Bind unlooksNum, Mode=OneWay}"></TextBlock>
 							</StackPanel>
-							<!--<AppBarButton Grid.Column="1" Grid.Row="6" Icon="Bullets" Click="UnlooksList_btn"></AppBarButton>-->
-                            <TextBlock Grid.Column="0" Grid.Row="3" Text="内容:"></TextBlock>
+							<TextBlock Grid.Column="0" Grid.Row="3" Text="内容:"></TextBlock>
                             <TextBlock Grid.Column="1" Grid.Row="0" Margin="0,20,48,0" Text="{x:Bind name, Mode=OneWay}"></TextBlock>
 							<TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind join_on, Mode=OneWay}"></TextBlock>
 							<TextBlock Grid.Column="1" Grid.Row="2" Text="{x:Bind deadline, Mode=OneWay}"></TextBlock>

@@ -9,6 +9,7 @@ using ClassManager.ViewModels;
 using Windows.UI.Xaml;
 using System.Collections.Generic;
 using ClassManager.Controls;
+using Windows.ApplicationModel.DataTransfer;
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
 namespace ClassManager.Views
@@ -20,6 +21,7 @@ namespace ClassManager.Views
 	{
 		private OrganizationViewModel OVM;
 		private UserViewModel UVM;
+		private Homework clickHome;
 		public Homeworks ()
 		{
 			this.InitializeComponent();
@@ -30,6 +32,7 @@ namespace ClassManager.Views
 		protected override void OnNavigatedTo (NavigationEventArgs e)
 		{
 			OVM.initialOVM((string)e.Parameter);
+			DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
 			bool hasPowful = false;
 			foreach (var item in UVM.User.Relationships) {
 				if (item.account == OVM.Organization.Account && (item.position == "founder" || item.position == "manager")) {
@@ -39,6 +42,20 @@ namespace ClassManager.Views
 			if (!hasPowful) {
 				add_btn.Visibility = Visibility.Collapsed;
 			}
+		}
+
+		protected override void OnNavigatedFrom (NavigationEventArgs e)
+		{
+			DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
+		}
+
+		//数据打包进行分享
+		/*async*/ void OnShareDataRequested (DataTransferManager sender, DataRequestedEventArgs args)
+		{
+			var dp = args.Request.Data;
+			dp.Properties.Title = "共享作业：" + clickHome.name;
+			dp.Properties.Description = "来自ClassManager的共享";
+			dp.SetText("开始日期： " + Convert.ToDateTime(clickHome.join_on).ToLocalTime() + "\n截止日期： " + Convert.ToDateTime(clickHome.deadline).ToLocalTime()  + "\n\n作业内容：" + clickHome.content + "\n");
 		}
 
 		private async void AddButton_Click (object sender, RoutedEventArgs e)
@@ -64,7 +81,7 @@ namespace ClassManager.Views
 
 		private async void OnItemClick (object sender, ItemClickEventArgs e)
 		{
-			var clickHome = (Homework)(e.ClickedItem);
+			clickHome = (Homework)(e.ClickedItem);
 			bool hasPowful = false;
 			bool unlook = false;
 			bool uncomplete = false;
@@ -106,6 +123,8 @@ namespace ClassManager.Views
 					UVM.complishHomework(clickHome._id, !uncomplete);
 				} else if (what == 4) {
 					UVM.complishHomework(clickHome._id, !uncomplete);
+				} else if (what == 5) {
+					DataTransferManager.ShowShareUI();
 				}
 			};
 			await dialog.ShowAsync();

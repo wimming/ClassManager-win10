@@ -20,6 +20,7 @@ using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using ClassManager.ViewModels;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Media.Imaging;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -140,6 +141,19 @@ namespace ClassManager
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             return (bool)value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class UrlToSourceCVT : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            string image_str = value == null ? "null" : (string)value;
+            return new BitmapImage(new Uri(SingleService.Instance.getServerAddress() + (string)value));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

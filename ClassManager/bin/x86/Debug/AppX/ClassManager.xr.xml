@@ -183,6 +183,7 @@
     <RootType FullName="ClassManager.DeletableCVT" />
     <RootType FullName="ClassManager.UncomplishToToggleCVT" />
     <RootType FullName="ClassManager.Views.DateCVT" />
+    <RootType FullName="ClassManager.UrlToSourceCVT" />
     <RootType FullName="Windows.UI.Xaml.Controls.FlipView">
       <RootProperty Name="Items" />
     </RootType>

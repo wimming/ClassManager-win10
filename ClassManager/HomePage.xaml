@@ -13,6 +13,7 @@
         <local:DeletableCVT x:Key="deletableCVT"/>
         <local:UncomplishToToggleCVT x:Key="uncomplishToToggleCVT"/>
         <views:DateCVT x:Key="dateCVT"/>
+        <local:UrlToSourceCVT x:Key="urlToSourceCVT"/>
     </Page.Resources>
 
     <Grid>
@@ -25,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <RelativePanel Grid.Row="0">
-            <Image x:Name="user_image" Source="{x:Bind UVM.User.Image, Mode=OneTime}" Height="100" Width="100"/>
+            <Image x:Name="user_image" Source="{x:Bind UVM.User.Image, Mode=OneWay, Converter={StaticResource urlToSourceCVT}}" Height="100" Width="100"/>
             <TextBlock FontStyle="Italic" Margin="0,20,0,0" x:Name="user_name" TextWrapping="Wrap" Text="{x:Bind UVM.User.Name}" RelativePanel.RightOf="user_image" FontSize="26.667"/>
             <AppBarButton Icon="ShowBcc" Margin="30,20,0,0" IsCompact="True" RelativePanel.RightOf="user_name">
                 <AppBarButton.Flyout>
@@ -127,7 +128,7 @@
                                             <ColumnDefinition/>-->
                                         </Grid.ColumnDefinitions>
 
-                                        <Image Grid.Column="0" Source="{x:Bind image, Mode=OneTime}" Height="90" Width="90"/>
+                                        <Image Grid.Column="0" Source="{x:Bind image, Mode=OneWay, Converter={StaticResource urlToSourceCVT}}" Height="90" Width="90"/>
                                         <Button Grid.Column="1" Content="delete" Margin="10,10,0,0" Click="deleteOrganization_Click" IsEnabled="{x:Bind position, Converter={StaticResource deletableCVT}}"/>
 
                                         <TextBlock Grid.Row="1" Grid.Column="0" FontStyle="Italic" Text="Name" Margin="10,10,0,0"/>

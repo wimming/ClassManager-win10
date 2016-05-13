@@ -42,11 +42,10 @@ namespace ClassManager.ViewModels
         {
             User u = SingleService.Instance.getUser();
             u.Name = u.Name == null ? "（还没有设置）" : u.Name;
-            u.Image = SingleService.Instance.getServerAddress() + (u.Image == null ? "null" : u.Image);
+
             foreach (var item in u.Relationships)
             {
                 item.name = item.name == null ? "（还没有设置）" : item.name;
-                item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
             }
 
             User.DeepCopy(u);
@@ -223,11 +222,10 @@ namespace ClassManager.ViewModels
             {
                 User u = SingleService.Instance.getUser();
                 u.Name = u.Name == null ? "（还没有设置）" : u.Name;
-                u.Image = SingleService.Instance.getServerAddress() + (u.Image == null ? "null" : u.Image);
+
                 foreach (var item in u.Relationships)
                 {
                     item.name = item.name == null ? "（还没有设置）" : item.name;
-                    item.image = SingleService.Instance.getServerAddress() + (item.image == null ? "null" : item.image);
                 }
 
                 User.DeepCopy(u);

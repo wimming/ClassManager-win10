@@ -212,7 +212,7 @@ namespace ClassManager.Views
             }
             catch (Exception e)
             {
-                return "时间显示异常";
+                return "（时间显示异常）";
             }
         }
 

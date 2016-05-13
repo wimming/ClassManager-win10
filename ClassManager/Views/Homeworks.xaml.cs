@@ -55,7 +55,7 @@ namespace ClassManager.Views
 			var dp = args.Request.Data;
 			dp.Properties.Title = "共享作业：" + clickHome.name;
 			dp.Properties.Description = "来自ClassManager的共享";
-			dp.SetText("开始日期： " + clickHome.join_on + "\n截止日期： " + clickHome.deadline + "\n\n作业内容：" + clickHome.content + "\n");
+			dp.SetText("开始日期： " + Convert.ToDateTime(clickHome.join_on).ToLocalTime() + "\n截止日期： " + Convert.ToDateTime(clickHome.deadline).ToLocalTime()  + "\n\n作业内容：" + clickHome.content + "\n");
 		}
 
 		private async void AddButton_Click (object sender, RoutedEventArgs e)

@@ -22,13 +22,13 @@
     <AppXManifest Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-05-12T15:23:38.597</Modified>
+      <Modified>2016-05-12T16:42:19.708</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\ClassManager.exe">
       <PackagePath>entrypoint\ClassManager.exe</PackagePath>
-      <Modified>2016-05-12T15:23:37.739</Modified>
+      <Modified>2016-05-12T16:42:18.959</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\.nuget\packages\Microsoft.ApplicationInsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -548,7 +548,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\Controls\tiles.xml">
       <PackagePath>Controls\tiles.xml</PackagePath>
-      <Modified>2016-05-12T14:22:24.068</Modified>
+      <Modified>2016-05-12T16:19:50.030</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
@@ -598,11 +598,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-05-12T15:23:38.386</Modified>
+      <Modified>2016-05-12T16:42:19.508</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\家松\Desktop\软件学院\现代操作系统应用开发\作业\期中\ClassManager-win10\ClassManager\bin\x86\Debug\Core\ClassManager.exe">
       <PackagePath>ClassManager.exe</PackagePath>
-      <Modified>2016-05-12T15:23:38.592</Modified>
+      <Modified>2016-05-12T16:42:19.704</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

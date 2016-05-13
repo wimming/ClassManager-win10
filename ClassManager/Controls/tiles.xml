@@ -39,7 +39,6 @@
 					<text hint-style="subtle" hint-wrap="true"></text>
 				</subgroup>
 				<subgroup>
-					<!--<image src="Assets\background.jpg" hint-removeMargin="true"/>-->
 				</subgroup>
 			</group>
 		</binding>
@@ -50,7 +49,6 @@
 					<text hint-style="subtle" hint-wrap="true"></text>
 					<text hint-style="subtle" hint-wrap="true"></text>
 					<text hint-style="subtle" hint-wrap="true"></text>
-					<image src="Assets\background.jpg" hint-removeMargin="true"/>
 				</subgroup>
 			</group>
 		</binding>

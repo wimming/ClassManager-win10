@@ -70,7 +70,8 @@ namespace ClassManager.ViewModels
 			});
 			for (int i = 0; i < 12; i = i + 3) {
 				elements[i].InnerText = homs.First().name;
-				elements[i + 1].InnerText = homs.First().content;
+				elements[i + 1].InnerText = "ddl:" + Convert.ToDateTime(homs.First().deadline).ToString("yyyy/MM/dd");
+				elements[i + 2].InnerText = homs.First().content;
 			}
 
 			var updator = TileUpdateManager.CreateTileUpdaterForApplication();

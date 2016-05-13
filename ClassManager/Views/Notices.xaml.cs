@@ -66,8 +66,8 @@ namespace ClassManager.Views
 			dp.Properties.Description = "来自ClassManager的共享";
 			dp.SetText("开始日期： " + clickNotice.join_on + "\n截止日期： " + clickNotice.deadline + "\n\n公告内容：" + clickNotice.content + "\n");
 			dp.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(
-				"<p>" + "开始日期： " + clickNotice.join_on + "</p>" +
-				"<p>" + "截止日期： " + clickNotice.deadline + "</p>" +
+				"<p>" + "开始日期： " + Convert.ToDateTime(clickNotice.join_on).ToLocalTime() + "</p>" +
+				"<p>" + "截止日期： " + Convert.ToDateTime(clickNotice.deadline).ToLocalTime() + "</p>" +
 				"<p>" + "公告内容：" + clickNotice.content + "</p>" +
 				"<p>" + "公告配图：" + "</p>" +
 				"<img src=" + clickNotice.image + " />"));

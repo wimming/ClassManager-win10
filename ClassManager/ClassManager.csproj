@@ -138,6 +138,7 @@
     <Compile Include="Controls\UserControlContent.xaml.cs">
       <DependentUpon>UserControlContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\PublicConverter.cs" />
     <Compile Include="CreateOrganizationPage.xaml.cs">
       <DependentUpon>CreateOrganizationPage.xaml</DependentUpon>
     </Compile>

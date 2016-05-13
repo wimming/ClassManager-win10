@@ -8,17 +8,25 @@
     mc:Ignorable="d">
     <ScrollViewer>
         <Grid>
-        <Grid.Background>
-            <ImageBrush Stretch="Fill" ImageSource="Resource/SunLeaves.jpg" />
-        </Grid.Background>
-        <TextBlock x:Name="ClassManager" Margin="77,10,0,0" TextWrapping="Wrap" Text="ClassManager" VerticalAlignment="Top" FontFamily="Segoe WP" Width="189" HorizontalAlignment="Left" Height="56" FontSize="29.333"/>
-        <AppBarButton FontStyle="Italic" x:Name="registerButton" HorizontalAlignment="Left" Label="register" Margin="77,574,0,0" VerticalAlignment="Top" Icon="Permissions" Click="onClickRegister"/>
-        <AppBarButton FontStyle="Italic" x:Name="loginButton" HorizontalAlignment="Left" Icon="Accept" Label="login" Margin="198,574,0,0" VerticalAlignment="Top" Click="onClickLogin"/>
-        <TextBox x:Name="input_account" HorizontalAlignment="Left" Margin="77,239,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="189" Height="43"/>
-        <PasswordBox x:Name="input_password" HorizontalAlignment="Left" Margin="77,342,0,0" VerticalAlignment="Top" Width="189" Height="47"/>
-        <TextBlock FontStyle="Italic" x:Name="textBlock" HorizontalAlignment="Left" Margin="77,207,0,0" TextWrapping="Wrap" Text="Account:" VerticalAlignment="Top" Height="27" Width="189"/>
-        <TextBlock FontStyle="Italic" x:Name="textBlock1" HorizontalAlignment="Left" Margin="77,317,0,0" TextWrapping="Wrap" Text="password:" VerticalAlignment="Top" Width="189"/>
-
-    </Grid>
+            <Grid.Background>
+                <ImageBrush Stretch="Fill" ImageSource="Resource/SunLeaves.jpg" />
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.ColumnSpan="2" x:Name="ClassManager" Text="ClassManager" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe WP" FontSize="29.333"/>
+            <TextBox x:Name="input_account" Grid.Row="1" Grid.ColumnSpan="2" Header="用户名" HorizontalAlignment="Center" TextWrapping="Wrap" Width="200" Height="60"/>
+            <PasswordBox x:Name="input_password" Grid.Row="2" Grid.ColumnSpan="2" Header="密码" HorizontalAlignment="Center" Width="200" Height="60"/>
+            <AppBarButton Grid.Row="3" FontStyle="Italic" x:Name="registerButton" HorizontalAlignment="Right" Margin="0, 0, 30, 0" Label="register" Icon="Permissions" Click="onClickRegister"/>
+            <AppBarButton Grid.Row="3" Grid.Column="1" FontStyle="Italic" x:Name="loginButton" HorizontalAlignment="Left" Margin="30, 0, 0, 0" Icon="Accept" Label="login" VerticalAlignment="Top" Click="onClickLogin"/>
+        </Grid>
     </ScrollViewer>
 </Page>

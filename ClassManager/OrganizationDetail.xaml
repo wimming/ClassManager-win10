@@ -4,6 +4,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:ClassManager"
       xmlns:controls="using:ClassManager.Controls"
+      xmlns:converters="using:ClassManager.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -18,6 +19,7 @@
     -->
 
     <Page.Resources>
+        <converters:NameToNameCVT x:Key="nameToNameCVT"/>
         <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="local:NavMenuItem">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -92,29 +94,15 @@
 
 					<!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
 					<Grid Grid.Row="0" Margin="48,0,0,0">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-							<ColumnDefinition Width="*"></ColumnDefinition>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"></RowDefinition>
-							<RowDefinition Height="auto"></RowDefinition>
-						</Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-						<Image Grid.Column="0" Grid.RowSpan="2" Source="{x:Bind OVM.Organization.image, Mode=OneWay}"  Height="50" Width="50"/>
+                        <Image Grid.Column="0" Source="{x:Bind OVM.Organization.image, Mode=OneWay}"  Height="50" Width="50" Margin="0, 0, 20, 0"/>
+                        <TextBlock Grid.Column="1" Text="{x:Bind OVM.Organization.Name, Mode=OneWay, Converter={StaticResource nameToNameCVT}}"  VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
 
-						<StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-							<TextBlock Text="Account: "  VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
-							<TextBlock x:Name="org_account" VerticalAlignment="Bottom" Text="{x:Bind OVM.Organization.Account, Mode=OneWay}" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
-						</StackPanel>
-
-						<StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-							<TextBlock Text="Name: " VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
-							<TextBlock  Text="{x:Bind OVM.Organization.Name, Mode=OneWay}" x:Name="org_name" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center"></TextBlock>
-						</StackPanel>
-
-						<!--<Button x:Name="SettingsNavPaneButton"
+                        <!--<Button x:Name="SettingsNavPaneButton"
                             Grid.RowSpan="2"
                             Grid.Column="2"
                             Style="{StaticResource SplitViewPaneButtonStyle}"
@@ -141,13 +129,19 @@
                                Height="1"
                                Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
                                Margin="16,6,16,6"/>
-					<AppBarButton x:Name="ToHomePage"
-                            Grid.Row="4"
-                            Grid.Column="2"
+                    <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
+                        <AppBarButton x:Name="ToHomePage"
                             Icon="Home"
 							Click="ToHomePageClick"
                             AutomationProperties.Name="Home"
                             ToolTipService.ToolTip="Home"/>
+
+                        <TextBlock x:Name="org_account"
+                                   VerticalAlignment="Center"
+                                   Text="{x:Bind OVM.Organization.Account, Mode=OneWay}"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
                     <!--<Button x:Name="SettingsNavPaneButton"
                             Grid.Row="2"
                             Grid.Column="2"

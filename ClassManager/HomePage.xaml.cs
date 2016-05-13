@@ -148,17 +148,4 @@ namespace ClassManager
             throw new NotImplementedException();
         }
     }
-    public class UrlToSourceCVT : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            string image_str = value == null ? "null" : (string)value;
-            return new BitmapImage(new Uri(SingleService.Instance.getServerAddress() + (string)value));
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

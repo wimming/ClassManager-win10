@@ -43,12 +43,6 @@ namespace ClassManager.ViewModels
         public void initialUVM()
         {
             User u = SingleService.Instance.getUser();
-            u.Name = u.Name == null ? "（还没有设置）" : u.Name;
-
-            foreach (var item in u.Relationships)
-            {
-                item.name = item.name == null ? "（还没有设置）" : item.name;
-            }
 
             User.DeepCopy(u);
 			creat_tile();

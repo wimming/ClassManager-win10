@@ -43,6 +43,8 @@ namespace ClassManager
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            UVM.initialUVM();
+
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame.CanGoBack)
             {

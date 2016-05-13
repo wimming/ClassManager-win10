@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ClassManager"
     xmlns:views="using:ClassManager.Views"
+    xmlns:converters="using:ClassManager.Converters"
     xmlns:md="using:ClassManager.Model"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -12,8 +13,9 @@
     <Page.Resources>
         <local:DeletableCVT x:Key="deletableCVT"/>
         <local:UncomplishToToggleCVT x:Key="uncomplishToToggleCVT"/>
-        <views:DateCVT x:Key="dateCVT"/>
-        <local:UrlToSourceCVT x:Key="urlToSourceCVT"/>
+        <converters:DateCVT x:Key="dateCVT"/>
+        <converters:UrlToSourceCVT x:Key="urlToSourceCVT"/>
+        <converters:NameToNameCVT x:Key="nameToNameCVT"/>
     </Page.Resources>
 
     <Grid>
@@ -26,9 +28,9 @@
         </Grid.RowDefinitions>
 
         <RelativePanel Grid.Row="0">
-            <Image x:Name="user_image" Source="{x:Bind UVM.User.Image, Mode=OneWay, Converter={StaticResource urlToSourceCVT}}" Height="100" Width="100"/>
-            <TextBlock FontStyle="Italic" Margin="0,20,0,0" x:Name="user_name" TextWrapping="Wrap" Text="{x:Bind UVM.User.Name}" RelativePanel.RightOf="user_image" FontSize="26.667"/>
-            <AppBarButton Icon="ShowBcc" Margin="30,20,0,0" IsCompact="True" RelativePanel.RightOf="user_name">
+            <Image x:Name="user_image" Source="{x:Bind UVM.User.Image, Mode=OneWay, Converter={StaticResource urlToSourceCVT}}" Height="100" Width="100" RelativePanel.AlignLeftWithPanel="True"/>
+            <TextBlock FontStyle="Italic" Margin="0,20,0,0" x:Name="user_name" TextWrapping="Wrap" Text="{x:Bind UVM.User.Name, Converter={StaticResource nameToNameCVT}}" RelativePanel.RightOf="user_image" FontSize="26.667"/>
+            <AppBarButton Icon="ShowBcc" Margin="30,20,0,0" IsCompact="True" RelativePanel.AlignRightWithPanel="True" >
                 <AppBarButton.Flyout>
                     <MenuFlyout>
                         <MenuFlyoutItem FontStyle="Italic" x:Name="Setting" Text="Setting" Click="setting_Click"/>
@@ -49,9 +51,9 @@
                         <RowDefinition Height="8*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="1" FontStyle="Italic" Margin="0,0,0,0"  Text="作业"  FontSize="25"/>
+                    <TextBlock Grid.Row="1" FontStyle="Italic" Margin="0,0,0,0"  HorizontalAlignment="Center" Text="作业"  FontSize="25"/>
                     <ScrollViewer Grid.Row="2">
-                        <ListView  ItemsSource="{x:Bind UVM.User.homeworks}" SelectionMode="None">
+                        <ListView  ItemsSource="{x:Bind UVM.User.homeworks}" HorizontalAlignment="Center" SelectionMode="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="md:UserHomework">
                                     <Grid Margin="10, 10, 10, 10">
@@ -70,23 +72,19 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Grid.Row="0" FontStyle="Italic" Text="Name" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="1" FontStyle="Italic"  Text="Content" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="2" FontStyle="Italic" Text="Source" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="3" FontStyle="Italic" Text="Start Date" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="4" FontStyle="Italic" Text="Deadline" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="5" FontStyle="Italic" Text="State" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="2" FontStyle="Italic" Text="所属班级" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="3" FontStyle="Italic" Text="创建日期" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="4" FontStyle="Italic" Text="截止于" Margin="10,10,0,0"/>
                                         <!--<TextBlock Grid.Row="6" FontStyle="Italic" Text="Look" Margin="10,10,0,0"/>-->
 
-                                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind name}" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind content}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="{x:Bind name}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{x:Bind content}" Margin="10,10,0,0"/>
                                         <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind account}" Margin="10,10,0,0"/>
                                         <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind join_on, Converter={StaticResource dateCVT}}" Margin="10,10,0,0"/>
                                         <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind deadline, Converter={StaticResource dateCVT}}" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="5" Grid.Column="1" Text="{x:Bind uncomplish}" Margin="10,10,0,0"/>
                                         <!--<TextBlock Grid.Row="6" Grid.Column="1" Text="{x:Bind unlook}" Margin="10,10,0,0"/>-->
                                         <ToggleSwitch Grid.Row="6" Toggled="complishUserHomework" OnContent="未完成" OffContent="已完成" IsOn="{x:Bind uncomplish, Mode=OneWay, Converter={StaticResource uncomplishToToggleCVT}}"/>
-                                        <Button Grid.Row="6" Grid.Column="1" Content="删除" Click="deleteUserHomework_Click"/>
+                                        <AppBarButton Grid.Row="6" Grid.Column="1" Icon="Delete" Click="deleteUserHomework_Click" HorizontalAlignment="Right"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -103,9 +101,9 @@
                         <RowDefinition Height="8*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="1" FontStyle="Italic" Margin="0,0,0,0"  Text="班级"  FontSize="25"/>
+                    <TextBlock Grid.Row="1" FontStyle="Italic" Margin="0,0,0,0" Text="班级"  HorizontalAlignment="Center"  FontSize="25"/>
                     <ScrollViewer Grid.Row="2">
-                        <ListView  x:Name="relationships"  ItemsSource="{x:Bind UVM.User.relationships, Mode=OneWay}" IsItemClickEnabled="True" ItemClick="relationships_ItemClick" SelectionMode="None">
+                        <ListView  x:Name="relationships" ItemsSource="{x:Bind UVM.User.relationships, Mode=OneWay}" HorizontalAlignment="Center" IsItemClickEnabled="True" ItemClick="relationships_ItemClick" SelectionMode="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="md:Relationship">
                                     <Grid Margin="10, 10, 10, 10">
@@ -121,22 +119,17 @@
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
-                                            <!--<ColumnDefinition Width="120"/>
-                                            <ColumnDefinition Width="5*"/>
-                                            <ColumnDefinition Width="70"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition/>-->
+                                            <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Image Grid.Column="0" Source="{x:Bind image, Mode=OneWay, Converter={StaticResource urlToSourceCVT}}" Height="90" Width="90"/>
-                                        <Button Grid.Column="1" Content="delete" Margin="10,10,0,0" Click="deleteOrganization_Click" IsEnabled="{x:Bind position, Converter={StaticResource deletableCVT}}"/>
+                                        <Image Source="{x:Bind image, Mode=OneWay, Converter={StaticResource urlToSourceCVT}}" Height="90" Width="90" Margin="0, 0, 30, 0"/>
+                                        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{x:Bind name, Converter={StaticResource nameToNameCVT}}" Margin="10,10,0,0"/>
 
-                                        <TextBlock Grid.Row="1" Grid.Column="0" FontStyle="Italic" Text="Name" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="Account" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="3" Grid.Column="0" FontStyle="Italic" Text="Position" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind name}" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind account}" Margin="10,10,0,0"/>
-                                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind position}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" FontStyle="Italic" Text="班级账号" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="职位" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind account}" Margin="10,10,0,0"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind position}" Margin="10,10,0,0"/>
+                                        <AppBarButton Grid.Row="3" Grid.Column="1" Icon="Delete" Margin="10,10,0,0" Click="deleteOrganization_Click" IsEnabled="{x:Bind position, Converter={StaticResource deletableCVT}}" HorizontalAlignment="Right"/>
                                         <!--<Line Grid.Column="3" Stretch="Fill" Visibility="Collapsed" />-->
                                     </Grid>
                                 </DataTemplate>

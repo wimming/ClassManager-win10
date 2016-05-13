@@ -37,17 +37,9 @@ namespace ClassManager
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame.CanGoBack)
-            {
-                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                    Windows.UI.Core.AppViewBackButtonVisibility.Visible;
-            }
-            else
-            {
-                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                    Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
-            }
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
+
             input_account.Text = "14330015";
             input_password.Password = "123456";
         }

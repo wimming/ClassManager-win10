@@ -57,7 +57,7 @@ namespace ClassManager.Views
         {
             var dialog = new ContentDialog()
             {
-                Content = "确定为其投票？",
+                Title = "确定为其投票？",
                 PrimaryButtonText = "确定",
                 SecondaryButtonText = "取消",
                 FullSizeDesired = false,
@@ -88,7 +88,7 @@ namespace ClassManager.Views
                     jo.Add("name", ((CreateVoteContent)_s.Content).getName());
                     jo.Add("content", ((CreateVoteContent)_s.Content).getContent());
                     jo.Add("deadline", ((CreateVoteContent)_s.Content).getDeadline());
-                    jo.Add("options", ((CreateVoteContent)_s.Content).getOptions());
+                    jo.Add("options", ((CreateVoteContent)_s.Content).getOptions().ToString());
 
                     OVM.createVote(jo.ToString());
             };
@@ -100,7 +100,7 @@ namespace ClassManager.Views
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return ((List<User>)value).Count + "";
+            return "已有" + ((List<User>)value).Count + "人支持";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -190,7 +190,7 @@ namespace ClassManager.Views
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return ((List<User>)value).Count + "";
+            return "还有" + ((List<User>)value).Count + "人未投票";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -199,26 +199,4 @@ namespace ClassManager.Views
         }
     }
 
-    public class DateCVT : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            try {
-                string date_str = (string)value;
-                date_str = date_str.Substring(0, 19);
-                DateTime dt = DateTime.ParseExact(date_str, "yyyy-MM-ddTHH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
-                dt = dt.AddHours(8);
-                return string.Format("{0:U}", dt);
-            }
-            catch (Exception e)
-            {
-                return "（时间显示异常）";
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

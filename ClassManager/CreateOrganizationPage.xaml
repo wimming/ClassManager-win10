@@ -16,10 +16,10 @@
             <RowDefinition Height="77*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.RowSpan="2">
-            <TextBox x:Name="account" Header="Account" Margin="20,20,80,0"/>
-            <PasswordBox x:Name="password" Header="Password" Margin="20,10,80,0" />
-            <PasswordBox x:Name="confirm_password" Header="Confirm Password" Margin="20,10,80,0"/>
-            <Button x:Name="confirmBtn"  Content="create" Click="confirmBtn_Click" HorizontalAlignment="Left" Width="61" RenderTransformOrigin="0.546,1.563" Margin="20,20,149,0" FontStyle="Italic"/>
+            <TextBox x:Name="account" Header="账号" Margin="20,20,80,0"/>
+            <PasswordBox x:Name="password" Header="密码" Margin="20,10,80,0" />
+            <PasswordBox x:Name="confirm_password" Header="重复密码" Margin="20,10,80,0"/>
+            <Button x:Name="confirmBtn"  Content="创建" Click="confirmBtn_Click" HorizontalAlignment="Left" Width="61" RenderTransformOrigin="0.546,1.563" Margin="20,20,149,0" FontStyle="Italic"/>
         </StackPanel>
     </Grid>
 </Page>

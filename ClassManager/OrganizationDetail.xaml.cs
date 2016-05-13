@@ -113,13 +113,8 @@ namespace ClassManager
 				Frame.Navigate(typeof(MainPage));
 				return;
 			}
-			Debug.WriteLine("member");
-
 			OVM.initialOVM((string)e.Parameter);
-
-			string tem = OVM.Organization.account;
-			//org_account.Text = "Account: " + (OVM.Organization.account == null ? "" : OVM.Organization.account);
-			//org_name.Text = "Name: " + (OVM.Organization.name == null ? "" : OVM.Organization.name);
+			this.AppFrame.Navigate(typeof(Members), (string)e.Parameter);
 		}
 
 		private void ToHomePageClick (object sender, RoutedEventArgs e)

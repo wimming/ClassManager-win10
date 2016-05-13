@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
 using Windows.Storage.Streams;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml.Controls;
 
 namespace ClassManager.ViewModels
@@ -49,9 +51,34 @@ namespace ClassManager.ViewModels
             }
 
             User.DeepCopy(u);
-        }
+			creat_tile();
+		}
 
-        public async void setPasswprd(string password)
+		//使用最新创建的Homework来更新磁贴，在每次initialUVM和regetUser调用
+		private void creat_tile ()
+		{
+			XmlDocument xml = new XmlDocument();
+			xml.LoadXml(File.ReadAllText("Controls/tiles.xml"));
+			var elements = xml.GetElementsByTagName("text");
+			List<UserHomework> homs = new List<UserHomework>();
+			homs = User.Homeworks.ToList();
+			homs.Sort((a, b) => {
+				DateTime tem1 = Convert.ToDateTime(a.join_on);
+				DateTime tem2 = Convert.ToDateTime(a.join_on);
+				return tem1.CompareTo(tem2);
+			});
+			for (int i = 0; i < 12; i = i + 3) {
+				elements[i].InnerText = homs.First().name;
+				elements[i + 1].InnerText = "ddl:" + Convert.ToDateTime(homs.First().deadline).ToString("yyyy/MM/dd");
+				elements[i + 2].InnerText = homs.First().content;
+			}
+
+			var updator = TileUpdateManager.CreateTileUpdaterForApplication();
+			var notification = new TileNotification(xml);
+			updator.Update(notification);
+		}
+
+		public async void setPasswprd(string password)
         {
             Dictionary<string, string> settingData = new Dictionary<string, string>();
             settingData.Add("password", password);
@@ -229,8 +256,8 @@ namespace ClassManager.ViewModels
                 }
 
                 User.DeepCopy(u);
-
-            }
+				creat_tile();
+			}
             else
             {
                 await new Windows.UI.Popups.MessageDialog("当前网络状况不佳").ShowAsync();

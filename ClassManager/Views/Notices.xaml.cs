@@ -7,8 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,7 +30,7 @@ namespace ClassManager.Views
 	{
 		private OrganizationViewModel OVM;
 		private UserViewModel UVM;
-		Boolean? isOpenUnlooksList = false;
+		private Notice clickNotice;
 		public Notices ()
 		{
 			this.InitializeComponent();
@@ -39,6 +41,7 @@ namespace ClassManager.Views
 		protected override void OnNavigatedTo (NavigationEventArgs e)
 		{
 			OVM.initialOVM((string)e.Parameter);
+			DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
 			bool hasPowful = false;
 			foreach (var item in UVM.User.Relationships) {
 				if (item.account == OVM.Organization.Account && (item.position == "founder" || item.position == "manager")) {
@@ -48,6 +51,28 @@ namespace ClassManager.Views
 			if (!hasPowful) {
 				add_btn.Visibility = Visibility.Collapsed;
 			}
+		}
+
+		protected override void OnNavigatedFrom (NavigationEventArgs e)
+		{
+			DataTransferManager.GetForCurrentView().DataRequested += OnShareDataRequested;
+		}
+
+		//数据打包进行分享
+		async void OnShareDataRequested (DataTransferManager sender, DataRequestedEventArgs args)
+		{
+			var dp = args.Request.Data;
+			var deferral = args.Request.GetDeferral();
+			dp.Properties.Title = "共享班级公告：" + clickNotice.name;
+			dp.Properties.Description = "来自ClassManager的共享";
+			dp.SetText("开始日期： " + clickNotice.join_on + "\n截止日期： " + clickNotice.deadline + "\n\n公告内容：" + clickNotice.content + "\n");
+			dp.SetHtmlFormat(HtmlFormatHelper.CreateHtmlFormat(
+				"<p>" + "开始日期： " + Convert.ToDateTime(clickNotice.join_on).ToLocalTime() + "</p>" +
+				"<p>" + "截止日期： " + Convert.ToDateTime(clickNotice.deadline).ToLocalTime() + "</p>" +
+				"<p>" + "公告内容：" + clickNotice.content + "</p>" +
+				"<p>" + "公告配图：" + "</p>" +
+				"<img src=" + clickNotice.image + " />"));
+			deferral.Complete();
 		}
 
 		private async void AddButton_Click (object sender, RoutedEventArgs e)
@@ -79,14 +104,9 @@ namespace ClassManager.Views
 			await dialog.ShowAsync();
 		}
 
-		private void UnlooksList_btn(object sender, RoutedEventArgs e)
-		{
-			isOpenUnlooksList = !isOpenUnlooksList;
-		}
-
 		private async void OnItemClick (object sender, ItemClickEventArgs e)
 		{
-			var clickHome = (Notice)(e.ClickedItem);
+			clickNotice = (Notice)(e.ClickedItem);
 			bool hasPowful = false;
 			bool unlook = false;
 			Dictionary<string, string> type = new Dictionary<string, string>();
@@ -96,7 +116,7 @@ namespace ClassManager.Views
 				}
 			}
 			foreach (var item in OVM.Organization.Notices) {
-				if (item._id == clickHome._id) {
+				if (item._id == clickNotice._id) {
 					foreach (var unlookUser in item.unlooks) {
 						if (unlookUser.account == UVM.User.Account) {
 							unlook = true;
@@ -118,9 +138,11 @@ namespace ClassManager.Views
 				ContentDialog x = dialog;
 				int what = ((homeWorkAndNoticesCtl)dialog.Content).getwhatControls();
 				if (what == 0) {
-					OVM.deleteNotice(OVM.Organization.account, clickHome._id);
+					OVM.deleteNotice(OVM.Organization.account, clickNotice._id);
 				} else if (what == 2) {
-					OVM.lookNotice(OVM.Organization.account, clickHome._id);
+					OVM.lookNotice(OVM.Organization.account, clickNotice._id);
+				} else if (what == 5) {
+					DataTransferManager.ShowShareUI();
 				}
 			};
 			await dialog.ShowAsync();

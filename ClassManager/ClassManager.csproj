@@ -100,6 +100,7 @@
     <Content Include="Controls\RightLeaves.jpg" />
     <Content Include="Controls\ShadowLeaves.jpg" />
     <Content Include="Controls\SunLeaves.jpg" />
+    <Content Include="Controls\tiles.xml" />
     <Content Include="Resource\3Leaves.jpg" />
     <Content Include="Resource\GreenDream.jpg" />
     <Content Include="Resource\LeftLeaves.jpg" />

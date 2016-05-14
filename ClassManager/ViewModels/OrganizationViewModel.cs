@@ -62,8 +62,10 @@ namespace ClassManager.ViewModels
 
 			if (!result.error) {
 				await new Windows.UI.Popups.MessageDialog("修改成功").ShowAsync();
-				initialOVM(account);
-			} else {
+
+                regetOrganization();
+                UserViewModel.Instance.updateUser();
+            } else {
 				await new Windows.UI.Popups.MessageDialog(result.message).ShowAsync();
 			}
 		}
@@ -249,9 +251,9 @@ namespace ClassManager.ViewModels
             if (!result.error)
             {
                 await new Windows.UI.Popups.MessageDialog("修改成功").ShowAsync();
-
-                UserViewModel.Instance.updateUser();
+                
                 regetOrganization();
+                UserViewModel.Instance.updateUser();
             }
             else
             {

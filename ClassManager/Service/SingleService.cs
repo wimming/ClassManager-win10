@@ -39,7 +39,7 @@ namespace ClassManager.Service
 
         private SingleService()
         {
-            _serverAddress = "http://119.29.65.204:3000/";
+            _serverAddress = "http://120.27.45.70:3000/";
             _user = null;
 
             // 自动处理cookie

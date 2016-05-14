@@ -94,6 +94,7 @@ namespace ClassManager
             {
                 UserViewModel.Instance.joinOrganizationWithoutPassword(account.Text);
             }
-        }
+			Frame.Navigate(typeof(HomePage));
+		}
     }
 }

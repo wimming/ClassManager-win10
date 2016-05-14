@@ -35,7 +35,7 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<Grid 
+		<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
               Grid.Row="1"
               Grid.ColumnSpan="2">
 
@@ -46,7 +46,7 @@
             
             <Border Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Grid.Row="0">
 				<StackPanel Orientation="Horizontal">
-                    <TextBlock FontStyle="Italic"   Text="Homeworks" Margin="48,20,8,8"
+                    <TextBlock FontStyle="Italic"   Text="Homeworks" Margin="48,8,8,8"
                            Style="{ThemeResource TitleTextBlockStyle}" />
                     <AppBarButton x:Name="add_btn" Icon="Add" Click="AddButton_Click"></AppBarButton>
 				</StackPanel>

@@ -62,6 +62,7 @@ namespace ClassManager
 
 
             UserViewModel.Instance.createOrganization(account.Text, password.Password);
-        }
+			Frame.Navigate(typeof(HomePage));
+		}
     }
 }

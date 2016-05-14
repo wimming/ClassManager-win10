@@ -78,7 +78,7 @@ namespace ClassManager.Views
 		private async void AddButton_Click (object sender, RoutedEventArgs e)
 		{
 			var dialog = new ContentDialog() {
-				Title = "新建作业",
+				Title = "新建通知",
 				Content = new CreateNoticeContent(),
 				PrimaryButtonText = "确定",
 				SecondaryButtonText = "取消",

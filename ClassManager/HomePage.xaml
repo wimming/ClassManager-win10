@@ -33,10 +33,10 @@
             <AppBarButton Icon="ShowBcc" Margin="30,20,0,0" IsCompact="True" RelativePanel.AlignRightWithPanel="True" >
                 <AppBarButton.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem FontStyle="Italic" x:Name="Setting" Text="Setting" Click="setting_Click"/>
-                        <MenuFlyoutItem FontStyle="Italic" x:Name="create" Text="Setup Class" Click="create_Click"/>
-                        <MenuFlyoutItem FontStyle="Italic" x:Name="join" Text="Join Class" Click="join_Click"/>
-                        <MenuFlyoutItem FontStyle="Italic" x:Name="Logout" Text="Logout" Click="logout_Click"/>
+                        <MenuFlyoutItem FontStyle="Italic" x:Name="Setting" Text="设置" Click="setting_Click"/>
+                        <MenuFlyoutItem FontStyle="Italic" x:Name="create" Text="创建班级" Click="create_Click"/>
+                        <MenuFlyoutItem FontStyle="Italic" x:Name="join" Text="加入班级" Click="join_Click"/>
+                        <MenuFlyoutItem FontStyle="Italic" x:Name="Logout" Text="退出登录" Click="logout_Click"/>
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
@@ -53,7 +53,7 @@
 
                     <TextBlock Grid.Row="1" FontStyle="Italic" Margin="0,0,0,0"  HorizontalAlignment="Center" Text="作业"  FontSize="25"/>
                     <ScrollViewer Grid.Row="2">
-                        <ListView  ItemsSource="{x:Bind UVM.User.homeworks}" HorizontalAlignment="Center" SelectionMode="None">
+                        <ListView  ItemsSource="{x:Bind UVM.User.Homeworks}" HorizontalAlignment="Center" SelectionMode="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="md:UserHomework">
                                     <Grid Margin="10, 10, 10, 10">
@@ -103,7 +103,7 @@
 
                     <TextBlock Grid.Row="1" FontStyle="Italic" Margin="0,0,0,0" Text="班级"  HorizontalAlignment="Center"  FontSize="25"/>
                     <ScrollViewer Grid.Row="2">
-                        <ListView  x:Name="relationships" ItemsSource="{x:Bind UVM.User.relationships, Mode=OneWay}" HorizontalAlignment="Center" IsItemClickEnabled="True" ItemClick="relationships_ItemClick" SelectionMode="None">
+                        <ListView  x:Name="relationships" ItemsSource="{x:Bind UVM.User.Relationships, Mode=OneWay}" HorizontalAlignment="Center" IsItemClickEnabled="True" ItemClick="relationships_ItemClick" SelectionMode="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="md:Relationship">
                                     <Grid Margin="10, 10, 10, 10">

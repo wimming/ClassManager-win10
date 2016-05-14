@@ -56,6 +56,9 @@ namespace ClassManager.ViewModels
 			var elements = xml.GetElementsByTagName("text");
 			List<UserHomework> homs = new List<UserHomework>();
 			homs = User.Homeworks.ToList();
+			if (homs.Count < 1) {
+				return;
+			}
 			homs.Sort((a, b) => {
 				DateTime tem1 = Convert.ToDateTime(a.join_on);
 				DateTime tem2 = Convert.ToDateTime(a.join_on);
